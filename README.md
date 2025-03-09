@@ -15,16 +15,13 @@ ______________________________________________________________________
 
 - astal
 - ags
+- glibtop
 - hyprland
 - adw-gtk3-git
 - adwaita-icon-theme
 - coreutils
 - dart-sass
-- gawk
 - imagemagick
-- procps-ng
-- ripgrep
-- util-linux
 - Material Symbols Outlined Font
 - ***For the end-4 scripts:***
   - python-materialyoucolor-git

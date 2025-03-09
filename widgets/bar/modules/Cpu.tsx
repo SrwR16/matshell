@@ -1,40 +1,19 @@
-import { Variable, bind } from "astal";
-import { interval } from "astal/time";
+import { bind } from "astal";
 import { execAsync } from "astal/process";
+import SystemMonitor from "../../../utils/hwmonitor";
 
 export default function Cpu() {
-  const cpuValue = Variable(0);
-  const cpuFreq = Variable("");
-
-  interval(2000, () => {
-    execAsync([
-      "sh",
-      "-c",
-      `top -bn1 | rg '%Cpu' | tail -1 | awk '{print 100-$8}'`,
-    ])
-      .then((val) => cpuValue.set(Number(val) / 100))
-      .catch((err) => console.log(err));
-  });
-
-  interval(2000, () => {
-    execAsync(["sh", "-c", "lscpu --parse=MHZ"])
-      .then((val) => {
-        const mhz = val.split("\n").slice(4);
-        const freq = mhz.reduce((acc, e) => acc + Number(e), 0) / mhz.length;
-        cpuFreq.set(`${Math.round(freq)} MHz`);
-      })
-      .catch((err) => console.log(err));
-  });
+  const sysmon = SystemMonitor.get_default();
 
   return (
     <box className={"bar-hw-cpu-box"}>
       <circularprogress
         className="cpu"
-        value={bind(cpuValue)}
+        value={bind(sysmon, "cpu-load")}
         startAt={0.25}
         endAt={1.25}
         rounded={false}
-        tooltipText={bind(cpuFreq)}
+        tooltipText={bind(sysmon, "cpu-frequency")}
       >
         <button
           className="cpu-inner"

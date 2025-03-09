@@ -1,42 +1,19 @@
-import { Variable, bind } from "astal";
-import { interval } from "astal/time";
+import { bind } from "astal";
 import { execAsync } from "astal/process";
+import SystemMonitor from "../../../utils/hwmonitor";
 
 export default function Mem() {
-  const ramValue = Variable(0);
-  const ramMem = Variable("");
-
-  interval(2000, () => {
-    execAsync([
-      "sh",
-      "-c",
-      `free | tail -2 | head -1 | awk '{print $3/$2*100}'`,
-    ])
-      .then((val) => ramValue.set(Number(val) / 100))
-      .catch((err) => console.log(err));
-  });
-
-  interval(2000, () => {
-    execAsync([
-      "sh",
-      "-c",
-      "free --si -h | tail -2 | head -1 | awk '{print $3}'",
-    ])
-      .then((val) => {
-        ramMem.set(val);
-      })
-      .catch((err) => console.log(err));
-  });
+  const sysmon = SystemMonitor.get_default();
 
   return (
     <box className={"bar-hw-ram-box"}>
       <circularprogress
         className="ram"
-        value={bind(ramValue)}
+        value={bind(sysmon, "memory-utilization")}
         startAt={0.25}
         endAt={1.25}
         rounded={false}
-        tooltipText={bind(ramMem)}
+        tooltipText={bind(sysmon, "memory-used")}
       >
         <button
           className="ram-inner"
