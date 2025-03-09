@@ -104,7 +104,7 @@ programs.ags = {
 
 This will simply clone the repo for you to .config/ags if that dir does not exist, build ags wrapped with all dependencies for matshell, and start a systemd service. You will have to remove the ags home-manager module from you config, as enabling matshell will handle everything ags-related for you.
 
-This is absolutely hacky, unsafe, and not the nix way to do it, but it gets the job done. To get the latest version of matshell, you would have to pull the updates manually or delete .config/ags and rebuild the system/home-manager.
+This is absolutely hacky, probably unsafe, and not the nix way to do it, but it gets the job done. To get the latest version of matshell, you would have to pull the updates manually or delete .config/ags and rebuild the system/home-manager.
 
 ______________________________________________________________________
 
