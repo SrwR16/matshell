@@ -1,10 +1,12 @@
-export const getBluetoothIcon = (bt) => {
+import Bluetooth from "gi://AstalBluetooth";
+
+export const getBluetoothIcon = (bt: Bluetooth.Bluetooth) => {
   if (!bt.is_powered) return "bluetooth-disabled-symbolic";
   if (bt.is_connected) return "bluetooth-active-symbolic";
   return "bluetooth-disconnected-symbolic";
 };
 
-export const getBluetoothText = (devs, bt) => {
+export const getBluetoothText = (devs: Bluetooth.Device, bt: Bluetooth.Bluetooth) => {
   if (!bt.is_powered) return "Bluetooth off";
 
   if (bt.is_connected) {

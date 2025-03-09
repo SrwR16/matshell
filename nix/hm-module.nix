@@ -4,6 +4,7 @@ self: {
   inputs,
   system,
   lib,
+  osConfig,
   ...
 }: let
   cfg = config.programs.ags;
@@ -33,8 +34,13 @@ self: {
     bluetooth
     cava
   ];
+  mobileAstalDeps = with agsPkgs; [
+    battery
+    powerprofiles
+  ];
 
-  dependencies = requiredDeps ++ guiDeps ++ astalDeps;
+  dependencies = requiredDeps ++ guiDeps ++ astalDeps ++ mobileAstalDeps;
+
 in {
   imports = [
     inputs.ags.homeManagerModules.default

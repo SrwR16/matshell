@@ -11,7 +11,7 @@ so I cant match by coordinates. */
 export const focusedGdkMonitor = bind(
   Hyprland.get_default(),
   "focused-monitor",
-).as((focused) => {
+).as((focused: Hyprland.Monitor) => {
   const display = Gdk.Display.get_default()!;
   const hyprModel = focused.get_model();
   const nMon = display.get_n_monitors();
