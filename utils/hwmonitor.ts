@@ -108,7 +108,7 @@ export default class SystemMonitor extends GObject.Object {
     if (bytes === 0) return "0 B";
     const exp = Math.floor(Math.log(bytes) / Math.log(1024));
     const value = bytes / Math.pow(1024, exp);
-    return `${value.toLocaleString("en", { maximumFractionDigits: 2 })} ${SystemMonitor.BYTE_UNITS[exp]}`;
+    return `${Math.round(value * 100) / 100} ${SystemMonitor.BYTE_UNITS[exp]}`;
   }
 
   // Property getters
