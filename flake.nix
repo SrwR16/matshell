@@ -28,9 +28,47 @@
       import nixpkgs {
         inherit system;
       };
+    mkMatshellDeps = system: let
+      pkgs = mkPkgs system;
+      agsPkgs = ags.packages.${system};
+    in
+      (with pkgs; [
+        wrapGAppsHook
+        gobject-introspection
+        typescript
+        dart-sass
+        mission-center
+        imagemagick
+        libgtop
+      ])
+      ++ (with agsPkgs; [
+        io
+        notifd
+        hyprland
+        wireplumber
+        mpris
+        network
+        tray
+        bluetooth
+        cava
+        battery
+        powerprofiles
+      ]);
+
+    # Create a static map for all systems.
+    # Required for hm-module.
+    sys = import systems;
+    matshellDeps = builtins.listToAttrs (
+      map
+      (system: {
+        name = system;
+        value = mkMatshellDeps system;
+      })
+      sys
+    );
   in
     flake-parts.lib.mkFlake {inherit inputs;} {
-      systems = import systems;
+      systems = sys;
 
       perSystem = {system, ...}: let
         pkgs = mkPkgs system;
@@ -40,30 +78,7 @@
           inherit pkgs name;
           src = ./.;
           entry = "bundleapp.ts";
-
-          extraPackages =
-            (with ags.packages.${system}; [
-              io
-              notifd
-              hyprland
-              wireplumber
-              mpris
-              network
-              tray
-              bluetooth
-              cava
-            ])
-            ++ (with pkgs; [
-              ags.packages.${system}.default
-              wrapGAppsHook
-              gobject-introspection
-              typescript
-              dart-sass
-              mission-center
-              imagemagick
-              libgtop
-              # any other package
-            ]);
+          extraPackages = matshellDeps.${system} ++ [ags.packages.${system}.default];
         };
 
         devShells.default = pkgs.mkShell {
@@ -78,6 +93,7 @@
           default = self.homeManagerModules.matshell;
           matshell = import ./nix/hm-module.nix self;
         };
+        inherit matshellDeps;
       };
     };
 }

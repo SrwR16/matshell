@@ -4,43 +4,11 @@ self: {
   inputs,
   system,
   lib,
-  osConfig,
   ...
 }: let
   cfg = config.programs.ags;
-
   agsPkgs = inputs.ags.packages.${system};
-
-  requiredDeps = with pkgs; [
-    imagemagick
-    libgtop
-  ];
-
-  guiDeps = with pkgs; [
-    gnome-control-center
-    mission-center
-    overskride
-    wlogout
-    pwvucontrol
-  ];
-  astalDeps = with agsPkgs; [
-    io
-    notifd
-    hyprland
-    wireplumber
-    mpris
-    network
-    tray
-    bluetooth
-    cava
-  ];
-  mobileAstalDeps = with agsPkgs; [
-    battery
-    powerprofiles
-  ];
-
-  dependencies = requiredDeps ++ guiDeps ++ astalDeps ++ mobileAstalDeps;
-
+  dependencies = self.matshellDeps.${system};
 in {
   imports = [
     inputs.ags.homeManagerModules.default
