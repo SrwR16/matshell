@@ -95,7 +95,6 @@ imports = [
 ];
 
 programs.ags = {
-  enable = true;
   matshell.enable = true;
     };
 #...
