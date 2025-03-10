@@ -34,12 +34,12 @@ export default class Brightness extends GObject.Object {
     // Initialize values
     this.#kbdMax = get(`--device ${kbd} max`);
     this.#kbd = get(`--device ${kbd} get`);
-    this.#screenMax = get(`--device ${screen} max`);
-    this.#screen = get(`--device ${screen} get`) / (this.#screenMax || 1);
+    this.#screenMax = get("max");
+    this.#screen = get("get") / (get("max") || 1);
 
     // Setup file monitoring
     monitorFile(
-      `/sys/class/backlight/${this.#screenDev}/brightness`,
+      `/sys/class/backlight/${screen}/brightness`,
       async (f) => {
         const v = await readFileAsync(f);
         this.#screen = Number(v) / this.#screenMax;
@@ -47,7 +47,7 @@ export default class Brightness extends GObject.Object {
       },
     );
 
-    monitorFile(`/sys/class/leds/${this.#kbdDev}/brightness`, async (f) => {
+    monitorFile(`/sys/class/leds/${kbd}/brightness`, async (f) => {
       const v = await readFileAsync(f);
       this.#kbd = Number(v);
       this.notify("kbd");
@@ -65,7 +65,7 @@ export default class Brightness extends GObject.Object {
 
   set kbd(value) {
     if (value < 0 || value > this.#kbdMax) return;
-    execAsync(`brightnessctl -d ${this.#kbdDev} s ${value} -q`).then(() => {
+    execAsync(`brightnessctl -d ${kbd} s ${value} -q`).then(() => {
       this.#kbd = value;
       this.notify("kbd");
     });
@@ -79,7 +79,7 @@ export default class Brightness extends GObject.Object {
   set screen(percent) {
     percent = Math.max(0, Math.min(1, percent));
     execAsync(
-      `brightnessctl -d ${this.#screenDev} set ${Math.floor(percent * 100)}% -q`,
+      `brightnessctl -d ${screen} set ${Math.floor(percent * 100)}% -q`,
     ).then(() => {
       this.#screen = percent;
       this.notify("screen");

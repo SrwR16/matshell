@@ -48,7 +48,7 @@ export default function OnScreenProgress({
       setup={(self) => {
         if (brightness) {
           self.hook(brightness, "notify::screen", () =>
-            osd.show(brightness.screen, "", "display-brightness-symbolic"),
+            osd.show(brightness.screen, "Screen Brightness", "display-brightness-symbolic"),
           );
         }
 
