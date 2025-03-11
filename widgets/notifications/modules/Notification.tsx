@@ -99,7 +99,7 @@ export function NotificationWidget(props: {
                 className="action-button"
                 onClicked={() => notification.invoke(action)}
               >
-                <label label={label} halign={CENTER} hexpand />
+                <label label={label.toString()} halign={CENTER} hexpand />
               </button>
             ))}
           </box>
