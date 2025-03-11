@@ -9,11 +9,11 @@ export default function Cpu() {
     <box className={"bar-hw-cpu-box"}>
       <circularprogress
         className="cpu"
-        value={bind(sysmon, "cpu-load")}
+        value={bind(sysmon, "cpuLoad")}
         startAt={0.25}
         endAt={1.25}
         rounded={false}
-        tooltipText={bind(sysmon, "cpu-frequency")}
+        tooltipText={bind(sysmon, "cpuFrequency").as((f) => `${f} MHz`)}
       >
         <button
           className="cpu-inner"

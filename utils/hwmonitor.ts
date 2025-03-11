@@ -127,8 +127,8 @@ export default class SystemMonitor extends GObject.Object {
     return this.#cpuLoad;
   }
 
-  @property(String)
-  get cpuFrequency(): string {
-    return `${Math.round(this.#cpuFreq)} MHz`;
+  @property(Number)
+  get cpuFrequency(): number {
+    return Math.round(this.#cpuFreq);
   }
 }

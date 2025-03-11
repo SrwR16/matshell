@@ -9,11 +9,11 @@ export default function Mem() {
     <box className={"bar-hw-ram-box"}>
       <circularprogress
         className="ram"
-        value={bind(sysmon, "memory-utilization")}
+        value={bind(sysmon, "memoryUtilization")}
         startAt={0.25}
         endAt={1.25}
         rounded={false}
-        tooltipText={bind(sysmon, "memory-used")}
+        tooltipText={bind(sysmon, "memoryUsed").as((m) => m.toString())}
       >
         <button
           className="ram-inner"
