@@ -27,32 +27,32 @@
 
     .monitor0 {
       background: $primaryMon;
-      box-shadow: inset -2px -2px 2px adjust_color($primaryMon, $lightness: -10%);
+      box-shadow: inset -2px -2px 2px adjust_color($primaryMon, $whiteness: -10%);
     }
     .monitor0:hover{
-      background: adjust_color($primaryMon, $lightness: +8%);
+      background: adjust_color($primaryMon, $whiteness: +15%);
     }
 
     .monitor1 {
       background: $secondaryMon;
-      box-shadow: inset -2px -2px 2px adjust_color($secondaryMon, $lightness: -10%);
+      box-shadow: inset -2px -2px 2px adjust_color($secondaryMon, $whiteness: -10%);
     }
     .monitor1:hover{
-      background: adjust_color($secondaryMon, $lightness: +8%);
+      background: adjust_color($secondaryMon, $whiteness: +15%);
     }
     .monitor2 {
       background: $thirdMon;
-      box-shadow: inset -2px -2px 2px adjust_color($thirdMon, $lightness: -10%);
+      box-shadow: inset -2px -2px 2px adjust_color($thirdMon, $whiteness: -10%);
     }
     .monitor2:hover{
-      background: adjust_color($thirdMon, $lightness: +8%);
+      background: adjust_color($thirdMon, $whiteness: +15%);
     }
     .monitor3 {
       background: $fourthMon;
-      box-shadow: inset -2px -2px 2px adjust_color($fourthMon, $lightness: -10%);
+      box-shadow: inset -2px -2px 2px adjust_color($fourthMon, $whiteness: -10%);
     }
     .monitor3:hover{
-      background: adjust_color($fourthMon, $lightness: +8%);
+      background: adjust_color($fourthMon, $whiteness: +15%);
     }
   }
 
