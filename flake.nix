@@ -72,10 +72,10 @@
 
       perSystem = {system, ...}: let
         pkgs = mkPkgs system;
-        name = "matshell";
       in {
         packages.default = ags.lib.bundle {
-          inherit pkgs name;
+          inherit pkgs;
+          name = "matshell";
           src = ./.;
           entry = "bundleapp.ts";
           extraPackages = matshellDeps.${system} ++ [ags.packages.${system}.default];
