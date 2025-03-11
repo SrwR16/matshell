@@ -1,7 +1,7 @@
 import { Gtk } from "astal/gtk3";
 import { execAsync, bind } from "astal";
 import Wp from "gi://AstalWp";
-import Brightness from "../../../utils/brightness.ts";
+import Brightness from "utils/brightness.ts";
 
 export const Sliders = () => {
   const speaker = Wp.get_default()!.audio.defaultSpeaker;

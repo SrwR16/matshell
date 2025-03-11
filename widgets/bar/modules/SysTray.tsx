@@ -1,9 +1,8 @@
-import { Astal, Gtk, Gdk } from "astal/gtk3";
+import { Astal, Gdk } from "astal/gtk3";
 import Tray from "gi://AstalTray";
 import { bind } from "astal";
 
 function SysTrayItem({ item }) {
-  let menuButtonRef = null;
   return (
     <menubutton
       className="tray-item"
@@ -19,15 +18,12 @@ function SysTrayItem({ item }) {
             item.activate(event.x, event.y);
           }
           if (button === Astal.MouseButton.SECONDARY) {
-            print(menuButtonRef.get_popup());
-            menuButtonRef
-              .get_popup()
-              ?.popup_at_widget(
-                menubuttonRef,
-                Gdk.Gravity.NORTH,
-                Gdk.Gravity.SOUTH,
-                null,
-              );
+            self.get_popup()?.popup_at_widget(
+              self,
+              Gdk.Gravity.NORTH,
+              Gdk.Gravity.SOUTH,
+              null
+            );
           }
           return true;
         } catch (error) {

@@ -1,6 +1,6 @@
 import Mpris from "gi://AstalMpris";
 import { bind } from "astal";
-import { lengthStr } from "../../../utils/mpris";
+import { lengthStr } from "utils/mpris";
 
 function PositionLabel({ player }: { player: Mpris.Player }) {
   return (

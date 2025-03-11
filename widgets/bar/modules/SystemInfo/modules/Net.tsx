@@ -31,7 +31,7 @@ export default function Net() {
     <icon
       className="net module"
       icon={bind(network, "connectivity").as(
-        (connectivity) => `${getNetIcon(network)}`,
+        () => `${getNetIcon(network)}`,
       )}
       tooltipText={bind(network, "connectivity").as(
         (connectivity) => `${getNetText(connectivity, network)}`,

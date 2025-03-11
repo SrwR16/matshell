@@ -1,9 +1,9 @@
 import { Gtk } from "astal/gtk3";
 import Variable from "astal/variable";
 import Wp from "gi://AstalWp";
-import Brightness from "../../../utils/brightness";
+import Brightness from "utils/brightness";
 import Bluetooth from "gi://AstalBluetooth";
-import OSDManager from "../../../utils/osd.ts";
+import OSDManager from "utils/osd.ts";
 
 export default function OnScreenProgress({
   visible,
@@ -96,7 +96,7 @@ export default function OnScreenProgress({
         }
       }}
     >
-      <box className="osd" horizontal>
+      <box className="osd" >
         <icon icon={iconName()} />
 
         <box vertical>
@@ -104,7 +104,7 @@ export default function OnScreenProgress({
             label={labelText()}
             maxWidthChars={24}
             widthRequest={250}
-            truncate={"end"}
+            truncate={true}
           />
 
           <levelbar

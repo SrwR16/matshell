@@ -4,7 +4,7 @@ import Network from "gi://AstalNetwork";
 import {
   getBluetoothIcon,
   getBluetoothText,
-} from "../../../utils/bluetooth.ts";
+} from "utils/bluetooth.ts";
 
 export const Toggles = () => {
   const network = Network.get_default();

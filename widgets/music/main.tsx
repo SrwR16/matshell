@@ -1,7 +1,7 @@
 import { App, Astal } from "astal/gtk3";
 import Mpris from "gi://AstalMpris";
 import { bind, Variable } from "astal";
-import { findPlayer, generateBackground } from "../../utils/mpris";
+import { findPlayer, generateBackground } from "utils/mpris";
 import { Cover } from "./modules/Cover";
 import { Info } from "./modules/Info";
 

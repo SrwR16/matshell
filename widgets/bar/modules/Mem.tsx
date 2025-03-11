@@ -1,6 +1,6 @@
 import { bind } from "astal";
 import { execAsync } from "astal/process";
-import SystemMonitor from "../../../utils/hwmonitor";
+import SystemMonitor from "utils/hwmonitor";
 
 export default function Mem() {
   const sysmon = SystemMonitor.get_default();

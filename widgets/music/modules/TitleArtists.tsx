@@ -1,14 +1,15 @@
+import { Gtk } from "astal/gtk3";
 import Mpris from "gi://AstalMpris";
 import { bind } from "astal";
 
 export function Title({ player }: { player: Mpris.Player }) {
   return (
     <scrollable
+      className="title"
       vexpand={true}
       heightRequest={12}
-      className="title"
-      vscroll={"never"}
-      hscroll={"automatic"}
+      vscroll={Gtk.PolicyType.NEVER}
+      hscroll={Gtk.PolicyType.AUTOMATIC}
     >
       <label
         className="title"
@@ -23,8 +24,8 @@ export function Artists({ player }: { player: Mpris.Player }) {
     <scrollable
       className="artists"
       vexpand={true}
-      vscroll={"never"}
-      hscroll={"automatic"}
+      vscroll={Gtk.PolicyType.NEVER}
+      hscroll={Gtk.PolicyType.AUTOMATIC}
     >
       <label
         className="artists"

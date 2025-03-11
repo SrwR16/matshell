@@ -19,8 +19,6 @@ export default class Brightness extends GObject.Object {
   #kbd = 0;
   #screenMax = 0;
   #screen = 0;
-  #screenDev = "";
-  #kbdDev = "";
 
   constructor() {
     super();

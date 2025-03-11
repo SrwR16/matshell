@@ -3,7 +3,7 @@ import Bluetooth from "gi://AstalBluetooth";
 import {
   getBluetoothIcon,
   getBluetoothText,
-} from "../../../../../utils/bluetooth.ts";
+} from "utils/bluetooth.ts";
 
 export default function Blue() {
   const bluetooth = Bluetooth.get_default();

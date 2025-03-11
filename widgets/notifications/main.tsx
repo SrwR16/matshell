@@ -1,7 +1,7 @@
 import { Astal } from "astal/gtk3";
 import Notifd from "gi://AstalNotifd";
 import { bind } from "astal";
-import { focusedGdkMonitor } from "../../utils/hyprland.ts";
+import { focusedGdkMonitor } from "utils/hyprland.ts";
 import { NotificationWidget } from "./modules/Notification.tsx";
 
 export default function Notifications() {

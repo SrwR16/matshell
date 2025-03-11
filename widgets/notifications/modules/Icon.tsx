@@ -1,6 +1,6 @@
 import { Gtk } from "astal/gtk3";
 import Notifd from "gi://AstalNotifd";
-import { fileExists, isIcon } from "../../../utils/notifd.ts";
+import { fileExists, isIcon } from "utils/notifd.ts";
 
 export function NotificationIcon(notification: Notifd.Notification) {
   if (notification.image && fileExists(notification.image)) {

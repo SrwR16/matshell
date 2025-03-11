@@ -1,6 +1,6 @@
 import Mpris from "gi://AstalMpris";
 import { bind } from "astal";
-import { mprisStateIcon } from "../../../utils/mpris";
+import { mprisStateIcon } from "utils/mpris";
 
 export function Controls({ player }: { player: Mpris.Player }) {
   return (

@@ -2,7 +2,7 @@ import { bind } from "astal";
 import { Astal, Gtk } from "astal/gtk3";
 import Notifd from "gi://AstalNotifd";
 import { NotificationIcon } from "./Icon.tsx";
-import { time, urgency, createTimeoutManager } from "../../../utils/notifd.ts";
+import { time, urgency, createTimeoutManager } from "utils/notifd.ts";
 
 export function NotificationWidget(props: {
   notification: Notifd.Notification;
@@ -57,9 +57,8 @@ export function NotificationWidget(props: {
           />
         </box>
         <Gtk.Separator visible />
-        <box horizontal className="content">
+        <box className="content">
           <box
-            horizontal
             className="thumb"
             visible={Boolean(NotificationIcon(notification))}
             halign={CENTER}
@@ -79,7 +78,6 @@ export function NotificationWidget(props: {
               className="title"
               valign={CENTER}
               wrap={false}
-              justification="left"
               label={bind(notification, "summary")}
             />
             {notification.body && (
