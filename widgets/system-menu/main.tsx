@@ -2,6 +2,7 @@ import { Astal, App } from "astal/gtk3";
 import { Variable } from "astal";
 import { Sliders } from "./modules/Sliders.tsx";
 import { Toggles } from "./modules/Toggles.tsx";
+import { PowerBox } from "./modules/PowerBox.tsx";
 
 export default function SystemMenu() {
   const { TOP, RIGHT } = Astal.WindowAnchor;
@@ -17,6 +18,7 @@ export default function SystemMenu() {
     >
       <box className="system-menu" vertical>
         <Toggles />
+        <PowerBox />
         <Sliders />
       </box>
     </window>
