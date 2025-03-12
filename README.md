@@ -1,4 +1,16 @@
-# Simple Material Design desktop shell made with [Astal](https://github.com/Aylur/astal)
+<div align="center">
+  
+# Matshell 
+### Material Design desktop shell made with [Astal](https://github.com/Aylur/astal)
+![GitHub repo size](https://img.shields.io/github/repo-size/neurarian/matshell?style=for-the-badge&logo=gitlfs&logoColor=%23FFDBC9&labelColor=%2346362d&color=%23FFDBC9)
+![GitHub commit activity](https://img.shields.io/github/commit-activity/m/neurarian/matshell?style=for-the-badge&logo=git&logoColor=%23FFB68D&labelColor=%2346362d&color=%23FFB68D)
+![GitHub last commit (branch)](https://img.shields.io/github/last-commit/neurarian/matshell/master?style=for-the-badge&logo=git&logoColor=%23EDBD92&labelColor=%2346362d&color=%23EDBD92)
+![GitHub Repo stars](https://img.shields.io/github/stars/neurarian/matshell?style=for-the-badge&logo=github&logoColor=%23ECBF78&labelColor=%2346362d&color=%23ECBF78)
+
+---
+
+</div>
+
 
 This is heavily inspired by [fufexan's](https://github.com/fufexan/dotfiles) AGSv1 config, tailored to personal taste and my multi-monitor desktop setup on [hyprland](https://github.com/hyprwm/Hyprland).
 
