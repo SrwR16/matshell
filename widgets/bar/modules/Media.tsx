@@ -1,6 +1,9 @@
-import { App } from "astal/gtk3";
+import { App, Gtk } from "astal/gtk3";
 import Mpris from "gi://AstalMpris";
-import { bind } from "astal";
+import { Variable, bind } from "astal";
+import { Controls } from "widgets/music/modules/Controls";
+
+const mpris = Mpris.get_default();
 
 function Cover({ player }) {
   return (
@@ -25,16 +28,33 @@ function Title({ player }) {
 }
 
 function MusicBox({ player }) {
+  const revealPower = Variable(false);
   return (
     <box>
-      <Cover player={player} />
-      <Title player={player} />
+      <box>
+        <Cover player={player} />
+      </box>
+      <eventbox
+        onHover={() => revealPower.set(true)}
+        onHoverLost={() => revealPower.set(false)}
+      >
+        <box>
+          <Title player={player} />
+          <revealer
+            transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
+            transitionDuration={300}
+            revealChild={bind(revealPower)}
+          >
+            <Controls player={player} widthRequest={80} />
+          </revealer>
+        </box>
+      </eventbox>
     </box>
   );
 }
+``
 
 export default function Media() {
-  const mpris = Mpris.get_default();
 
   return (
     <eventbox

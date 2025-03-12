@@ -2,9 +2,11 @@ import Mpris from "gi://AstalMpris";
 import { bind } from "astal";
 import { mprisStateIcon } from "utils/mpris";
 
-export function Controls({ player }: { player: Mpris.Player }) {
+export function Controls({ player, widthRequest }: { player: Mpris.Player, widthRequest?: number }) {
   return (
-    <centerbox className="controls" vexpand={true}>
+    <centerbox className="controls"
+      vexpand={true}
+      widthRequest={widthRequest}>
       <button onClick={() => player.previous()}>
         <icon icon="media-skip-backward-symbolic" />
       </button>
