@@ -5,10 +5,9 @@ import { Variable, bind } from "astal";
 const showList = Variable(false);
 const powerprofiles = PowerProfiles.get_default();
 
-const prettyName = (n: String | null) => {
-  if (!n) return "Unknown";
+const prettyName = (n: String) =>
   n.charAt(0).toUpperCase() + n.substring(1).replace("-", " ");
-};
+
 
 function Profile(args) {
   return (
