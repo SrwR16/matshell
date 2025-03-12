@@ -91,7 +91,7 @@ After using hyprpaper or some other means to set your wallpaper, run the script 
 $HOME/.config/astal/scripts/colorgen.sh "$HOME/.cache/current_wallpaper.jpg" --apply --smart
 ```
 
-The color generation works better with wallpapers that have a bit of contrast.
+The color generation works better with wallpapers that have a bit of chroma.
 
 #### ❄️ Nix
 
