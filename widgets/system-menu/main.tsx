@@ -3,7 +3,8 @@ import PowerProfiles from "gi://AstalPowerProfiles";
 import { Variable } from "astal";
 import { Sliders } from "./modules/Sliders.tsx";
 import { Toggles } from "./modules/Toggles.tsx";
-import { PowerBox } from "./modules/PowerBox.tsx";
+import { PowerProfileBox } from "./modules/PowerProfileBox.tsx";
+import { BatteryBox } from "./modules/BatteryBox.tsx";
 
 export default function SystemMenu() {
   const powerprofiles = PowerProfiles.get_default();
@@ -21,8 +22,9 @@ export default function SystemMenu() {
     >
       <box className="system-menu" vertical>
         <Toggles />
-        {hasProfiles && <PowerBox />}
+        {hasProfiles && <PowerProfileBox />}
         <Sliders />
+        <BatteryBox />
       </box>
     </window>
   );
