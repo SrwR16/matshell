@@ -1,6 +1,7 @@
 import { bind } from "astal";
 import Battery from "gi://AstalBattery";
 import { Gtk } from "astal/gtk3";
+import { toTime } from "utils/battery";
 
 
 export const BatteryBox = () => {
@@ -16,12 +17,12 @@ export const BatteryBox = () => {
         <icon icon={bind(battery, "battery-icon-name")}
           tooltipText={bind(battery, "energy-rate").as((er) => batteryEnergy(er))}
         />
-        <label label={bind(battery, "percent").as((p) => `${p * 100}%`)} />
+        <label label={bind(battery, "percentage").as((p) => ` ${p * 100}%`)} />
         <label className={"time"}
-          vexpand={true}
-          valign={Gtk.Align.CENTER}
+          hexpand={true}
+          halign={Gtk.Align.END}
           visible={bind(battery, "charging").as((c) => !c)}
-          label={bind(battery, "energy-rate").as((er) => batteryEnergy(er))}
+          label={bind(battery, "time-to-empty").as((t) => toTime(t))}
         />
       </box>
     </box >
