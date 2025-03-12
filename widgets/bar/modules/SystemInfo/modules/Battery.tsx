@@ -8,7 +8,7 @@ export default function Batt() {
       className="battery module"
       visible={bind(battery, "is-battery")}
       icon={bind(battery, "battery-icon-name")}
-      tooltipText={bind(battery, "percentage").as((p) => `Battery on ${p * 100}%`)}
+      tooltipText={bind(battery, "percentage").as((p) => `Battery on ${Math.round(p * 100)}%`)}
     />
   );
 }

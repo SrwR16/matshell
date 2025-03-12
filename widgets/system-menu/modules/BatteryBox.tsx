@@ -17,7 +17,7 @@ export const BatteryBox = () => {
         <icon icon={bind(battery, "battery-icon-name")}
           tooltipText={bind(battery, "energy-rate").as((er) => batteryEnergy(er))}
         />
-        <label label={bind(battery, "percentage").as((p) => ` ${p * 100}%`)} />
+        <label label={bind(battery, "percentage").as((p) => ` ${Math.round(p * 100)}%`)} />
         <label className={"time"}
           hexpand={true}
           halign={Gtk.Align.END}
