@@ -1,20 +1,24 @@
 <div align="center">
   
 # Matshell 
-### Material Design desktop shell made with [Astal](https://github.com/Aylur/astal)
+### A Material Design desktop shell powered by [Astal](https://github.com/Aylur/astal)
+
 ![GitHub repo size](https://img.shields.io/github/repo-size/neurarian/matshell?style=for-the-badge&logo=gitlfs&logoColor=%23FFDBC9&labelColor=%2346362d&color=%23FFDBC9)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/neurarian/matshell?style=for-the-badge&logo=git&logoColor=%23FFB68D&labelColor=%2346362d&color=%23FFB68D)
 ![GitHub last commit (branch)](https://img.shields.io/github/last-commit/neurarian/matshell/master?style=for-the-badge&logo=git&logoColor=%23EDBD92&labelColor=%2346362d&color=%23EDBD92)
 ![GitHub Repo stars](https://img.shields.io/github/stars/neurarian/matshell?style=for-the-badge&logo=github&logoColor=%23ECBF78&labelColor=%2346362d&color=%23ECBF78)
 
----
-
 </div>
 
+Matshell is a Material Design inspired desktop shell built with [Astal](https://github.com/Aylur/astal) for [Hyprland](https://github.com/hyprwm/Hyprland). This project draws inspiration from [fufexan's](https://github.com/fufexan/dotfiles) AGSv1 config, with design influences from [saimoomedits](https://github.com/saimoomedits/eww-widgets), tailored for both multi-monitor desktop setups and notebooks.
 
-This is heavily inspired by [fufexan's](https://github.com/fufexan/dotfiles) AGSv1 config, tailored to personal taste and my multi-monitor desktop setup on [hyprland](https://github.com/hyprwm/Hyprland).
+## Features
 
-Matshell can be dynamically themed either with the color-theme generation scripts that I yanked and botched from [end-4](https://github.com/end-4/dots-hyprland), or together with the [matugen](https://github.com/InioX/matugen) templates also included here. The design is also influenced by [saimoomedits](https://github.com/saimoomedits/eww-widgets).
+- **Adaptive Layout**: Automatically adapts to desktop or laptop environments by conditionally rendering notebook-specific widgets
+- **Dynamic Material Design Theming**: Change themes on-the-fly using either scripts I botched from [end-4](https://github.com/end-4/dots-hyprland) or via [matugen](https://github.com/InioX/matugen) templates
+- **Multi-monitor Support**: Designed with multi-monitor setups in mind
+- **Hyprland Integration**: Built specifically for the Hyprland compositor
+- **Nix Support**: Support for NixOS / Home-Manager with dedicated module
 
 ______________________________________________________________________
 
@@ -117,25 +121,31 @@ This will simply clone the repo for you to .config/ags if that dir does not exis
 
 This is absolutely hacky, probably unsafe, and not the nix way to do it, but it gets the job done. To get the latest version of matshell, you would have to pull the updates manually or delete .config/ags and rebuild the system/home-manager.
 
-______________________________________________________________________
+## Acknowledgements
 
-### 🌚 Dark example
-
-![screenshot-20240602-010310](https://github.com/Neurarian/ags-bar/assets/110474238/39baf677-26bf-402a-8d33-8a8cd326bbe3)
-
-![screenshot-20240602-010238](https://github.com/Neurarian/ags-bar/assets/110474238/e3e87c15-e8f4-481c-b71a-1625542887d1)
-
-______________________________________________________________________
-
-### 🌞 Light example
-
-![screenshot-20240602-010428](https://github.com/Neurarian/ags-bar/assets/110474238/4efbb62d-b416-44e2-a044-92e4704b3d83)
-
-![screenshot-20240602-005946](https://github.com/Neurarian/ags-bar/assets/110474238/36195074-559a-4a52-ba26-96869a512db1)
+This project wouldn't be possible without:
+- [fufexan's dotfiles](https://github.com/fufexan/dotfiles) for the initial inspiration and foundation
+- [end-4's dots-hyprland](https://github.com/end-4/dots-hyprland) for the color generation scripts
+- [saimoomedits' eww-widgets](https://github.com/saimoomedits/eww-widgets) for design influence
+- [Astal](https://github.com/Aylur/astal) for the powerful widget toolkit
 
 ______________________________________________________________________
 
-https://github.com/Neurarian/ags-bar/assets/110474238/3f01073e-552a-479b-99f9-d82647138e55
+## Screenshots
 
-```
-```
+### 🌚 Dark Theme
+<p align="center">
+  <img src="https://github.com/Neurarian/ags-bar/assets/110474238/39baf677-26bf-402a-8d33-8a8cd326bbe3"/>
+  <img src="https://github.com/Neurarian/ags-bar/assets/110474238/e3e87c15-e8f4-481c-b71a-1625542887d1"/>
+</p>
+
+### 🌞 Light Theme
+<p align="center">
+  <img src="https://github.com/Neurarian/ags-bar/assets/110474238/4efbb62d-b416-44e2-a044-92e4704b3d83"/>
+  <img src="https://github.com/Neurarian/ags-bar/assets/110474238/36195074-559a-4a52-ba26-96869a512db1"/>
+</p>
+
+### Video Demo
+<p align="center">
+  <video src="https://github.com/Neurarian/ags-bar/assets/110474238/3f01073e-552a-479b-99f9-d82647138e55" controls width="600"></video>
+</p>
