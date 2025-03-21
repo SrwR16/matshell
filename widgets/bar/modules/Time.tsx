@@ -1,4 +1,4 @@
-import { Gtk } from "astal/gtk3";
+import { App, Gtk } from "astal/gtk3";
 import { execAsync } from "astal/process";
 import { interval } from "astal/time";
 import { Variable, bind } from "astal";
@@ -17,6 +17,7 @@ export default function Time() {
     <eventbox
       onHover={() => revealPower.set(true)}
       onHoverLost={() => revealPower.set(false)}
+      onClick={() => App.toggle_window("launcher")}
     >
       <box>
         <label className="date" label={bind(time)} />

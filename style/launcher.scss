@@ -1,0 +1,55 @@
+@use "sass:string";
+
+@function gtkalpha($c, $a) {
+    @return string.unquote("alpha(#{$c},#{$a})");
+}
+
+box.applauncher {
+    @include window-box;
+        background-color: $bg;
+
+
+    entry {
+        @include window;
+        margin: 1rem .5rem 1rem .5rem;
+        background-color: transparentize($tertiaryMonHover, .6);
+    }
+
+    button {
+        min-width: 0;
+        min-height: 0;
+        padding: .5rem;
+
+        icon {
+            font-size: 3em;
+            margin-right: .3rem;
+        }
+
+        label.name {
+            font-weight: bold;
+            font-size: 1.1em
+        }
+
+        label.description {
+            color: transparentize($fg, .2);
+        }
+    }
+    box.apps {
+        @include window-box;
+
+    }
+
+    box.not-found {
+        padding: 1rem;
+
+        icon {
+            font-size: 6em;
+            color: transparentize($fg, .3);
+        }
+
+        label {
+            color: transparentize($fg, .1);
+            font-size: 1.2em;
+        }
+    }
+}

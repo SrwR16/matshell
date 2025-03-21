@@ -44,6 +44,7 @@
       ++ (with agsPkgs; [
         io
         notifd
+        apps
         hyprland
         wireplumber
         mpris
