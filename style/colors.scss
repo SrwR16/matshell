@@ -8,6 +8,8 @@ $secondaryMon:         $tertiaryContainer;
 $thirdMon:             $tertiary;
 $fourthMon:            $success;
 
+$os                    $onSurfaceVariant;
+
 $primaryMon:           mix($primaryContainer, $onPrimaryContainer, 70%, $method: rgb);
 $primaryMonHover:      mix($primaryContainer, $onPrimaryContainer, 45%, $method: rgb);
 $secondaryMon:         mix($tertiaryContainer, $onTertiaryContainer, 50%, $method: rgb);

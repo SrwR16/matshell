@@ -17,7 +17,6 @@ export default function Time() {
     <eventbox
       onHover={() => revealPower.set(true)}
       onHoverLost={() => revealPower.set(false)}
-      onClick={() => App.toggle_window("launcher")}
     >
       <box>
         <label className="date" label={bind(time)} />

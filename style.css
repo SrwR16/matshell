@@ -1,9 +1,9 @@
-/* Error: Undefined variable.
+/* Error: expected ":".
  *    ,
- * 40 | $ramProc:              mix($PrimaryFixedDim, $onPrimaryFixedVariant, 66%);
- *    |                            ^^^^^^^^^^^^^^^^
+ * 11 | $os                    $onSurfaceVariant;
+ *    |                        ^
  *    '
- *   style/colors.scss 40:28  @import
+ *   style/colors.scss 11:24  @import
  *   style.scss 2:9           root stylesheet */
 
 body::before {
@@ -14,5 +14,5 @@ body::before {
   padding: 1em;
   margin-bottom: 1em;
   border-bottom: 2px solid black;
-  content: "Error: Undefined variable.\a    \2577 \a 40 \2502  $ramProc:              mix($PrimaryFixedDim, $onPrimaryFixedVariant, 66%);\a    \2502                             ^^^^^^^^^^^^^^^^\a    \2575 \a   style/colors.scss 40:28  @import\a   style.scss 2:9           root stylesheet";
+  content: 'Error: expected ":".\a    \2577 \a 11 \2502  $os                    $onSurfaceVariant;\a    \2502                         ^\a    \2575 \a   style/colors.scss 11:24  @import\a   style.scss 2:9           root stylesheet';
 }

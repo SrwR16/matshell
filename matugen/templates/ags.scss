@@ -9,6 +9,7 @@ ${{name}}: {{value.default.rgba}};
 $red:                  #d17678;
 $accent_green:         #afbea2;
 
+$os:                   $on_surface_variant;
 
 $primaryMon:           mix($primary_container, $on_primary_container, 70%, $method: rgb);
 $primaryMonHover:      mix($primary_container, $on_primary_container, 45%, $method: rgb);

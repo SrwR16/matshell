@@ -1,18 +1,21 @@
-@use "sass:string";
-
-@function gtkalpha($c, $a) {
-    @return string.unquote("alpha(#{$c},#{$a})");
-}
-
 box.applauncher {
     @include window-box;
         background-color: $bg;
+        margin-top: 10rem;
 
-
-    entry {
-        @include window;
+    box.search {
+        @include window-box;
         margin: 1rem .5rem 1rem .5rem;
         background-color: transparentize($tertiaryMonHover, .6);
+
+        icon {
+            font-size: 2rem;
+            margin: .3rem;
+        }
+        entry {
+            font-size: 1.5rem;
+            margin: .3rem;
+        }
     }
 
     button {
@@ -21,13 +24,13 @@ box.applauncher {
         padding: .5rem;
 
         icon {
-            font-size: 3em;
+            font-size: 3rem;
             margin-right: .3rem;
         }
 
         label.name {
             font-weight: bold;
-            font-size: 1.1em
+            font-size: 1.1rem
         }
 
         label.description {

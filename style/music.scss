@@ -1,5 +1,6 @@
 .music.window {
   @include window;
+  margin-top: .7rem;
 
   .cover {
     background-position: center;

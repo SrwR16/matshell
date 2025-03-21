@@ -18,7 +18,7 @@ function reloadCss() {
 }
 
 App.start({
-  icons: "./icons",
+  icons: "./utils/icons",
   css: css,
   instanceName: "js",
   requestHandler(request, res) {

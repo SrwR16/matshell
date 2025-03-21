@@ -7,6 +7,7 @@ import Cpu from "./modules/Cpu.tsx";
 import Media from "./modules/Media.tsx";
 import SystemInfo from "./modules/SystemInfo/main.tsx";
 import Time from "./modules/Time.tsx/";
+import OsIcon from "./modules/OsIcon.tsx";
 
 export default function Bar(monitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
@@ -23,6 +24,7 @@ export default function Bar(monitor: Gdk.Monitor) {
     >
       <centerbox>
         <box hexpand halign={Gtk.Align.START}>
+          <OsIcon />
           <Workspaces />
         </box>
         <box>

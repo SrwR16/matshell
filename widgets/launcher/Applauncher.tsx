@@ -41,6 +41,7 @@ export default function Applauncher() {
   const width = Variable(1000);
 
   const text = Variable("");
+  const visible = Variable(false);
   const list = text((text) => apps.fuzzy_query(text).slice(0, MAX_ITEMS));
   const onEnter = () => {
     apps.fuzzy_query(text.get())?.[0].launch();
@@ -50,8 +51,8 @@ export default function Applauncher() {
   return (
     <window
       name="launcher"
+      visible={visible()}
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM}
-      // exclusivity={Astal.Exclusivity.IGNORE}
       keymode={Astal.Keymode.ON_DEMAND}
       application={App}
       onShow={(self) => {
@@ -67,13 +68,20 @@ export default function Applauncher() {
         <box hexpand={false} vertical>
           <eventbox heightRequest={100} onClick={hide} />
           <box widthRequest={500} className="applauncher" vertical>
-            <entry
-              placeholderText="Search"
-              text={text()}
-              onChanged={(self) => text.set(self.text)}
-              onActivate={onEnter}
-            />
-            <box spacing={6} vertical className="apps"
+            <box className="search">
+              <icon icon="system-search-symbolic" />
+              <entry
+                placeholderText="Search..."
+                text={text()}
+                onChanged={(self) => text.set(self.text)}
+                primary-icon-sensitive={true}
+                onActivate={onEnter}
+              />
+            </box>
+            <box
+              spacing={6}
+              vertical
+              className="apps"
               visible={list.as((l) => l.length > 0)}
             >
               {list.as((list) => list.map((app) => <AppButton app={app} />))}
