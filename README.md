@@ -133,16 +133,23 @@ ______________________________________________________________________
 
 ## Screenshots
 
-### 🌚 Dark Theme
+### 🌚 Dark Theme (Desktop)
 <p align="center">
-  <img src="https://github.com/Neurarian/ags-bar/assets/110474238/39baf677-26bf-402a-8d33-8a8cd326bbe3"/>
-  <img src="https://github.com/Neurarian/ags-bar/assets/110474238/e3e87c15-e8f4-481c-b71a-1625542887d1"/>
+  
+![2025-03-21T22:42:06,141625834+01:00](https://github.com/user-attachments/assets/c6c66f14-35b1-418c-839c-e66fbdffbb3c)
+![2025-03-21T23:02:56,372784904+01:00](https://github.com/user-attachments/assets/c10ab60a-c8e1-43e8-ad7a-9723437af4f1)
+
+
+
 </p>
 
-### 🌞 Light Theme
+### 🌞 Light Theme (Desktop)
 <p align="center">
-  <img src="https://github.com/Neurarian/ags-bar/assets/110474238/4efbb62d-b416-44e2-a044-92e4704b3d83"/>
-  <img src="https://github.com/Neurarian/ags-bar/assets/110474238/36195074-559a-4a52-ba26-96869a512db1"/>
+
+![2025-03-21T22:37:54,320570898+01:00](https://github.com/user-attachments/assets/45bf6c1a-d931-40a1-8644-fd7ccbfb4f95)
+![2025-03-21T22:52:59,913307252+01:00](https://github.com/user-attachments/assets/444a6624-9c36-412a-b265-2a887717c933)
+
+
 </p>
 
 ### Video Demo
