@@ -8,6 +8,15 @@ $secondaryMon:         $tertiaryContainer;
 $thirdMon:             $tertiary;
 $fourthMon:            $success;
 
+$primaryMon:           mix($primaryContainer, $onPrimaryContainer, 70%, $method: rgb);
+$primaryMonHover:      mix($primaryContainer, $onPrimaryContainer, 45%, $method: rgb);
+$secondaryMon:         mix($tertiaryContainer, $onTertiaryContainer, 50%, $method: rgb);
+$secondaryMonHover:    mix($tertiaryContainer, $onTertiaryContainer, 30%, $method: rgb);
+$tertiaryMon:          mix($secondaryContainer, $onSecondaryContainer, 70%, $method: rgb);
+$tertiaryMonHover:     mix($secondaryContainer, $onSecondaryContainer, 45%, $method: rgb);
+$fourthMon:            mix($secondary, $onSecondary, 70%, $method: rgb);
+$fourthMonHover:       mix($secondary, $onSecondary, 45%, $method: rgb);
+
 $tooltipBg:            $background;
 $fg:                   $onBackground;
 $bg:                   transparentize($background, .5);
@@ -26,4 +35,8 @@ $buttonDisabledHover:  adjust_color($buttonDisabled, $alpha: +0.8);
 
 $ramProc:              $onPrimaryFixedVariant;
 $cpuProc:              $onTertiaryFixedVariant;
+$procBg:               $surfaceDim;
+
+$ramProc:              mix($PrimaryFixedDim, $onPrimaryFixedVariant, 66%);
+$cpuProc:              mix($tertiaryFixedDim, $onTertiaryFixedVariant, 66%);
 $procBg:               $surfaceDim;

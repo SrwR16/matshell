@@ -27,32 +27,37 @@
 
     .monitor0 {
       background: $primaryMon;
-      box-shadow: inset -2px -2px 2px adjust_color($primaryMon, $whiteness: -10%);
+      box-shadow: inset -2px -2px 2px scale_color($primaryMon, $lightness: -25%);
     }
     .monitor0:hover{
-      background: adjust_color($primaryMon, $whiteness: +15%);
+      background: $primaryMonHover;
+      box-shadow: inset -2px -2px 2px scale_color($primaryMonHover, $lightness: -25%);
     }
 
     .monitor1 {
       background: $secondaryMon;
-      box-shadow: inset -2px -2px 2px adjust_color($secondaryMon, $whiteness: -10%);
+      box-shadow: inset -2px -2px 2px scale_color($secondaryMon, $lightness: -25%);
     }
     .monitor1:hover{
-      background: adjust_color($secondaryMon, $whiteness: +15%);
+      background: $secondaryMonHover;
+      box-shadow: inset -2px -2px 2px scale_color($secondaryMonHover, $lightness: -25%);
+      
     }
     .monitor2 {
-      background: $thirdMon;
-      box-shadow: inset -2px -2px 2px adjust_color($thirdMon, $whiteness: -10%);
+      background: $tertiaryMon;
+      box-shadow: inset -2px -2px 2px scale_color($tertiaryMon, $lightness: -25%);
     }
     .monitor2:hover{
-      background: adjust_color($thirdMon, $whiteness: +15%);
+      background: $tertiaryMonHover;
+      box-shadow: inset -2px -2px 2px scale_color($tertiaryMonHover, $lightness: -25%);
     }
     .monitor3 {
       background: $fourthMon;
-      box-shadow: inset -2px -2px 2px adjust_color($fourthMon, $whiteness: -10%);
+      box-shadow: inset -2px -2px 2px scale_color($fourthMon, $lightness: -25%);
     }
     .monitor3:hover{
-      background: adjust_color($fourthMon, $whiteness: +15%);
+      background: $fourthMonHover;
+      box-shadow: inset -2px -2px 2px scale_color($fourthMonHover, $lightness: -25%);
     }
   }
 
