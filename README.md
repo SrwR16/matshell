@@ -39,6 +39,7 @@ ______________________________________________________________________
 - dart-sass
 - imagemagick
 - Material Symbols Outlined Font
+- Fira Code Nerd Font
 - ***For the end-4 scripts:***
   - python-materialyoucolor-git
   - gradience-git
