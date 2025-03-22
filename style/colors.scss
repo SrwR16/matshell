@@ -39,6 +39,6 @@ $ramProc:              $onPrimaryFixedVariant;
 $cpuProc:              $onTertiaryFixedVariant;
 $procBg:               $surfaceDim;
 
-$ramProc:              mix($PrimaryFixedDim, $onPrimaryFixedVariant, 66%);
+$ramProc:              mix($primaryFixedDim, $onPrimaryFixedVariant, 66%);
 $cpuProc:              mix($tertiaryFixedDim, $onTertiaryFixedVariant, 66%);
 $procBg:               $surfaceDim;
