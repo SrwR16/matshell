@@ -66,8 +66,8 @@ export default function Applauncher() {
     >
       <box>
         <eventbox widthRequest={width((w) => w / 2)} expand onClick={hide} />
-        <box hexpand={false} vertical>
-          <eventbox heightRequest={100} onClick={hide} />
+        <box hexpand={false} vertical valign={Gtk.Align.CENTER}>
+          <eventbox onClick={hide} />
           <box widthRequest={500} className="applauncher" vertical>
             <box className="search">
               <icon icon="system-search-symbolic" />

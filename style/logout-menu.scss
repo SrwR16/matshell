@@ -3,7 +3,6 @@ box.logout-background {
     .logout-menu {
         @include window;
             background-color: transparentize($background, 0.3);
-            margin-top: 15rem;
         button {
             @include window-box;
             @include button;

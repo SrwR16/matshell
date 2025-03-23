@@ -1,5 +1,5 @@
 import { execAsync } from "astal/process";
-import { App, Astal, Gdk } from "astal/gtk3";
+import { App, Astal, Gdk, Gtk } from "astal/gtk3";
 import { Variable } from "astal";
 
 function hide() {
@@ -8,7 +8,7 @@ function hide() {
 
 function LogoutButton(label: String, command: String) {
   return (
-    <button onClick={() => execAsync(["sh", "-c", command])} label={label}/>
+    <button onClick={() => execAsync(["sh", "-c", command])} label={label} />
   );
 }
 
@@ -31,10 +31,14 @@ export default function LogoutMenu() {
         if (event.get_keyval()[1] === Gdk.KEY_Escape) self.hide();
       }}
     >
-      <box className="logout-background" >
+      <box className="logout-background">
         <eventbox widthRequest={width((w) => w / 2)} expand onClick={hide} />
-        <box hexpand={false} vertical>
-          <eventbox heightRequest={100} onClick={hide} />
+        <box
+          hexpand={false}
+          vertical
+          valign={Gtk.Align.CENTER}
+        >
+          <eventbox onClick={hide} />
           <box className="logout-menu" vertical>
             <box>
               {LogoutButton("lock", "hyprlock")}
@@ -61,7 +65,7 @@ export default function LogoutMenu() {
           </box>
           <eventbox expand onClick={hide} />
         </box>
-          <eventbox widthRequest={width((w) => w / 2)} expand onClick={hide} />
+        <eventbox widthRequest={width((w) => w / 2)} expand onClick={hide} />
       </box>
     </window>
   );

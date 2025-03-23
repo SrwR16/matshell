@@ -1,7 +1,6 @@
 box.applauncher {
     @include window;
         background-color: transparentize($background, 0.3);
-        margin-top: 10rem;
 
     box.search {
         @include window-box;
