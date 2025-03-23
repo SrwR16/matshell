@@ -38,11 +38,12 @@ box.applauncher {
             label.description {
                 color: transparentize($fg, .2);
             }
+
+            &:hover, &:focus {
+                @include button;
+            }
         }
 
-        button:hover, button:focus {
-            @include button;
-        }
     }
 
     box.not-found {
