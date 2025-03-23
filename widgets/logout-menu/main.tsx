@@ -31,7 +31,7 @@ export default function LogoutMenu() {
         if (event.get_keyval()[1] === Gdk.KEY_Escape) self.hide();
       }}
     >
-      <box className="logout-background">
+      <box className="logout-background" >
         <eventbox widthRequest={width((w) => w / 2)} expand onClick={hide} />
         <box hexpand={false} vertical>
           <eventbox heightRequest={100} onClick={hide} />
