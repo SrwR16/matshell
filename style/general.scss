@@ -96,6 +96,9 @@ progressbar {
   &:hover {
     background: $buttonDisabledHover;
   }
+  &:focus {
+    background: $buttonDisabledHover;
+  }
 }
 
 .button {

@@ -18,28 +18,31 @@ box.applauncher {
         }
     }
 
-    button {
-        min-width: 0;
-        min-height: 0;
-        padding: .5rem;
-
-        icon {
-            font-size: 3rem;
-            margin-right: .3rem;
-        }
-
-        label.name {
-            font-weight: bold;
-            font-size: 1.1rem
-        }
-
-        label.description {
-            color: transparentize($fg, .2);
-        }
-    }
     box.apps {
         @include window-box;
 
+        button {
+            padding: 0.4rem;
+
+            icon {
+                font-size: 3rem;
+                margin-right: .3rem;
+                margin-left: .3rem;
+            }
+
+            label.name {
+                font-weight: bold;
+                font-size: 1.1rem
+            }
+
+            label.description {
+                color: transparentize($fg, .2);
+            }
+        }
+
+        button:hover, button:focus {
+            @include button;
+        }
     }
 
     box.not-found {
