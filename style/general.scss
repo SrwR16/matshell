@@ -49,6 +49,7 @@ $font: 1.1rem;
   padding: $padding;
 }
 
+
 tooltip {
   background: $tooltipBg;
   box-shadow:
@@ -57,9 +58,8 @@ tooltip {
   border-radius: $round;
 }
 
-/* scales & progress bars */
-scale,
-progressbar {
+/* scales */
+scale {
   trough {
     background-color: $surface;
     border-radius: $scale;
@@ -76,6 +76,7 @@ progressbar {
   }
 }
 
+/* buttons */
 @mixin button-active {
   @include animate;
   background: $buttonEnabled;
@@ -104,4 +105,57 @@ progressbar {
 
 .button-disabled {
   @include button;
+}
+
+@mixin menu {
+  background: $tooltipBg;
+  border-radius: $round;
+  font-size: $font;
+
+  separator {
+    background-color: $surface;
+  }
+
+  menuitem {
+    @include button;
+    border-radius: 0;
+    padding: 0.4rem 0.7rem;
+
+    &:first-child {
+      border-radius: $round $round 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 $round $round;
+    }
+    &:only-child {
+      border-radius: $round;
+    }
+  }
+}
+
+/* popovers */
+popover {
+  background: $tooltipBg;
+  border-radius: $round;
+  box {
+    padding: 0.5rem;
+
+    entry {
+      @include window-box;
+      padding: 0.4rem 0.7rem;
+      menu {
+        @include menu;
+      }
+    }
+    button {
+      @include button;
+    }
+    & > label {
+      @include window-box;
+      font-weight: bold;
+    }
+    &:last-child {
+      @include window-box;
+    }
+  }
 }
