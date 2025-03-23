@@ -34,20 +34,9 @@
     margin: 0.3rem;
   }
 
-  .options {
-    padding: 0;
-
-    widget {
-      @include button;
-      border-radius: 0;
-
-      &:last-child {
-        border-radius: 0 0 $round $round;
-      }
-
-      box {
-        padding: 0.3rem;
-      }
+  .profile-options {
+    box {
+      padding: 0.3rem;
     }
   }
 }
