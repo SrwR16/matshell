@@ -53,6 +53,7 @@ export default function Applauncher() {
       name="launcher"
       visible={visible()}
       anchor={Astal.WindowAnchor.TOP | Astal.WindowAnchor.BOTTOM}
+      exclusivity={Astal.Exclusivity.EXCLUSIVE}
       keymode={Astal.Keymode.ON_DEMAND}
       application={App}
       onShow={(self) => {

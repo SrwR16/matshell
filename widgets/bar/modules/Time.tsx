@@ -27,9 +27,7 @@ export default function Time() {
         >
           <button
             className="power-button"
-            onClicked={() =>
-              execAsync(["sh", "-c", "systemctl poweroff || loginctl poweroff"])
-            }
+            onClick={() => App.toggle_window("logout-menu")}
           >
             <icon icon="system-shutdown-symbolic" />
           </button>

@@ -5,7 +5,8 @@ import OnScreenDisplay from "./widgets/osd/main.tsx";
 import Notifications from "./widgets/notifications/main.tsx";
 import SystemMenu from "./widgets/system-menu/main.tsx";
 import MusicPlayer from "./widgets/music/main.tsx";
-import Applauncher from "./widgets/launcher/Applauncher.tsx";
+import Applauncher from "./widgets/launcher/main.tsx";
+import LogoutMenu from "widgets/logout-menu/main.tsx";
 import scss from "./style.scss";
 
 function reloadCss() {
@@ -43,5 +44,6 @@ App.start({
     SystemMenu();
     MusicPlayer();
     Applauncher();
+    LogoutMenu();
   },
 });
