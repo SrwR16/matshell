@@ -20,6 +20,19 @@ Matshell is a Material Design inspired desktop shell built with [Astal](https://
 - **Hyprland Integration**: Built specifically for the Hyprland compositor
 - **Nix Support**: Support for NixOS / Home-Manager with dedicated module
 
+<details>
+  <summary>Widget List</summary>
+
+- Main Status Bar
+- App Launcher
+- Logout Menu
+- Music Player with CAVA
+- Notifications
+- On Screen Display
+- System Menu
+
+</details>
+
 ______________________________________________________________________
 
 ### ⛓️ Dependencies
