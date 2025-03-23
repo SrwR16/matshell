@@ -1,5 +1,5 @@
 import { execAsync } from "astal/process";
-import { App, Astal, Gdk, Gtk } from "astal/gtk3";
+import { App, Astal, Gdk } from "astal/gtk3";
 import { Variable } from "astal";
 
 function hide() {
