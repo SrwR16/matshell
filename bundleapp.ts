@@ -1,5 +1,7 @@
+/* Slightly different from app.ts. 
+Used for bundled Nix package demo only.
+Static CSS colors.  */
 import { App, Gdk, Gtk } from "astal/gtk3";
-import { monitorFile } from "astal/file";
 import Bar from "./widgets/bar/main.tsx";
 import OnScreenDisplay from "./widgets/osd/main.tsx";
 import Notifications from "./widgets/notifications/main.tsx";
@@ -8,11 +10,6 @@ import MusicPlayer from "./widgets/music/main.tsx";
 import Applauncher from "./widgets/launcher/main.tsx";
 import LogoutMenu from "widgets/logout-menu/main.tsx";
 import scss from "./style.scss";
-
-function reloadCss() {
-  console.log("scss change detected");
-  App.apply_css(scss);
-}
 
 App.start({
   icons: "./icons",
@@ -23,7 +20,6 @@ App.start({
     res("ok");
   },
   main() {
-    monitorFile(`./style`, reloadCss);
     const bars = new Map<Gdk.Monitor, Gtk.Widget>();
 
     // initialize
