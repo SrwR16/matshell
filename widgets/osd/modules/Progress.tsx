@@ -1,4 +1,5 @@
-import { Gtk } from "astal/gtk3";
+import { Gtk, hook } from "astal/gtk4";
+import Pango from "gi://Pango";
 import Variable from "astal/variable";
 import Wp from "gi://AstalWp";
 import Brightness from "utils/brightness";
@@ -47,13 +48,17 @@ export default function OnScreenProgress({
       revealChild={visible()}
       setup={(self) => {
         if (brightness) {
-          self.hook(brightness, "notify::screen", () =>
-            osd.show(brightness.screen, "Screen Brightness", "display-brightness-symbolic"),
+          hook(self, brightness, "notify::screen", () =>
+            osd.show(
+              brightness.screen,
+              "Screen Brightness",
+              "display-brightness-symbolic",
+            ),
           );
         }
 
         if (speaker) {
-          self.hook(speaker, "notify::volume", () =>
+          hook(self, speaker, "notify::volume", () =>
             osd.show(
               speaker.volume,
               speaker.description || "",
@@ -62,7 +67,7 @@ export default function OnScreenProgress({
           );
         }
         if (microphone) {
-          self.hook(microphone, "notify::volume", () =>
+          hook(self, microphone, "notify::volume", () =>
             osd.show(
               microphone.volume,
               microphone.description || "",
@@ -71,7 +76,7 @@ export default function OnScreenProgress({
           );
         }
         if (bluetooth) {
-          self.hook(bluetooth, "notify::devices", () => {
+          hook(self, bluetooth, "notify::devices", () => {
             bluetooth.devices.forEach((device) => {
               // Monitor connection state changes for new devices
               self.hook(device, "notify::connected", () => {
@@ -96,15 +101,15 @@ export default function OnScreenProgress({
         }
       }}
     >
-      <box className="osd" >
-        <icon icon={iconName()} />
+      <box cssClasses={["osd"]}>
+        <image iconName={iconName()} />
 
         <box vertical>
           <label
             label={labelText()}
             maxWidthChars={24}
             widthRequest={250}
-            truncate={true}
+            ellipsize={Pango.EllipsizeMode.END}
           />
 
           <levelbar

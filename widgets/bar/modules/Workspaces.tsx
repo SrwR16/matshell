@@ -7,7 +7,7 @@ function FocusedClient() {
   const focused = bind(hypr, "focusedClient");
 
   return (
-    <box className="Focused" visible={focused.as(Boolean)}>
+    <box cssClasses={["Focused"]} visible={focused.as(Boolean)}>
       {focused.as(
         (client) =>
           client && <label label={bind(client, "title").as(String)} />,
@@ -20,7 +20,7 @@ export default function Workspaces() {
   const hypr = Hyprland.get_default();
 
   return (
-    <box className="Workspaces">
+    <box cssClasses={["Workspaces"]}>
       {bind(hypr, "workspaces").as((wss) => {
         const activeWorkspaces = wss
           .filter((ws) => !(ws.id >= -99 && ws.id <= -2))
@@ -32,14 +32,16 @@ export default function Workspaces() {
           return (
             <button
               visible={activeWorkspaces[activeWorkspaces.length - 1]?.id >= id}
-              className={bind(hypr, "focusedWorkspace").as(
-                (fw) =>
-                  `${ws === fw && "focused"}
-                         ${ws !== undefined && `monitor${ws.monitor.id}`}`,
-              )}
+              cssClassses={[`workspace-${id}`]} // For stable identification
+              cssClasses={bind(hypr, "focusedWorkspace").as((fw) => {
+                const classes = [];
+                if (ws === fw) classes.push("focused");
+                if (ws !== undefined) classes.push(`monitor${ws.monitor.id}`);
+                return classes;
+              })}
               onClicked={() => hypr.message(`dispatch workspace ${id}`)}
             >
-              {}
+              {id} {/* Add content to make button visible */}
             </button>
           );
         });

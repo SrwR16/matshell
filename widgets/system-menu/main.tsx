@@ -1,4 +1,4 @@
-import { Astal, App } from "astal/gtk3";
+import { Astal, App } from "astal/gtk4";
 import PowerProfiles from "gi://AstalPowerProfiles";
 import { Variable } from "astal";
 import { Sliders } from "./modules/Sliders.tsx";
@@ -20,7 +20,7 @@ export default function SystemMenu() {
       keymode={Astal.Keymode.ON_DEMAND}
       visible={visible()}
     >
-      <box className="system-menu" vertical>
+      <box cssClasses={["system-menu"]} vertical>
         <Toggles />
         {hasProfiles && <PowerProfileBox />}
         <Sliders />

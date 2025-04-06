@@ -1,4 +1,4 @@
-import { Astal, Gtk, Gdk } from "astal/gtk3";
+import { Astal, Gtk, Gdk } from "astal/gtk4";
 import SysTray from "./modules/SysTray.tsx";
 import Separator from "./modules/Separator.tsx";
 import Workspaces from "./modules/Workspaces.tsx";
@@ -14,7 +14,8 @@ export default function Bar(monitor: Gdk.Monitor) {
 
   return (
     <window
-      className="Bar"
+      visible
+      cssClasses={["Bar"]}
       gdkmonitor={monitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={TOP | LEFT | RIGHT}
@@ -32,9 +33,6 @@ export default function Bar(monitor: Gdk.Monitor) {
         </box>
         <box hexpand halign={Gtk.Align.END}>
           <SysTray />
-          <Separator />
-          <Cpu />
-          <Mem />
           <Separator />
           <SystemInfo />
           <Separator />

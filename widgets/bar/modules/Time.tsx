@@ -1,4 +1,4 @@
-import { App, Gtk } from "astal/gtk3";
+import { App, Gtk } from "astal/gtk4";
 import { execAsync } from "astal/process";
 import { interval } from "astal/time";
 import { Variable, bind } from "astal";
@@ -14,25 +14,23 @@ export default function Time() {
   });
 
   return (
-    <eventbox
-      onHover={() => revealPower.set(true)}
-      onHoverLost={() => revealPower.set(false)}
+    <box
+      onHoverEnter={() => revealPower.set(true)}
+      onHoverLeave={() => revealPower.set(false)}
     >
-      <box>
-        <label className="date" label={bind(time)} />
-        <revealer
-          transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-          transitionDuration={300}
-          revealChild={bind(revealPower)}
+      <label cssClasses={["date"]} label={bind(time)} />
+      <revealer
+        transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
+        transitionDuration={300}
+        revealChild={bind(revealPower)}
+      >
+        <button
+          cssClasses={["power-button"]}
+          onClicked={() => App.toggle_window("logout-menu")}
         >
-          <button
-            className="power-button"
-            onClick={() => App.toggle_window("logout-menu")}
-          >
-            <icon icon="system-shutdown-symbolic" />
-          </button>
-        </revealer>
-      </box>
-    </eventbox>
+          <image iconName="system-shutdown-symbolic" />
+        </button>
+      </revealer>
+    </box>
   );
 }

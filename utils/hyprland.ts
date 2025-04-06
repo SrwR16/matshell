@@ -1,4 +1,4 @@
-import { Gdk } from "astal/gtk3";
+import { Gdk } from "astal/gtk4";
 import Hyprland from "gi://AstalHyprland";
 import { bind } from "astal";
 
@@ -14,9 +14,11 @@ export const focusedGdkMonitor = bind(
 ).as((focused: Hyprland.Monitor) => {
   const display = Gdk.Display.get_default()!;
   const hyprModel = focused.get_model();
-  const nMon = display.get_n_monitors();
-  for (let i = 0; i < nMon; i++) {
-    const gdkMon = display.get_monitor(i);
+  const monitors = display.get_monitors();
+  const monitorCount = monitors.get_n_items();
+
+  for (let i = 0; i < monitorCount; i++) {
+    const gdkMon = monitors.get_item(i) as Gdk.Monitor;
     if (gdkMon.get_model() === hyprModel) {
       return gdkMon;
     }

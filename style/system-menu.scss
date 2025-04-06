@@ -1,5 +1,6 @@
 /* general */
 .system-menu {
+  -gtk-icon-size: $font;
   @include window;
   margin-top: .7rem;
   margin-right: .7rem;

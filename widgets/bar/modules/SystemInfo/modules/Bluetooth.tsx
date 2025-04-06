@@ -8,9 +8,9 @@ import {
 export default function Blue() {
   const bluetooth = Bluetooth.get_default();
   return (
-    <icon
-      className="bluetooth module"
-      icon={bind(bluetooth, "devices").as(() => getBluetoothIcon(bluetooth))}
+    <image
+      cssClasses={["bluetooth", "module"]}
+      iconName={bind(bluetooth, "devices").as(() => getBluetoothIcon(bluetooth))}
       tooltipText={bind(bluetooth, "devices").as((devices) =>
         getBluetoothText(devices, bluetooth),
       )}

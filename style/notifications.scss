@@ -26,7 +26,7 @@
   }
 
   separator {
-      margin: 0 -0.75rem ;
+      margin: 0 0.75rem ;
       background-color: transparentize($fg, .5);
   }
 
@@ -42,8 +42,8 @@
       background-repeat: no-repeat;
     }
 
-    icon {
-      font-size: 64px;
+    image {
+      -gtk-icon-size: 64px;
     }
     .thumb {
       margin-right: 0.5rem;

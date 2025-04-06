@@ -1,6 +1,6 @@
 import Notifd from "gi://AstalNotifd";
 import { GLib } from "astal";
-import { Astal } from "astal/gtk3";
+import { Astal } from "astal/gtk4";
 
 type TimeoutManager = {
   setupTimeout: () => void;
@@ -24,27 +24,30 @@ export const createTimeoutManager = (
     }
   };
 
-  const setupTimeout = () => {
-    clearTimeout();
+const setupTimeout = () => {
+  clearTimeout();
 
-    if (!isHovered) {
-      timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, timeoutDelay, () => {
+  if (!isHovered) {
+    timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, timeoutDelay, () => {
+        clearTimeout();
         dismissCallback();
-        timeoutId = null;
         return GLib.SOURCE_REMOVE;
-      });
-    }
-  };
+    });
+  }
+};
 
   return {
     setupTimeout,
     clearTimeout,
     handleHover: () => {
       isHovered = true;
+      print(isHovered);
+      print(timeoutId);
       clearTimeout();
     },
     handleHoverLost: () => {
       isHovered = false;
+      print(isHovered);
       setupTimeout();
     },
     cleanup: clearTimeout,

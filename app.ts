@@ -1,13 +1,14 @@
-import { App, Gdk, Gtk } from "astal/gtk3";
+import { App, Gdk, Gtk } from "astal/gtk4";
 import { monitorFile } from "astal/file";
 import { exec } from "astal/process";
 import Bar from "./widgets/bar/main.tsx";
+import SystemMenu from "./widgets/system-menu/main.tsx";
 import OnScreenDisplay from "./widgets/osd/main.tsx";
 import Notifications from "./widgets/notifications/main.tsx";
-import SystemMenu from "./widgets/system-menu/main.tsx";
+/* 
 import MusicPlayer from "./widgets/music/main.tsx";
 import Applauncher from "./widgets/launcher/main.tsx";
-import LogoutMenu from "widgets/logout-menu/main.tsx";
+import LogoutMenu from "widgets/logout-menu/main.tsx"; */
 
 const scss = "./style.scss";
 const css = "./style.css";
@@ -19,7 +20,7 @@ function reloadCss() {
 }
 
 App.start({
-  icons: "./utils/icons",
+  icons: "./assets/icons",
   css: css,
   instanceName: "js",
   requestHandler(request, res) {
@@ -29,26 +30,11 @@ App.start({
   main() {
     exec(`sass ${scss} ${css}`);
     monitorFile(`./style`, reloadCss);
-    const bars = new Map<Gdk.Monitor, Gtk.Widget>();
-
-    // initialize
     for (const gdkmonitor of App.get_monitors()) {
-      bars.set(gdkmonitor, Bar(gdkmonitor));
+      Bar(gdkmonitor);
+      SystemMenu();
+      OnScreenDisplay();
+      Notifications();
     }
-
-    App.connect("monitor-added", (_, gdkmonitor) => {
-      bars.set(gdkmonitor, Bar(gdkmonitor));
-    });
-
-    App.connect("monitor-removed", (_, gdkmonitor) => {
-      bars.get(gdkmonitor)?.destroy();
-      bars.delete(gdkmonitor);
-    });
-    Notifications();
-    OnScreenDisplay();
-    SystemMenu();
-    MusicPlayer();
-    Applauncher();
-    LogoutMenu();
   },
 });

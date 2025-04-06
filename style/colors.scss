@@ -1,44 +1,142 @@
-@import 'material';
+/*
+* Css Colors
+* Generated with Matugen
+*/
 
-$red:                   #d17678;
-$accent_green:          #afbea2;
+$background: rgba(238, 252, 254, 1.0);
 
-$primaryMon:           $primaryContainer;
-$secondaryMon:         $tertiaryContainer;
-$thirdMon:             $tertiary;
-$fourthMon:            $success;
+$error: rgba(186, 26, 26, 1.0);
 
-$os:                    $onSurfaceVariant;
+$error_container: rgba(255, 218, 214, 1.0);
 
-$primaryMon:           mix($primaryContainer, $onPrimaryContainer, 70%, $method: rgb);
-$primaryMonHover:      mix($primaryContainer, $onPrimaryContainer, 45%, $method: rgb);
-$secondaryMon:         mix($tertiaryContainer, $onTertiaryContainer, 50%, $method: rgb);
-$secondaryMonHover:    mix($tertiaryContainer, $onTertiaryContainer, 30%, $method: rgb);
-$tertiaryMon:          mix($secondaryContainer, $onSecondaryContainer, 70%, $method: rgb);
-$tertiaryMonHover:     mix($secondaryContainer, $onSecondaryContainer, 45%, $method: rgb);
-$fourthMon:            mix($secondary, $onSecondary, 70%, $method: rgb);
-$fourthMonHover:       mix($secondary, $onSecondary, 45%, $method: rgb);
+$inverse_on_surface: rgba(230, 243, 245, 1.0);
+
+$inverse_primary: rgba(0, 219, 239, 1.0);
+
+$inverse_surface: rgba(38, 50, 52, 1.0);
+
+$on_background: rgba(17, 30, 31, 1.0);
+
+$on_error: rgba(255, 255, 255, 1.0);
+
+$on_error_container: rgba(65, 0, 2, 1.0);
+
+$on_primary: rgba(255, 255, 255, 1.0);
+
+$on_primary_container: rgba(0, 31, 35, 1.0);
+
+$on_primary_fixed: rgba(0, 31, 35, 1.0);
+
+$on_primary_fixed_variant: rgba(0, 79, 87, 1.0);
+
+$on_secondary: rgba(255, 255, 255, 1.0);
+
+$on_secondary_container: rgba(0, 31, 41, 1.0);
+
+$on_secondary_fixed: rgba(0, 31, 41, 1.0);
+
+$on_secondary_fixed_variant: rgba(36, 76, 91, 1.0);
+
+$on_surface: rgba(17, 30, 31, 1.0);
+
+$on_surface_variant: rgba(60, 73, 75, 1.0);
+
+$on_tertiary: rgba(255, 255, 255, 1.0);
+
+$on_tertiary_container: rgba(0, 30, 48, 1.0);
+
+$on_tertiary_fixed: rgba(0, 30, 48, 1.0);
+
+$on_tertiary_fixed_variant: rgba(23, 75, 107, 1.0);
+
+$outline: rgba(108, 121, 124, 1.0);
+
+$outline_variant: rgba(187, 201, 203, 1.0);
+
+$primary: rgba(0, 105, 115, 1.0);
+
+$primary_container: rgba(146, 241, 255, 1.0);
+
+$primary_fixed: rgba(146, 241, 255, 1.0);
+
+$primary_fixed_dim: rgba(0, 219, 239, 1.0);
+
+$scrim: rgba(0, 0, 0, 1.0);
+
+$secondary: rgba(61, 99, 115, 1.0);
+
+$secondary_container: rgba(193, 233, 251, 1.0);
+
+$secondary_fixed: rgba(193, 233, 251, 1.0);
+
+$secondary_fixed_dim: rgba(165, 204, 223, 1.0);
+
+$shadow: rgba(0, 0, 0, 1.0);
+
+$source_color: rgba(39, 169, 184, 1.0);
+
+$surface: rgba(238, 252, 254, 1.0);
+
+$surface_bright: rgba(238, 252, 254, 1.0);
+
+$surface_container: rgba(227, 240, 243, 1.0);
+
+$surface_container_high: rgba(221, 235, 237, 1.0);
+
+$surface_container_highest: rgba(215, 229, 231, 1.0);
+
+$surface_container_low: rgba(232, 246, 248, 1.0);
+
+$surface_container_lowest: rgba(255, 255, 255, 1.0);
+
+$surface_dim: rgba(207, 221, 223, 1.0);
+
+$surface_tint: rgba(0, 105, 115, 1.0);
+
+$surface_variant: rgba(215, 229, 231, 1.0);
+
+$tertiary: rgba(52, 99, 132, 1.0);
+
+$tertiary_container: rgba(203, 230, 255, 1.0);
+
+$tertiary_fixed: rgba(203, 230, 255, 1.0);
+
+$tertiary_fixed_dim: rgba(158, 204, 242, 1.0);
+
+
+$red:                  #d17678;
+$accent_green:         #afbea2;
+
+$os:                   $on_surface_variant;
+
+$primaryMon:           mix($primary_container, $on_primary_container, 70%, $method: rgb);
+$primaryMonHover:      mix($primary_container, $on_primary_container, 45%, $method: rgb);
+$secondaryMon:         mix($tertiary_container, $on_tertiary_container, 50%, $method: rgb);
+$secondaryMonHover:    mix($tertiary_container, $on_tertiary_container, 30%, $method: rgb);
+$tertiaryMon:          mix($secondary_container, $on_secondary_container, 70%, $method: rgb);
+$tertiaryMonHover:     mix($secondary_container, $on_secondary_container, 45%, $method: rgb);
+$fourthMon:            mix($secondary, $on_secondary, 70%, $method: rgb);
+$fourthMonHover:       mix($secondary, $on_secondary, 45%, $method: rgb);
 
 $tooltipBg:            $background;
-$fg:                   $onBackground;
+$fg:                   $on_background;
 $bg:                   transparentize($background, .5);
 $barBg:                transparentize($background, .5);
 
-$surface:              transparentize($surfaceBright, .6);
-$overlay:              transparentize($onSurface, .25);
+$surface:              transparentize($surface_bright, .6);
+$overlay:              transparentize($on_surface, .25);
 
-$accent:               $tertiaryContainer;
+$accent:               $tertiary_container;
 
+/* buttons */
 $buttonEnabled:        $accent;
 $buttonEnabledHover:   adjust_color($buttonEnabled, $lightness: -15%);
 
 $buttonDisabled:       $surface;
 $buttonDisabledHover:  adjust_color($buttonDisabled, $alpha: +0.8);
 
-$ramProc:              $onPrimaryFixedVariant;
-$cpuProc:              $onTertiaryFixedVariant;
-$procBg:               $surfaceDim;
+/* hw circular proc */
+$ramProc:              mix($primary_fixed_dim, $on_primary_fixed_variant, 66%);
+$cpuProc:              mix($tertiary_fixed_dim, $on_tertiary_fixed_variant, 66%);
+$procBg:               $surface_dim;
 
-$ramProc:              mix($primaryFixedDim, $onPrimaryFixedVariant, 66%);
-$cpuProc:              mix($tertiaryFixedDim, $onTertiaryFixedVariant, 66%);
-$procBg:               $surfaceDim;

@@ -7,23 +7,23 @@
     margin: 0 0.4rem;
   }
   .OsIcon {
-    font-size: 2rem;
+    -gtk-icon-size: 2rem;
     margin-left: 0.8rem;
     margin-right: -0.5rem;
     color: $os;
   }
 
   .Workspaces {
-    margin: 0.2rem 0.8rem;
+    margin: 0.4rem 0.8rem;
 
     button {
       background: rgba(0, 0, 0, 0.3);
       border-radius: 2rem;
       margin: 0.6rem 0.35rem;
-      min-width: 1.3rem;
-      min-height: 1.3rem;
+      min-width: 1.5rem;
+      min-height: 1.5rem;
       transition: 100ms linear;
-      box-shadow: inset -2px -2px 2px transparentize($bg , 0.2) 
+      box-shadow: inset -2px -2px 2px transparentize($bg , 0.2);
     }
 
     
@@ -85,18 +85,19 @@
       background-size: cover;
       background-position: center;
       border-radius: 50%;
-      min-width: 2rem;
+      min-width: 2.5rem;
       min-height: 2rem;
-      margin: 0 0.4rem;
+      margin: 0.1rem 0.4rem;
     }
   }
 
   /* tray */
-  .SysTray button {
+  .SysTray {
     @include button;
+    image {
+      -gtk-icon-size: 5rem;
+    }
     background: none;
-    margin: 0.5rem 0;
-    font-size: $font;
 
     &:not(:last-child) {
       margin-right: 0.3rem;
@@ -116,6 +117,7 @@
       @include animate;
       margin: 0.4rem 0;
       border-radius: $round2;
+      -gtk-icon-size: $font;
     }
 
     &.active box {
@@ -188,5 +190,5 @@
   .power-button {
     margin: 0 1.2rem 0 0rem;
   }
-  }
+}
 
