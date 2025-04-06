@@ -25,8 +25,6 @@ const blurredPath = MEDIA_CACHE_PATH + "/blurred";
 export function generateBackground(coverpath: string | null): string {
   if (!coverpath) return "";
 
-  const makebg = (bg: string) => `background: center/cover url('${bg}')`;
-
   // Construct blurred path using path.join for safe concatenation
   const relativePath = coverpath.substring(MEDIA_CACHE_PATH.length + 1); // +1 to skip slash
   const blurred = GLib.build_filenamev([blurredPath, relativePath]);
@@ -43,7 +41,6 @@ export function generateBackground(coverpath: string | null): string {
     console.error("Background generation failed:", e);
     return ""; // Fallback
   }
-
   return blurred;
 }
 

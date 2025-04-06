@@ -1,13 +1,8 @@
-import { Astal, Gtk, Gdk } from "astal/gtk4";
+import { Gtk } from "astal/gtk4";
 import Mpris from "gi://AstalMpris";
 import { bind } from "astal";
+import { isIcon } from "utils/notifd";
 
-const isIcon = (icon: string) => {
-  const display = Gdk.Display.get_default();
-  if (!display) return false;
-  const iconTheme = Gtk.IconTheme.get_for_display(display);
-  return iconTheme.has_icon(icon);
-};
 export function PlayerInfo({ player }: { player: Mpris.Player }) {
   const { START, END } = Gtk.Align;
   return (

@@ -295,7 +295,7 @@ popover modelbutton:only-child {
   border-radius: 8px;
   opacity: 0.9;
 }
-.music.window cava {
+.music.window .cava-container cava {
   opacity: 0.2;
 }
 

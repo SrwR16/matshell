@@ -123,7 +123,7 @@ const CavaWidget = GObject.registerClass(
           y: p2.y - (p3.y - p1.y) / 6,
         };
 
-        // Add the cubic Bezier curve to our path
+        // Add the cubic Bezier curve to path
         pathBuilder.cubic_to(c1.x, c1.y, c2.x, c2.y, p2.x, p2.y);
       }
 

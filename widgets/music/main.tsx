@@ -5,13 +5,7 @@ import { findPlayer, generateBackground } from "utils/mpris";
 import { Cover } from "./modules/Cover";
 import { Info } from "./modules/Info";
 import { CavaDraw } from "./modules/Cava";
-import { ConstructProps } from "astal/gtk4";
 import { astalify, Gtk } from "astal/gtk4";
-
-export type PictureProps = ConstructProps<
-  Gtk.Picture,
-  Gtk.Picture.ConstructorProps
->;
 
 const Picture = astalify<Gtk.Picture, Gtk.Picture.ConstructorProps>(
   Gtk.Picture,
@@ -27,10 +21,9 @@ function MusicBox({ player }: { player: Mpris.Player }) {
             Gio.file_new_for_path(generateBackground(c)),
           )}
           contentFit={Gtk.ContentFit.COVER}
-          overflow={Gtk.Overflow.HIDDEN}
         />
       </Gtk.ScrolledWindow>
-      <box type="overlay clip">
+      <box cssClasses={["cava-container"]} type="overlay clip">
         <CavaDraw />
       </box>
       <box type="overlay measure">
