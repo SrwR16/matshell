@@ -44,7 +44,7 @@ export function generateBackground(coverpath: string | null): string {
     return ""; // Fallback
   }
 
-  return makebg(blurred);
+  return blurred;
 }
 
 export function lengthStr(length: number) {

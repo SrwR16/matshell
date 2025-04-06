@@ -4,8 +4,9 @@ import { mprisStateIcon } from "utils/mpris";
 
 export function Controls({ player, widthRequest }: { player: Mpris.Player, widthRequest?: number }) {
   return (
-    <centerbox className="controls"
+    <centerbox cssClasses={["controls"]}
       vexpand={true}
+      hexpand={false}
       widthRequest={widthRequest}>
       <button onClicked={() => player.previous()}>
         <image iconName="media-skip-backward-symbolic" />

@@ -1,13 +1,13 @@
 import { App, Gtk } from "astal/gtk4";
 import Mpris from "gi://AstalMpris";
 import { Variable, bind } from "astal";
-import { Controls } from "widgets/music/modules/Controls";
 
 const mpris = Mpris.get_default();
 
 function Cover({ player }) {
   return (
-    <image cssClasses={["cover"]}
+    <image
+      cssClasses={["cover"]}
       overflow={Gtk.Overflow.HIDDEN}
       file={bind(player, "coverArt")}
     />
@@ -37,13 +37,6 @@ function MusicBox({ player }) {
         onHoverLeave={() => revealPower.set(false)}
       >
         <Title player={player} />
-        <revealer
-          transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
-          transitionDuration={300}
-          revealChild={bind(revealPower)}
-        >
-          <Controls player={player} widthRequest={80} />
-        </revealer>
       </box>
     </box>
   );

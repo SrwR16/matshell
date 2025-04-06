@@ -5,7 +5,7 @@ import { lengthStr } from "utils/mpris";
 function PositionLabel({ player }: { player: Mpris.Player }) {
   return (
     <label
-      className="position"
+      cssClasses={["position"]}
       xalign={0}
       label={bind(player, "position").as((pos) =>
         player.length > 0 ? lengthStr(pos) : "",
@@ -17,7 +17,7 @@ function PositionLabel({ player }: { player: Mpris.Player }) {
 function LengthLabel({ player }: { player: Mpris.Player }) {
   return (
     <label
-      className="length"
+      cssClasses={["length"]}
       xalign={1}
       hexpand={true}
       visible={bind(player, "length").as((l) => l > 0)}
@@ -29,13 +29,13 @@ function LengthLabel({ player }: { player: Mpris.Player }) {
 function Position({ player }: { player: Mpris.Player }) {
   return (
     <slider
-      className="position"
+      cssClasses={["position"]}
       hexpand={true}
       visible={bind(player, "length").as((l) => l > 0)}
       value={bind(player, "position").as((p) =>
         player.length > 0 ? p / player.length : 0,
       )}
-      onDragged={({ value }) => (player.position = value * player.length)}
+      onChangeValue={( self ) => (player.position = self.value * player.length)}
     />
   );
 }

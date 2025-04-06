@@ -10,14 +10,14 @@
 /* buttons */
 /* hw circular proc */
 * {
-  color: rgb(227, 226, 224);
-  text-shadow: 0 2px 3px rgba(18, 20, 18, 0.2);
+  color: rgb(216, 230, 222);
+  text-shadow: 0 2px 3px rgba(10, 22, 17, 0.2);
 }
 
 /* mixins */
 tooltip.background,
 tooltip > box {
-  background-color: rgb(18, 20, 18);
+  background-color: rgb(10, 22, 17);
   border-radius: 8px;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 rgba(0, 0, 0, 0.4);
 }
@@ -28,14 +28,14 @@ tooltip > box label {
 
 /* scales */
 scale trough {
-  background-color: rgba(57, 57, 56, 0.4);
+  background-color: rgba(48, 60, 55, 0.4);
   border-radius: 0.5rem;
   min-width: calc(0.5rem * 10);
   padding: 0 calc(0.5rem / 2);
 }
 scale highlight,
 scale progress {
-  background: rgba(227, 226, 224, 0.75);
+  background: rgba(216, 230, 222, 0.75);
   border-radius: 0.5rem;
   margin: 0 calc(0px - 0.5rem / 2);
   min-height: 0.5rem;
@@ -44,40 +44,40 @@ scale progress {
 /* buttons */
 .button {
   transition: 200ms;
-  background: rgb(54, 75, 63);
+  background: rgb(0, 79, 83);
   border-radius: 5rem;
   padding: 0.4rem;
 }
 .button:hover {
-  background: rgb(21.976744186, 30.523255814, 25.6395348837);
+  background: rgb(0, 6.186746988, 6.5);
 }
 
 .button-disabled {
   transition: 200ms;
-  background: rgba(57, 57, 56, 0.4);
+  background: rgba(48, 60, 55, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
 }
 .button-disabled:hover, .button-disabled:focus {
-  background: #393938;
+  background: #303c37;
 }
 
 /* popovers */
 popover {
-  background: rgb(18, 20, 18);
+  background: rgb(10, 22, 17);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 popover modelbutton {
   transition: 200ms;
-  background: rgba(57, 57, 56, 0.4);
+  background: rgba(48, 60, 55, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
   border-radius: 0;
   padding: 0.4rem 0.7rem;
 }
 popover modelbutton:hover, popover modelbutton:focus {
-  background: #393938;
+  background: #303c37;
 }
 popover modelbutton:first-child {
   border-radius: 8px 8px 0 0;
@@ -91,12 +91,15 @@ popover modelbutton:only-child {
 
 /* modules & windows */
 .Bar {
-  background: rgba(18, 20, 18, 0.5);
+  background: rgba(10, 22, 17, 0.5);
   border-radius: calc(8px * 4);
   font-size: 1.1rem;
-  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(18, 20, 18, 0.5);
+  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(10, 22, 17, 0.5);
   /* music */
   /* tray */
+}
+.Bar cava {
+  opacity: 0.1;
 }
 .Bar .module {
   margin: 0 0.4rem;
@@ -105,7 +108,7 @@ popover modelbutton:only-child {
   -gtk-icon-size: 2rem;
   margin-left: 0.8rem;
   margin-right: -0.5rem;
-  color: rgb(199, 198, 196);
+  color: rgb(188, 202, 194);
 }
 .Bar .Workspaces {
   margin: 0.4rem 0.8rem;
@@ -117,42 +120,42 @@ popover modelbutton:only-child {
   min-width: 1.5rem;
   min-height: 1.5rem;
   transition: 100ms linear;
-  box-shadow: inset -2px -2px 2px rgba(18, 20, 18, 0.3);
+  box-shadow: inset -2px -2px 2px rgba(10, 22, 17, 0.3);
 }
 .Bar .Workspaces .focused {
   min-width: 2.5rem;
 }
 .Bar .Workspaces .monitor0 {
-  background: rgb(106.2, 121.1, 110.9);
-  box-shadow: inset -2px -2px 2px rgb(79.65, 90.825, 83.175);
+  background: rgb(12.9, 133.2, 104);
+  box-shadow: inset -2px -2px 2px rgb(9.675, 99.9, 78);
 }
 .Bar .Workspaces .monitor0:hover {
-  background: rgb(144.7, 160.35, 149.15);
-  box-shadow: inset -2px -2px 2px rgb(105.6586332032, 123.1288667968, 110.6262076116);
+  background: rgb(23.65, 176.7, 139);
+  box-shadow: inset -2px -2px 2px rgb(17.7375, 132.525, 104.25);
 }
 .Bar .Workspaces .monitor1 {
-  background: rgb(131, 153.5, 139);
-  box-shadow: inset -2px -2px 2px rgb(96.042405765, 117.332594235, 103.6122505543);
+  background: #549fa3;
+  box-shadow: inset -2px -2px 2px rgb(63, 119.25, 122.25);
 }
 .Bar .Workspaces .monitor1:hover {
-  background: rgb(161.8, 184.9, 169.4);
-  box-shadow: inset -2px -2px 2px rgb(112.3320881813, 147.6929118187, 123.9659522352);
+  background: rgb(117.6, 191, 195);
+  box-shadow: inset -2px -2px 2px rgb(71.2613981763, 158.4378419453, 163.1886018237);
 }
 .Bar .Workspaces .monitor2 {
-  background: rgb(110.8, 119.8, 112.9);
-  box-shadow: inset -2px -2px 2px rgb(83.1, 89.85, 84.675);
+  background: rgb(78.1, 125.4, 119.5);
+  box-shadow: inset -2px -2px 2px rgb(58.575, 94.05, 89.625);
 }
 .Bar .Workspaces .monitor2:hover {
-  background: rgb(149.8, 158.8, 151.15);
-  box-shadow: inset -2px -2px 2px rgb(110.5535749752, 120.8964250248, 112.1050024826);
+  background: rgb(117.35, 164.9, 158.25);
+  box-shadow: inset -2px -2px 2px rgb(83.7455268935, 127.9419731065, 121.7609769484);
 }
 .Bar .Workspaces .monitor3 {
-  background: rgb(147, 155.7, 148.6);
-  box-shadow: inset -2px -2px 2px rgb(108.7485890014, 118.2764109986, 110.5008321274);
+  background: rgb(112.3, 162.1, 155);
+  box-shadow: inset -2px -2px 2px rgb(81.1494906621, 124.6505093379, 118.4485568761);
 }
 .Bar .Workspaces .monitor3:hover {
-  background: rgb(109.5, 117.95, 111.6);
-  box-shadow: inset -2px -2px 2px rgb(82.125, 88.4625, 83.7);
+  background: rgb(72.55, 123.85, 117.5);
+  box-shadow: inset -2px -2px 2px rgb(54.4125, 92.8875, 88.125);
 }
 .Bar .Media > box {
   transition: 200ms;
@@ -161,7 +164,7 @@ popover modelbutton:only-child {
   font-size: 1.1rem;
 }
 .Bar .Media.active > box {
-  background: rgba(57, 57, 56, 0.4);
+  background: rgba(48, 60, 55, 0.4);
 }
 .Bar .Media .cover {
   background-size: cover;
@@ -184,26 +187,26 @@ popover modelbutton:only-child {
   margin-right: -0.3rem;
 }
 .Bar .SysTray.active {
-  background: rgba(57, 57, 56, 0.4);
+  background: rgba(48, 60, 55, 0.4);
 }
 .Bar menu {
-  background: rgb(18, 20, 18);
+  background: rgb(10, 22, 17);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 .Bar menu separator {
-  background-color: rgba(57, 57, 56, 0.4);
+  background-color: rgba(48, 60, 55, 0.4);
 }
 .Bar menu menuitem {
   transition: 200ms;
-  background: rgba(57, 57, 56, 0.4);
+  background: rgba(48, 60, 55, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
   border-radius: 0;
   padding: 0.4rem 0.7rem;
 }
 .Bar menu menuitem:hover, .Bar menu menuitem:focus {
-  background: #393938;
+  background: #303c37;
 }
 .Bar menu menuitem:first-child {
   border-radius: 8px 8px 0 0;
@@ -221,24 +224,24 @@ popover modelbutton:only-child {
   -gtk-icon-size: 1.1rem;
 }
 .Bar .system-menu-toggler.active box {
-  background: rgba(57, 57, 56, 0.4);
+  background: rgba(48, 60, 55, 0.4);
 }
 .Bar .bar-hardware-progress-circle, .Bar .ram, .Bar .cpu {
   min-width: 2.2rem;
   min-height: 1.3rem;
   font-size: 0.35rem;
-  background: rgba(18, 20, 18, 0.5);
+  background: rgba(10, 22, 17, 0.5);
 }
 .Bar .bar-hardware-progress-inner-circle, .Bar .ram-inner, .Bar .cpu .cpu-inner {
   font-size: 0.7rem;
   margin: 1px 4px 0px 0px;
-  color: rgb(227, 226, 224);
+  color: rgb(216, 230, 222);
 }
 .Bar .cpu {
-  color: rgb(137.16, 160.14, 144.84);
+  color: rgb(92.4, 165.46, 170.12);
 }
 .Bar .ram {
-  color: rgb(143.16, 159.14, 147.5);
+  color: rgb(0, 175.38, 137.24);
 }
 .Bar .bar-hw-ram-box {
   margin-right: 0.4rem;
@@ -260,7 +263,7 @@ popover modelbutton:only-child {
 }
 .Bar .separator {
   font-size: 1.8rem;
-  color: rgb(145, 145, 143);
+  color: rgb(134, 148, 141);
 }
 .Bar .date {
   margin: 0 1.2rem 0 0.4rem;
@@ -270,21 +273,30 @@ popover modelbutton:only-child {
 }
 
 .music.window {
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 18, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(10, 22, 17, 0.1);
   border-radius: 16px;
-  background: rgba(18, 20, 18, 0.5);
+  background: rgba(10, 22, 17, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
+  background: none;
+  padding: 0rem;
   margin-top: 0.7rem;
 }
 .music.window .cover {
   background-position: center;
   background-size: cover;
   border-radius: 8px;
-  box-shadow: 0 1px 2px -1px rgba(18, 20, 18, 0.5);
+  box-shadow: 0 1px 2px -1px rgba(10, 22, 17, 0.5);
   margin: 0.4rem;
   min-height: 13rem;
   min-width: 13rem;
+}
+.music.window .blurred-cover {
+  border-radius: 8px;
+  opacity: 0.9;
+}
+.music.window cava {
+  opacity: 0.2;
 }
 
 .music.window .info {
@@ -310,21 +322,21 @@ popover modelbutton:only-child {
 }
 
 .music.window .controls button {
-  margin: 0 0.2rem;
-  font-size: 1.5rem;
+  margin: 0 1.6rem;
+  -gtk-icon-size: 1.5rem;
 }
 
 .music.window .player-info {
   margin-bottom: 0;
 }
 .music.window .player-info .player-icon {
-  font-size: 1.2rem;
+  -gtk-icon-size: 1.1rem;
 }
 
 .osd {
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 18, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(10, 22, 17, 0.1);
   border-radius: 16px;
-  background: rgba(18, 20, 18, 0.5);
+  background: rgba(10, 22, 17, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border-radius: 3rem;
@@ -350,15 +362,15 @@ popover modelbutton:only-child {
 }
 .osd levelbar block.filled {
   border-radius: 1.5rem;
-  background-color: rgb(227, 226, 224);
+  background-color: rgb(216, 230, 222);
 }
 
 /* general */
 .system-menu {
   -gtk-icon-size: 1.1rem;
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 18, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(10, 22, 17, 0.1);
   border-radius: 16px;
-  background: rgba(18, 20, 18, 0.5);
+  background: rgba(10, 22, 17, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   margin-top: 0.7rem;
@@ -366,7 +378,7 @@ popover modelbutton:only-child {
 }
 .system-menu > box {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(57, 57, 56, 0.4);
+  background: rgba(48, 60, 55, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
@@ -413,14 +425,14 @@ popover modelbutton:only-child {
 }
 .system-menu .sliders block filled {
   border-radius: 1.5rem;
-  background-color: rgb(227, 226, 224);
+  background-color: rgb(216, 230, 222);
 }
 
 .notification {
   margin: 5px 5px 5px 10px;
   min-width: 20rem;
   border-radius: 16px;
-  background-color: rgba(18, 20, 18, 0.5);
+  background-color: rgba(10, 22, 17, 0.5);
   border: 1px solid transparent;
   padding: 0.25rem 0.75rem;
 }
@@ -430,16 +442,16 @@ popover modelbutton:only-child {
 .notification .header .app-name {
   font-size: 0.9rem;
   font-weight: bold;
-  color: rgba(227, 226, 224, 0.7);
+  color: rgba(216, 230, 222, 0.7);
 }
 .notification .header .time {
   font-size: 0.9rem;
   font-weight: bold;
-  color: rgba(227, 226, 224, 0.7);
+  color: rgba(216, 230, 222, 0.7);
 }
 .notification separator {
   margin: 0 0.75rem;
-  background-color: rgba(227, 226, 224, 0.5);
+  background-color: rgba(216, 230, 222, 0.5);
 }
 .notification .content {
   margin-top: 0.75rem;
@@ -462,12 +474,12 @@ popover modelbutton:only-child {
   margin-right: 0.5rem;
   font-size: 1.1rem;
   font-weight: 500;
-  color: rgb(227, 226, 224);
+  color: rgb(216, 230, 222);
 }
 .notification .content .body {
   margin-right: 0.5rem;
   font-size: 0.95rem;
-  color: rgba(227, 226, 224, 0.8);
+  color: rgba(216, 230, 222, 0.8);
   margin-top: 0.75rem;
 }
 .notification .actions {
@@ -475,7 +487,7 @@ popover modelbutton:only-child {
 }
 .notification .actions .action-button {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(57, 57, 56, 0.4);
+  background: rgba(48, 60, 55, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
@@ -484,25 +496,25 @@ popover modelbutton:only-child {
   font-size: 0.9rem;
 }
 .notification .actions .action-button:hover {
-  background: #393938;
+  background: #303c37;
 }
 
 box.applauncher {
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 18, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(10, 22, 17, 0.1);
   border-radius: 16px;
-  background: rgba(18, 20, 18, 0.5);
+  background: rgba(10, 22, 17, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background-color: rgba(18, 20, 18, 0.7);
+  background-color: rgba(10, 22, 17, 0.7);
 }
 box.applauncher box.search {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(57, 57, 56, 0.4);
+  background: rgba(48, 60, 55, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
   margin: 1rem 0.5rem 1rem 0.5rem;
-  background-color: rgba(106.2, 121.1, 110.9, 0.4);
+  background-color: rgba(12.9, 133.2, 104, 0.4);
 }
 box.applauncher box.search image {
   -gtk-icon-size: 2rem;
@@ -513,23 +525,23 @@ box.applauncher box.search entry {
   margin: 0.3rem;
 }
 box.applauncher box.search entry menu {
-  background: rgb(18, 20, 18);
+  background: rgb(10, 22, 17);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 box.applauncher box.search entry menu separator {
-  background-color: rgba(57, 57, 56, 0.4);
+  background-color: rgba(48, 60, 55, 0.4);
 }
 box.applauncher box.search entry menu menuitem {
   transition: 200ms;
-  background: rgba(57, 57, 56, 0.4);
+  background: rgba(48, 60, 55, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
   border-radius: 0;
   padding: 0.4rem 0.7rem;
 }
 box.applauncher box.search entry menu menuitem:hover, box.applauncher box.search entry menu menuitem:focus {
-  background: #393938;
+  background: #303c37;
 }
 box.applauncher box.search entry menu menuitem:first-child {
   border-radius: 8px 8px 0 0;
@@ -542,7 +554,7 @@ box.applauncher box.search entry menu menuitem:only-child {
 }
 box.applauncher box.apps {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(57, 57, 56, 0.4);
+  background: rgba(48, 60, 55, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
@@ -560,54 +572,54 @@ box.applauncher box.apps button label.name {
   font-size: 1.1rem;
 }
 box.applauncher box.apps button label.description {
-  color: rgba(227, 226, 224, 0.8);
+  color: rgba(216, 230, 222, 0.8);
 }
 box.applauncher box.apps button:hover, box.applauncher box.apps button:focus {
   transition: 200ms;
-  background: rgba(57, 57, 56, 0.4);
+  background: rgba(48, 60, 55, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
 }
 box.applauncher box.apps button:hover:hover, box.applauncher box.apps button:hover:focus, box.applauncher box.apps button:focus:hover, box.applauncher box.apps button:focus:focus {
-  background: #393938;
+  background: #303c37;
 }
 box.applauncher box.not-found {
   padding: 1rem;
 }
 box.applauncher box.not-found image {
   -gtk-icon-size: 6rem;
-  color: rgba(227, 226, 224, 0.7);
+  color: rgba(216, 230, 222, 0.7);
 }
 box.applauncher box.not-found label {
-  color: rgba(227, 226, 224, 0.9);
+  color: rgba(216, 230, 222, 0.9);
   font-size: 1.2em;
 }
 
 box.logout-background {
-  background-color: rgba(18, 20, 18, 0.5);
+  background-color: rgba(10, 22, 17, 0.5);
 }
 box.logout-background .logout-menu {
-  box-shadow: 0 3px 5px 1px rgba(18, 20, 18, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(10, 22, 17, 0.1);
   border-radius: 16px;
-  background: rgba(18, 20, 18, 0.5);
+  background: rgba(10, 22, 17, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background-color: rgba(18, 20, 18, 0.7);
+  background-color: rgba(10, 22, 17, 0.7);
 }
 box.logout-background .logout-menu button {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(57, 57, 56, 0.4);
+  background: rgba(48, 60, 55, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
   transition: 200ms;
-  background: rgba(57, 57, 56, 0.4);
+  background: rgba(48, 60, 55, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
   margin: 1rem;
 }
 box.logout-background .logout-menu button:hover, box.logout-background .logout-menu button:focus {
-  background: #393938;
+  background: #303c37;
 }
 box.logout-background .logout-menu button label {
   font-family: "Material Symbols Outlined";
