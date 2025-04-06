@@ -29,6 +29,7 @@ export const Sliders = () => {
           onChangeValue={(self) => {
             brightness.screen = self.value;
           }}
+          min={0.1}
           valign={Gtk.Align.CENTER}
           hexpand={true}
         />

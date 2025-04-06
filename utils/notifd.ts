@@ -1,6 +1,6 @@
 import Notifd from "gi://AstalNotifd";
 import { GLib } from "astal";
-import { Astal } from "astal/gtk4";
+import { Gtk, Gdk } from "astal/gtk4";
 
 type TimeoutManager = {
   setupTimeout: () => void;
@@ -24,30 +24,27 @@ export const createTimeoutManager = (
     }
   };
 
-const setupTimeout = () => {
-  clearTimeout();
+  const setupTimeout = () => {
+    clearTimeout();
 
-  if (!isHovered) {
-    timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, timeoutDelay, () => {
+    if (!isHovered) {
+      timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, timeoutDelay, () => {
         clearTimeout();
         dismissCallback();
         return GLib.SOURCE_REMOVE;
-    });
-  }
-};
+      });
+    }
+  };
 
   return {
     setupTimeout,
     clearTimeout,
     handleHover: () => {
       isHovered = true;
-      print(isHovered);
-      print(timeoutId);
       clearTimeout();
     },
     handleHoverLost: () => {
       isHovered = false;
-      print(isHovered);
       setupTimeout();
     },
     cleanup: clearTimeout,
@@ -71,7 +68,12 @@ export const urgency = (notification: Notifd.Notification) => {
   }
 };
 
-export const isIcon = (icon: string) => !!Astal.Icon.lookup_icon(icon);
+export const isIcon = (icon: string) => {
+  const display = Gdk.Display.get_default();
+  if (!display) return false;
+  const iconTheme = Gtk.IconTheme.get_for_display(display);
+  return iconTheme.has_icon(icon);
+};
 
 export const fileExists = (path: string) =>
   GLib.file_test(path, GLib.FileTest.EXISTS);

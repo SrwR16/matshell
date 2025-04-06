@@ -24,7 +24,7 @@ export default function SysTray() {
   const tray = Tray.get_default();
 
   return (
-    <box cssClasses={["tray", "module"]}>
+    <box cssClasses={["SysTray", "module"]}>
       {bind(tray, "items").as((items) =>
         items.map((item) => <SysTrayItem item={item} />),
       )}

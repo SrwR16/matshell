@@ -2,7 +2,17 @@ import { bind } from "astal";
 import { Gtk } from "astal/gtk4";
 import Notifd from "gi://AstalNotifd";
 import { NotificationIcon } from "./Icon.tsx";
-import { time, urgency, createTimeoutManager} from "utils/notifd.ts";
+import { time, urgency, createTimeoutManager } from "utils/notifd.ts";
+
+// TODO There is still an issue with the hover handling on GTK4.
+// The hover signal is apparently handled correctly by the timeoutManager,
+// but the behavior is only as expected if the focused monitor changes 
+// at least once before hovering the notification widget.
+// This also happens without the focused monitor logic
+// when not setting the gdkmonitor property.
+// Causes?: 
+// Visibility handling of upstream window? 
+// Upstream bug? 
 
 export function NotificationWidget({
   notification,
@@ -23,7 +33,6 @@ export function NotificationWidget({
     <box
       setup={(self) => {
         // Set up timeout
-        print(notification.appIcon)
         timeoutManager.setupTimeout();
         const clickGesture = Gtk.GestureClick.new();
         clickGesture.set_button(0); // 0 means any button
@@ -57,6 +66,7 @@ export function NotificationWidget({
       onHoverEnter={timeoutManager.handleHover}
       onHoverLeave={timeoutManager.handleHoverLost}
       vertical
+      vexpand={false}
       cssClasses={["notification", `${urgency(notification)}`]}
       name={notification.id.toString()}
     >

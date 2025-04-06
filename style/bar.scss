@@ -93,14 +93,16 @@
 
   /* tray */
   .SysTray {
-    @include button;
-    image {
-      -gtk-icon-size: 5rem;
-    }
     background: none;
+    image {
+      -gtk-icon-size: $font;
+    }
+    .tray-item {
+      margin: 0rem 0.3rem;
+    }
 
     &:not(:last-child) {
-      margin-right: 0.3rem;
+      margin-right: -0.3rem;
     }
 
     &.active {

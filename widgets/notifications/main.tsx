@@ -10,16 +10,16 @@ export default function Notifications() {
 
   return (
     <window
-      visible={bind(notifd, "notifications").as((n) => n.length > 0)}
       name="notifications"
       gdkmonitor={focusedGdkMonitor}
       anchor={TOP | RIGHT}
+      visible={bind(notifd, "notifications").as(
+        (notifications) => notifications.length > 0,
+      )}
       child={
         <box vertical={true} cssClasses={["notifications"]}>
           {bind(notifd, "notifications").as((notifications) =>
-            notifications.map((n) => (
-              <NotificationWidget notification={n} />
-            )),
+            notifications.map((n) => <NotificationWidget notification={n} />),
           )}
         </box>
       }
