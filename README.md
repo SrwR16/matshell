@@ -18,7 +18,7 @@ Matshell is a Material Design inspired desktop shell built with [Astal](https://
 
 This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice sprinkled on top.
 
-Take a look at the GTK4 branch for the most recent version which still work in progress (but ~95% done and absolutely usable).
+Take a look at the GTK4 branch for the most recent version which is still work in progress (but ~95% done and absolutely usable).
 
 ## Features
 
