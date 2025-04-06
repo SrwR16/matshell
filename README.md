@@ -16,7 +16,9 @@
 
 Matshell is a Material Design inspired desktop shell built with [Astal](https://github.com/Aylur/astal) for [Hyprland](https://github.com/hyprwm/Hyprland). This project draws heavy inspiration from [fufexan's](https://github.com/fufexan/dotfiles) AGSv1 config, with design influences from [saimoomedits](https://github.com/saimoomedits/eww-widgets), tailored for both multi-monitor desktop setups and laptops.
 
-This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice sprinkled on top. 
+This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice sprinkled on top.
+
+Take a look at the GTK4 branch for the most recent version which still work in progress (but ~95% done and absolutely usable).
 
 ## Features
 
