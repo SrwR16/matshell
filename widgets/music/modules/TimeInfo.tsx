@@ -35,7 +35,8 @@ function Position({ player }: { player: Mpris.Player }) {
       value={bind(player, "position").as((p) =>
         player.length > 0 ? p / player.length : 0,
       )}
-      onChangeValue={( self ) => (player.position = self.value * player.length)}
+      //using scroll or valueChange signals will cause recursive update issues
+      onButtonReleased={( self ) => (player.position = self.value * player.length)}
     />
   );
 }
