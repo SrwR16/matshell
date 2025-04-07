@@ -133,41 +133,31 @@
     min-width: 2.2rem;
     min-height: 1.3rem;
     font-size: 0.35rem;
-    background: transparentize($procBg, 0.5);
   }
 
   .bar-hardware-progress-inner-circle {
     font-size: 0.7rem;
     margin: 1px 4px 0px 0px;
-    color: $fg;
-  }
-
-  .cpu {
-    @extend .bar-hardware-progress-circle;
-    color: $cpuProc;
-
-    .cpu-inner {
-      @extend .bar-hardware-progress-inner-circle;
-    }
-  }
-
-
-
-  .ram {
-    @extend .bar-hardware-progress-circle;
-    color: $ramProc;
-  }
-
-  .ram-inner {
-    @extend .bar-hardware-progress-inner-circle;
+    color: transparentize($procBg, 0.5);
   }
 
   .bar-hw-ram-box{
     margin-right: 0.4rem;
     margin-left: 0.3rem;
+    circularprogress {
+
+      progress {
+        @extend .bar-hardware-progress-circle;
+        color: $ramProc;
+      }
+
+      radius {
+        @extend .bar-hardware-progress-inner-circle;
+      }
+    }
     button{
       label {
-        margin: 0px 0px 0px 4px;
+        margin: 2px 0px 0px 2px;
         font-family: 'Material Symbols Outlined';
         font-size: 1.2rem;
       }
@@ -175,11 +165,23 @@
   }
 
   .bar-hw-cpu-box {
+
     margin-left: 0.4rem;
     margin-right: 0.3rem;
+    circularprogress {
+
+      progress {
+        @extend .bar-hardware-progress-circle;
+        color: $cpuProc;
+      }
+
+      radius {
+        @extend .bar-hardware-progress-inner-circle;
+      }
+    }
     button{
       label {
-        margin: 0px 0px 0px 5px;
+        margin: 2px 0px 0px 2px;
         font-family: 'Material Symbols Outlined';
         font-size: 1.3rem;
       }

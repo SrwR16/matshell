@@ -39,6 +39,9 @@ export default function Bar(monitor: Gdk.Monitor) {
           <box hexpand halign={Gtk.Align.END}>
             <SysTray />
             <Separator />
+            <Cpu />
+            <Mem />
+            <Separator />
             <SystemInfo />
             <Separator />
             <Time />
