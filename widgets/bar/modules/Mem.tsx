@@ -1,23 +1,26 @@
 import { bind } from "astal";
+import Gsk from "gi://Gsk";
 import { execAsync } from "astal/process";
 import SystemMonitor from "utils/hwmonitor";
+import { CircularProgressBar } from "widgets/common/circularprogress";
 
 export default function Mem() {
   const sysmon = SystemMonitor.get_default();
 
   return (
-    <box className={"bar-hw-ram-box"}>
-      <circularprogress
-        className="ram"
-        value={bind(sysmon, "memoryUtilization")}
-        startAt={0.25}
-        endAt={1.25}
-        rounded={false}
-        tooltipText={bind(sysmon, "memoryUsed").as((m) => m.toString())}
+    <box cssClasses={["bar-hw-ram-box"]}>
+      <CircularProgressBar
+        percentage={bind(sysmon, "memoryUtilization")}
+        radiusFilled={true}
+        inverted={true}
+        startAt={-0.75}
+        endAt={0.75}
+        lineWidth={3.5}
+        lineCap={Gsk.LineCap.ROUND}
       >
         <button
-          className="ram-inner"
-          onClick={async () => {
+          cssClasses={["ram-inner"]}
+          onClicked={async () => {
             try {
               await execAsync("missioncenter");
             } catch (error) {
@@ -25,8 +28,9 @@ export default function Mem() {
             }
           }}
           label={"memory_alt"}
-        ></button>
-      </circularprogress>
+          tooltipText={bind(sysmon, "memoryUsed").as((m) => m.toString())}
+        />
+      </CircularProgressBar>
     </box>
   );
 }

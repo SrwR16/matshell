@@ -1,5 +1,5 @@
 import { execAsync } from "astal/process";
-import { App, Astal, Gdk, Gtk } from "astal/gtk3";
+import { App, Astal, Gdk, Gtk } from "astal/gtk4";
 import { Variable } from "astal";
 
 function hide() {
@@ -8,7 +8,7 @@ function hide() {
 
 function LogoutButton(label: String, command: String) {
   return (
-    <button onClick={() => execAsync(["sh", "-c", command])} label={label} />
+    <button onClicked={() => execAsync(["sh", "-c", command])} label={label} />
   );
 }
 
@@ -25,21 +25,17 @@ export default function LogoutMenu() {
       keymode={Astal.Keymode.ON_DEMAND}
       application={App}
       onShow={(self) => {
-        width.set(self.get_current_monitor().workarea.width);
+        width.set(self.get_current_monitor().geometry.width);
       }}
-      onKeyPressEvent={function (self, event: Gdk.Event) {
-        if (event.get_keyval()[1] === Gdk.KEY_Escape) self.hide();
+      onKeyPressed={(self, keyval) => {
+        if (keyval === Gdk.KEY_Escape) self.hide();
       }}
     >
-      <box className="logout-background">
-        <eventbox widthRequest={width((w) => w / 2)} expand onClick={hide} />
-        <box
-          hexpand={false}
-          vertical
-          valign={Gtk.Align.CENTER}
-        >
-          <eventbox onClick={hide} />
-          <box className="logout-menu" vertical>
+      <box cssClasses={["logout-background"]}>
+        <button widthRequest={width((w) => w / 2)} expand onClicked={hide} />
+        <box hexpand={false} vertical valign={Gtk.Align.CENTER}>
+          <button onClicked={hide} />
+          <box cssClasses={["logout-menu"]} vertical>
             <box>
               {LogoutButton("lock", "hyprlock")}
               {LogoutButton("bedtime", "systemctl suspend || loginctl suspend")}
@@ -63,9 +59,9 @@ export default function LogoutMenu() {
               )}
             </box>
           </box>
-          <eventbox expand onClick={hide} />
+          <button expand onClicked={hide} />
         </box>
-        <eventbox widthRequest={width((w) => w / 2)} expand onClick={hide} />
+        <button widthRequest={width((w) => w / 2)} expand onClicked={hide} />
       </box>
     </window>
   );

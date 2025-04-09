@@ -1,5 +1,6 @@
 /* general */
 .system-menu {
+  -gtk-icon-size: $font;
   @include window;
   margin-top: .7rem;
   margin-right: .7rem;
@@ -29,7 +30,7 @@
     padding: 0.3rem;
   }
 
-  icon,
+  image,
   label {
     margin: 0.3rem;
   }
@@ -44,7 +45,7 @@
 /* sliders */
 .system-menu .sliders {
   min-height: 0.5rem;
-  icon {
+  image {
     margin: 0.3rem;
   }
   trough {

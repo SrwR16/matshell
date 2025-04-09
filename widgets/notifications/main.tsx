@@ -1,4 +1,4 @@
-import { Astal } from "astal/gtk3";
+import { Astal } from "astal/gtk4";
 import Notifd from "gi://AstalNotifd";
 import { bind } from "astal";
 import { focusedGdkMonitor } from "utils/hyprland.ts";
@@ -13,12 +13,13 @@ export default function Notifications() {
       name="notifications"
       gdkmonitor={focusedGdkMonitor}
       anchor={TOP | RIGHT}
+      visible={bind(notifd, "notifications").as(
+        (notifications) => notifications.length > 0,
+      )}
       child={
-        <box vertical={true} className="notifications">
+        <box vertical={true} cssClasses={["notifications"]}>
           {bind(notifd, "notifications").as((notifications) =>
-            notifications.map((n) => (
-              <NotificationWidget key={n.id} notification={n} />
-            )),
+            notifications.map((n) => <NotificationWidget notification={n} />),
           )}
         </box>
       }

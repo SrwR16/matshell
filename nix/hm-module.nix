@@ -35,8 +35,8 @@ in {
       Service = let
         ags = "${config.programs.ags.package}/bin/ags";
       in {
-        ExecStart = "${ags} run";
-        ExecReload = "${ags} quit && ${ags} run";
+        ExecStart = "${ags} run --gtk4";
+        ExecReload = "${ags} quit && ${ags} run --gtk4";
         Restart = "on-failure";
         KillMode = "mixed";
       };

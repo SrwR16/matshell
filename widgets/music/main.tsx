@@ -1,19 +1,36 @@
-import { App, Astal } from "astal/gtk3";
+import { App, Astal } from "astal/gtk4";
 import Mpris from "gi://AstalMpris";
-import { bind, Variable } from "astal";
+import { bind, Variable, Gio } from "astal";
 import { findPlayer, generateBackground } from "utils/mpris";
 import { Cover } from "./modules/Cover";
 import { Info } from "./modules/Info";
+import { CavaDraw, CavaStyle } from "./modules/Cava";
+import { astalify, Gtk } from "astal/gtk4";
+
+const Picture = astalify<Gtk.Picture, Gtk.Picture.ConstructorProps>(
+  Gtk.Picture,
+);
 
 function MusicBox({ player }: { player: Mpris.Player }) {
   return (
-    <box
-      className="music window"
-      css={bind(player, "cover_art").as(generateBackground)}
-    >
-      <Cover player={player} />
-      <Info player={player} />
-    </box>
+    <overlay>
+      <Gtk.ScrolledWindow>
+        <Picture
+          cssClasses={["blurred-cover"]}
+          file={bind(player, "cover_art").as((c) =>
+            Gio.file_new_for_path(generateBackground(c)),
+          )}
+          contentFit={Gtk.ContentFit.COVER}
+        />
+      </Gtk.ScrolledWindow>
+      <box cssClasses={["cava-container"]} type="overlay clip">
+        <CavaDraw hexpand vexpand style={CavaStyle.CATMULL_ROM} />
+      </box>
+      <box type="overlay measure">
+        <Cover player={player} />
+        <Info player={player} />
+      </box>
+    </overlay>
   );
 }
 
@@ -24,6 +41,7 @@ export default function MusicPlayer() {
   return (
     <window
       name="music-player"
+      cssClasses={["music", "window"]}
       application={App}
       layer={Astal.Layer.OVERLAY}
       anchor={TOP}

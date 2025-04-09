@@ -4,17 +4,18 @@ import { mprisStateIcon } from "utils/mpris";
 
 export function Controls({ player, widthRequest }: { player: Mpris.Player, widthRequest?: number }) {
   return (
-    <centerbox className="controls"
+    <centerbox cssClasses={["controls"]}
       vexpand={true}
+      hexpand={false}
       widthRequest={widthRequest}>
-      <button onClick={() => player.previous()}>
-        <icon icon="media-skip-backward-symbolic" />
+      <button onClicked={() => player.previous()}>
+        <image iconName="media-skip-backward-symbolic" />
       </button>
-      <button onClick={() => player.play_pause()}>
-        <icon icon={bind(player, "playback_status").as(mprisStateIcon)} />
+      <button onClicked={() => player.play_pause()}>
+        <image iconName={bind(player, "playback_status").as(mprisStateIcon)} />
       </button>
-      <button onClick={() => player.next()}>
-        <icon icon="media-skip-forward-symbolic" />
+      <button onClicked={() => player.next()}>
+        <image iconName="media-skip-forward-symbolic" />
       </button>
     </centerbox>
   );

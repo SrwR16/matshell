@@ -1,5 +1,5 @@
 import GObject, { register, property } from "astal/gobject";
-import { interval } from "astal/time";
+import GLib from "gi://GLib";
 import GTop from "gi://GTop";
 import { readFile } from "astal/file";
 
@@ -8,8 +8,8 @@ export default class SystemMonitor extends GObject.Object {
   static instance: SystemMonitor;
   private static readonly CPU_INFO_PATH = "/proc/cpuinfo";
 
-  // Configuration
-  private static readonly UPDATE_INTERVAL = 500;
+  // On lower intervals the tooltips start to take forever to show
+  private static readonly UPDATE_INTERVAL = 1000;
   private static readonly BYTE_UNITS = ["B", "KB", "MB", "GB", "TB"];
 
   // State tracking
@@ -18,6 +18,10 @@ export default class SystemMonitor extends GObject.Object {
   #lastUsed = 0;
   #lastTotal = 0;
   #cpuFreq = 0;
+
+  // Notification batching
+  #pendingNotifications = new Set<string>();
+  #notifyTimeoutId: number | null = null;
 
   static get_default(): SystemMonitor {
     return this.instance || (this.instance = new SystemMonitor());
@@ -38,15 +42,16 @@ export default class SystemMonitor extends GObject.Object {
   }
 
   private startMonitoring(): void {
-    interval(SystemMonitor.UPDATE_INTERVAL, () => {
-      this.updateCpuMetrics();
-      this.updateCpuFrequency();
-      this.updateMemoryMetrics();
-      return true;
+    // Use GTK4's idle priority for better integration with event loop
+    GLib.timeout_add(GLib.PRIORITY_LOW, SystemMonitor.UPDATE_INTERVAL, () => {
+      this.updateMetrics();
+      return GLib.SOURCE_CONTINUE;
     });
   }
 
-  private updateCpuMetrics(): void {
+  // Unified update method to minimize main thread blocking
+  private updateMetrics(): void {
+    // Update CPU metrics
     const currentCpu = new GTop.glibtop_cpu();
     GTop.glibtop_get_cpu(currentCpu);
 
@@ -62,26 +67,54 @@ export default class SystemMonitor extends GObject.Object {
     this.#lastUsed = currentUsed;
     this.#lastTotal = currentTotal;
 
-    this.notify("cpu-load");
-  }
-
-  private updateMemoryMetrics(): void {
+    // Update memory metrics
     GTop.glibtop_get_mem(this.#memory);
-    this.notify("memory-used");
-    this.notify("memory-utilization");
-  }
 
-  private updateCpuFrequency(): void {
+    // Update CPU frequency
     try {
       const frequencies = this.parseCpuFrequencies();
       if (frequencies.length > 0) {
         this.#cpuFreq =
           frequencies.reduce((a, b) => a + b, 0) / frequencies.length;
-        this.notify("cpu-frequency");
       }
     } catch (error) {
       console.error(`CPU frequency update failed: ${error}`);
     }
+
+    // Queue all notifications in batch
+    this.queueNotifications([
+      "cpu-load",
+      "memory-used",
+      "memory-utilization",
+      "cpu-frequency",
+    ]);
+  }
+
+  // Batch notification method
+  private queueNotifications(properties: string[]): void {
+    for (const prop of properties) {
+      this.#pendingNotifications.add(prop);
+    }
+
+    if (this.#notifyTimeoutId === null) {
+      // Process notifications on next frame for better GTK4 integration
+      this.#notifyTimeoutId = GLib.timeout_add(
+        GLib.PRIORITY_DEFAULT_IDLE,
+        100,
+        () => {
+          this.processNotifications();
+          this.#notifyTimeoutId = null;
+          return GLib.SOURCE_REMOVE;
+        },
+      );
+    }
+  }
+
+  private processNotifications(): void {
+    for (const prop of this.#pendingNotifications) {
+      this.notify(prop);
+    }
+    this.#pendingNotifications.clear();
   }
 
   private parseCpuFrequencies(): number[] {

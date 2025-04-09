@@ -1,37 +1,21 @@
-import { Astal, Gdk } from "astal/gtk3";
+import { Astal, Gdk, Gtk } from "astal/gtk4";
 import Tray from "gi://AstalTray";
 import { bind } from "astal";
 
 function SysTrayItem({ item }) {
   return (
     <menubutton
-      className="tray-item"
+      cssClasses={["tray-item"]}
       menuModel={bind(item, "menuModel")}
       actionGroup={bind(item, "actionGroup").as((ag) => ["dbusmenu", ag])}
       usePopover={false}
       tooltipMarkup={bind(item, "tooltipMarkup")}
-      onClicked={(self, event) => {
-        try {
-          const button = event.button;
-
-          if (button === Astal.MouseButton.PRIMARY) {
-            item.activate(event.x, event.y);
-          }
-          if (button === Astal.MouseButton.SECONDARY) {
-            self.get_popup()?.popup_at_widget(
-              self,
-              Gdk.Gravity.NORTH,
-              Gdk.Gravity.SOUTH,
-              null
-            );
-          }
-          return true;
-        } catch (error) {
-          console.log(error);
-        }
+      setup={(self) => {
+        self.insert_action_group("dbusmenu", item.actionGroup);
       }}
     >
-      <icon gicon={bind(item, "gicon")} />
+      <image gicon={bind(item, "gicon")} />
+      {Gtk.PopoverMenu.new_from_model(item.menuModel)}
     </menubutton>
   );
 }
@@ -40,7 +24,7 @@ export default function SysTray() {
   const tray = Tray.get_default();
 
   return (
-    <box className="tray module">
+    <box cssClasses={["SysTray", "module"]}>
       {bind(tray, "items").as((items) =>
         items.map((item) => <SysTrayItem item={item} />),
       )}

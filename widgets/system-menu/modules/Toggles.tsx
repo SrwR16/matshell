@@ -11,23 +11,23 @@ export const Toggles = () => {
   const bluetooth = Bluetooth.get_default();
 
   return (
-    <box className="toggles" vertical>
+    <box cssClasses={["toggles"]} vertical>
       {/* Network Toggle */}
-      <box className="toggle">
+      <box cssClasses={["toggle"]}>
         <button
-          onClick={() => {
+          onClicked={() => {
             if (network.wifi.enabled) {
               network.wifi.set_enabled(false);
             } else network.wifi.set_enabled(true);
           }}
-          className={bind(network, "connectivity").as((c) =>
-            c === Network.Connectivity.FULL ? "button" : "button-disabled",
+          cssClasses={bind(network, "connectivity").as((c) =>
+            c === Network.Connectivity.FULL ? ["button"] : ["button-disabled"],
           )}
         >
-          <icon icon={bind(network.wifi, "icon_name")} />
+          <image iconName={bind(network.wifi, "icon_name")} />
         </button>
         <button
-          onClick={() =>
+          onClicked={() =>
             execAsync([
               "sh",
               "-c",
@@ -40,20 +40,20 @@ export const Toggles = () => {
       </box>
 
       {/* Bluetooth Toggle */}
-      <box className="toggle">
+      <box cssClasses={["toggle"]}>
         <button
-          onClick={() => bluetooth.toggle()}
-          className={bind(bluetooth, "is_powered").as((p) =>
-            p ? "button" : "button-disabled",
+          onClicked={() => bluetooth.toggle()}
+          cssClasses={bind(bluetooth, "is_powered").as((p) =>
+            p ? ["button"] : ["button-disabled"],
           )}
         >
-          <icon
-            icon={bind(bluetooth, "devices").as(() =>
+          <image
+            iconName={bind(bluetooth, "devices").as(() =>
               getBluetoothIcon(bluetooth),
             )}
           />
         </button>
-        <button onClick={() => execAsync("overskride")}>
+        <button onClicked={() => execAsync("overskride")}>
           <label
             label={bind(bluetooth, "devices").as(
               (devices) => getBluetoothText(devices, bluetooth) || "Bluetooth",

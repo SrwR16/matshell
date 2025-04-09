@@ -1,6 +1,6 @@
 import Notifd from "gi://AstalNotifd";
 import { GLib } from "astal";
-import { Astal } from "astal/gtk3";
+import { Gtk, Gdk } from "astal/gtk4";
 
 type TimeoutManager = {
   setupTimeout: () => void;
@@ -29,8 +29,8 @@ export const createTimeoutManager = (
 
     if (!isHovered) {
       timeoutId = GLib.timeout_add(GLib.PRIORITY_DEFAULT, timeoutDelay, () => {
+        clearTimeout();
         dismissCallback();
-        timeoutId = null;
         return GLib.SOURCE_REMOVE;
       });
     }
@@ -68,7 +68,12 @@ export const urgency = (notification: Notifd.Notification) => {
   }
 };
 
-export const isIcon = (icon: string) => !!Astal.Icon.lookup_icon(icon);
+export const isIcon = (icon: string) => {
+  const display = Gdk.Display.get_default();
+  if (!display) return false;
+  const iconTheme = Gtk.IconTheme.get_for_display(display);
+  return iconTheme.has_icon(icon);
+};
 
 export const fileExists = (path: string) =>
   GLib.file_test(path, GLib.FileTest.EXISTS);

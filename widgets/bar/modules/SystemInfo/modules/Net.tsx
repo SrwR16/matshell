@@ -28,9 +28,9 @@ export default function Net() {
   };
   const network = Network.get_default();
   return (
-    <icon
-      className="net module"
-      icon={bind(network, "connectivity").as(
+    <image
+      cssClasses={["net", "module"]}
+      iconName={bind(network, "connectivity").as(
         () => `${getNetIcon(network)}`,
       )}
       tooltipText={bind(network, "connectivity").as(

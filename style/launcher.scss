@@ -7,8 +7,8 @@ box.applauncher {
         margin: 1rem .5rem 1rem .5rem;
         background-color: transparentize($primaryMon, .6);
 
-        icon {
-            font-size: 2rem;
+        image {
+            -gtk-icon-size: 2rem;
             margin: .3rem;
         }
         entry {
@@ -26,8 +26,8 @@ box.applauncher {
         button {
             padding: 0.4rem;
 
-            icon {
-                font-size: 3rem;
+            image {
+                -gtk-icon-size: 3rem;
                 margin-right: .3rem;
                 margin-left: .3rem;
             }
@@ -51,8 +51,8 @@ box.applauncher {
     box.not-found {
         padding: 1rem;
 
-        icon {
-            font-size: 6em;
+        image {
+            -gtk-icon-size: 6rem;
             color: transparentize($fg, .3);
         }
 

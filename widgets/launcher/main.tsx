@@ -1,5 +1,5 @@
 import Apps from "gi://AstalApps";
-import { App, Astal, Gdk, Gtk } from "astal/gtk3";
+import { App, Astal, Gdk, Gtk, hook } from "astal/gtk4";
 import { Variable } from "astal";
 
 const MAX_ITEMS = 8;
@@ -11,19 +11,19 @@ function hide() {
 function AppButton({ app }: { app: Apps.Application }) {
   return (
     <button
-      className="AppButton"
+      cssClasses={["AppButton"]}
       onClicked={() => {
         hide();
         app.launch();
       }}
     >
       <box>
-        <icon icon={app.iconName} />
+        <image iconName={app.iconName} />
         <box valign={Gtk.Align.CENTER} vertical>
-          <label className="name" truncate xalign={0} label={app.name} />
+          <label cssClasses={["name"]} truncate xalign={0} label={app.name} />
           {app.description && (
             <label
-              className="description"
+              cssClasses={["description"]}
               wrap
               xalign={0}
               label={app.description}
@@ -57,49 +57,59 @@ export default function Applauncher() {
       keymode={Astal.Keymode.ON_DEMAND}
       application={App}
       onShow={(self) => {
-        text.set("");
-        width.set(self.get_current_monitor().workarea.width);
+        width.set(self.get_current_monitor().geometry.width);
       }}
-      onKeyPressEvent={function (self, event: Gdk.Event) {
-        if (event.get_keyval()[1] === Gdk.KEY_Escape) self.hide();
+      onKeyPressed={(self, keyval) => {
+        if (keyval === Gdk.KEY_Escape) self.hide();
       }}
     >
       <box>
-        <eventbox widthRequest={width((w) => w / 2)} expand onClick={hide} />
+        <button widthRequest={width((w) => w / 2)} expand onClicked={hide} />
         <box hexpand={false} vertical valign={Gtk.Align.CENTER}>
-          <eventbox onClick={hide} />
-          <box widthRequest={500} className="applauncher" vertical>
-            <box className="search">
-              <icon icon="system-search-symbolic" />
+          <button onClicked={hide} />
+          <box widthRequest={500} cssClasses={["applauncher"]} vertical>
+            <box cssClasses={["search"]}>
+              <image iconName="system-search-symbolic" />
               <entry
                 placeholderText="Search..."
-                text={text()}
-                onChanged={(self) => text.set(self.text)}
+                text={text.get()}
+                setup={(self) => {
+                  hook(self, App, "window-toggled", (_, win) => {
+                    const winName = win.name;
+
+                    if (winName == "launcher") {
+                      self.set_text("");
+                      self.grab_focus();
+                    }
+                  });
+                }}
+                onNotifyText={(self) => text.set(self.text)}
                 primary-icon-sensitive={true}
                 onActivate={onEnter}
+                hexpand={true}
               />
             </box>
             <box
               spacing={6}
               vertical
-              className="apps"
+              cssClasses={["apps"]}
               visible={list.as((l) => l.length > 0)}
             >
               {list.as((list) => list.map((app) => <AppButton app={app} />))}
             </box>
             <box
               halign={CENTER}
-              className="not-found"
+              cssClasses={["not-found"]}
               vertical
               visible={list.as((l) => l.length === 0)}
             >
-              <icon icon="system-search-symbolic" />
+              <image iconName="system-search-symbolic" />
               <label label="No match found" />
             </box>
           </box>
-          <eventbox expand onClick={hide} />
+          <button expand onClicked={hide} />
         </box>
-        <eventbox widthRequest={width((w) => w / 2)} expand onClick={hide} />
+        <button widthRequest={width((w) => w / 2)} expand onClicked={hide} />
       </box>
     </window>
   );
