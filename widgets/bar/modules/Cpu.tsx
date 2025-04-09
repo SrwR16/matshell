@@ -13,8 +13,8 @@ export default function Cpu() {
         percentage={bind(sysmon, "cpuLoad")}
         radiusFilled={true}
         inverted={true}
-        startAt={0.25}
-        endAt={1.25}
+        startAt={-0.75}
+        endAt={0.75}
         lineWidth={3.5}
         lineCap={Gsk.LineCap.ROUND}
       >
