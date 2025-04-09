@@ -28,8 +28,7 @@ export default function Cpu() {
             }
           }}
           label="memory"
-          //TODO Setting tooltips in or around circularprogress freezes all other tooltips
-          // tooltipText={bind(sysmon, "cpuFrequency").as((f) => `${f} MHz`)}
+          tooltipText={bind(sysmon, "cpuFrequency").as((f) => `${f} MHz`)}
         />
       </CircularProgressBar>
     </box>

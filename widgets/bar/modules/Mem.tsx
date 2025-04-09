@@ -28,8 +28,7 @@ export default function Mem() {
             }
           }}
           label={"memory_alt"}
-          //TODO Setting tooltips in or around circularprogress freezes all other tooltips
-          // tooltipText={bind(sysmon, "memoryUsed").as((m) => m.toString())}
+          tooltipText={bind(sysmon, "memoryUsed").as((m) => m.toString())}
         />
       </CircularProgressBar>
     </box>
