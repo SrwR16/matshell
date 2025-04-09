@@ -1,7 +1,7 @@
 <div align="center">
   
 # Matshell 
-### A Material Design desktop shell powered by [Astal](https://github.com/Aylur/astal)
+### A GTK4 Material Design desktop shell powered by [Astal](https://github.com/Aylur/astal)
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/neurarian/matshell?style=for-the-badge&logo=gitlfs&logoColor=%23FFDBC9&labelColor=%2346362d&color=%23FFDBC9)
 ![GitHub commit activity](https://img.shields.io/github/commit-activity/m/neurarian/matshell?style=for-the-badge&logo=git&logoColor=%23FFB68D&labelColor=%2346362d&color=%23FFB68D)
@@ -10,15 +10,11 @@
 
 ![Neurarian_Matshell_round-2](https://github.com/user-attachments/assets/f3a2cbf8-6f62-4047-938f-68a4a01d8cd3)
 
-
-
 </div>
 
 Matshell is a Material Design inspired desktop shell built with [Astal](https://github.com/Aylur/astal) for [Hyprland](https://github.com/hyprwm/Hyprland). This project draws heavy inspiration from [fufexan's](https://github.com/fufexan/dotfiles) AGSv1 config, with design influences from [saimoomedits](https://github.com/saimoomedits/eww-widgets), tailored for both multi-monitor desktop setups and laptops.
 
 This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice sprinkled on top.
-
-Take a look at the GTK4 branch for the most recent version which is still work in progress (but ~95% done and absolutely usable).
 
 ## Features
 
