@@ -1,12 +1,11 @@
-// Thanks to https://github.com/kotontrion/kompass
+// Credits to https://github.com/kotontrion/kompass
 
-import { bind } from "astal";
 import { Gtk, Gdk } from "astal/gtk4";
 import Cava from "gi://AstalCava";
 import GObject from "gi://GObject";
 import Gsk from "gi://Gsk";
 
-enum CavaStyle {
+export enum CavaStyle {
   SMOOTH = 0,
   CATMULL_ROM = 1,
 }
@@ -181,17 +180,40 @@ const CavaWidget = GObject.registerClass(
   },
 );
 
-export function CavaDraw() {
+export function CavaDraw(props: {
+  style?: CavaStyle | { subscribe: Function; get: Function };
+  hexpand?: boolean;
+  vexpand?: boolean;
+}) {
   const cavaWidget = new CavaWidget();
-  cavaWidget.set_hexpand(true);
-  cavaWidget.set_vexpand(true);
-  return (
-    <box
-      visible={bind(cavaWidget.cava, "values").as((vals) =>
-        vals.every((val) => val <= 0.001) ? false : true,
-      )}
-    >
-      {cavaWidget}
-    </box>
-  );
+
+  if (props.hexpand !== undefined) {
+    cavaWidget.set_hexpand(props.hexpand);
+  } else {
+    cavaWidget.set_hexpand(false);
+  }
+
+  if (props.vexpand !== undefined) {
+    cavaWidget.set_vexpand(props.vexpand);
+  } else {
+    cavaWidget.set_vexpand(false);
+  }
+
+  // Handle style binding
+  if (props.style !== undefined) {
+    if (
+      typeof props.style === "object" &&
+      "subscribe" in props.style &&
+      "get" in props.style
+    ) {
+      cavaWidget.style = props.style.get();
+
+      props.style.subscribe((value) => {
+        cavaWidget.style = value;
+      });
+    } else {
+      cavaWidget.style = props.style as CavaStyle;
+    }
+  }
+  return cavaWidget;
 }
