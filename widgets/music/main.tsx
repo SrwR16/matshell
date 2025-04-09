@@ -13,7 +13,7 @@ const Picture = astalify<Gtk.Picture, Gtk.Picture.ConstructorProps>(
 
 function MusicBox({ player }: { player: Mpris.Player }) {
   return (
-    <overlay cssClasses={["music", "window"]}>
+    <overlay>
       <Gtk.ScrolledWindow>
         <Picture
           cssClasses={["blurred-cover"]}
@@ -41,6 +41,7 @@ export default function MusicPlayer() {
   return (
     <window
       name="music-player"
+      cssClasses={["music", "window"]}
       application={App}
       layer={Astal.Layer.OVERLAY}
       anchor={TOP}
