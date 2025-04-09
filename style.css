@@ -3,15 +3,21 @@
   font-family: FiraCode Nerd Font;
 }
 
+/*
+* Css Colors
+* Generated with Matugen
+*/
+/* buttons */
+/* hw circular proc */
 * {
-  color: #F8DDD0;
-  text-shadow: 0 2px 3px rgba(29, 16, 9, 0.2);
+  color: rgb(223, 226, 239);
+  text-shadow: 0 2px 3px rgba(15, 19, 28, 0.2);
 }
 
 /* mixins */
 tooltip.background,
 tooltip > box {
-  background-color: #1D1009;
+  background-color: rgb(15, 19, 28);
   border-radius: 8px;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 rgba(0, 0, 0, 0.4);
 }
@@ -22,14 +28,14 @@ tooltip > box label {
 
 /* scales */
 scale trough {
-  background-color: rgba(70, 54, 45, 0.4);
+  background-color: rgba(53, 57, 67, 0.4);
   border-radius: 0.5rem;
   min-width: calc(0.5rem * 10);
   padding: 0 calc(0.5rem / 2);
 }
 scale highlight,
 scale progress {
-  background: rgba(248, 221, 208, 0.75);
+  background: rgba(223, 226, 239, 0.75);
   border-radius: 0.5rem;
   margin: 0 calc(0px - 0.5rem / 2);
   min-height: 0.5rem;
@@ -38,40 +44,40 @@ scale progress {
 /* buttons */
 .button {
   transition: 200ms;
-  background: #B28A48;
+  background: rgb(72, 64, 112);
   border-radius: 5rem;
   padding: 0.4rem;
 }
 .button:hover {
-  background: rgb(123.532, 95.772, 49.968);
+  background: rgb(40.7045454545, 36.1818181818, 63.3181818182);
 }
 
 .button-disabled {
   transition: 200ms;
-  background: rgba(70, 54, 45, 0.4);
+  background: rgba(53, 57, 67, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
 }
 .button-disabled:hover, .button-disabled:focus {
-  background: #46362d;
+  background: #353943;
 }
 
 /* popovers */
 popover {
-  background: #1D1009;
+  background: rgb(15, 19, 28);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 popover modelbutton {
   transition: 200ms;
-  background: rgba(70, 54, 45, 0.4);
+  background: rgba(53, 57, 67, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
   border-radius: 0;
   padding: 0.4rem 0.7rem;
 }
 popover modelbutton:hover, popover modelbutton:focus {
-  background: #46362d;
+  background: #353943;
 }
 popover modelbutton:first-child {
   border-radius: 8px 8px 0 0;
@@ -85,10 +91,10 @@ popover modelbutton:only-child {
 
 /* modules & windows */
 .Bar {
-  background: rgba(29, 16, 9, 0.5);
+  background: rgba(15, 19, 28, 0.5);
   border-radius: calc(8px * 4);
   font-size: 1.1rem;
-  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(29, 16, 9, 0.5);
+  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(15, 19, 28, 0.5);
   /* music */
   /* tray */
 }
@@ -102,7 +108,7 @@ popover modelbutton:only-child {
   -gtk-icon-size: 2rem;
   margin-left: 0.8rem;
   margin-right: -0.5rem;
-  color: #DEC0B1;
+  color: rgb(195, 198, 211);
 }
 .Bar .Workspaces {
   margin: 0.4rem 0.8rem;
@@ -114,42 +120,42 @@ popover modelbutton:only-child {
   min-width: 1.5rem;
   min-height: 1.5rem;
   transition: 100ms linear;
-  box-shadow: inset -2px -2px 2px rgba(29, 16, 9, 0.3);
+  box-shadow: inset -2px -2px 2px rgba(15, 19, 28, 0.3);
 }
 .Bar .Workspaces .focused {
   min-width: 2.5rem;
 }
 .Bar .Workspaces .monitor0 {
-  background: rgb(159.1, 101.4, 60.3);
-  box-shadow: inset -2px -2px 2px rgb(119.325, 76.05, 45.225);
+  background: rgb(64.2, 116.4, 175.2);
+  box-shadow: inset -2px -2px 2px rgb(48.15, 87.3, 131.4);
 }
 .Bar .Workspaces .monitor0:hover {
-  background: rgb(193.35, 143.4, 110.55);
-  box-shadow: inset -2px -2px 2px rgb(159.7465611354, 104.5070960699, 68.1784388646);
+  background: rgb(117.7, 155.9, 203.7);
+  box-shadow: inset -2px -2px 2px rgb(65.5666224814, 114.3901113468, 175.4833775186);
 }
 .Bar .Workspaces .monitor1 {
-  background: #594524;
-  box-shadow: inset -2px -2px 2px rgb(66.75, 51.75, 27);
+  background: rgb(150.5, 143, 183.5);
+  box-shadow: inset -2px -2px 2px rgb(105.4230245232, 95.4145095368, 149.4604904632);
 }
 .Bar .Workspaces .monitor1:hover {
-  background: rgb(53.4, 41.4, 21.6);
-  box-shadow: inset -2px -2px 2px rgb(40.05, 31.05, 16.2);
+  background: rgb(181.9, 174.6, 212.1);
+  box-shadow: inset -2px -2px 2px rgb(124.5849756691, 111.5613138686, 178.4636861314);
 }
 .Bar .Workspaces .monitor2 {
-  background: rgb(145.8, 112.8, 80.6);
-  box-shadow: inset -2px -2px 2px rgb(109.35, 84.6, 60.45);
+  background: rgb(110.7, 115.5, 147.2);
+  box-shadow: inset -2px -2px 2px rgb(82.7100952003, 86.3929194764, 110.7149047997);
 }
 .Bar .Workspaces .monitor2:hover {
-  background: rgb(184.8, 151.8, 121.1);
-  box-shadow: inset -2px -2px 2px rgb(150.5144904459, 113.4198064674, 78.9105095541);
+  background: rgb(150.45, 154.25, 185.7);
+  box-shadow: inset -2px -2px 2px rgb(100.496958585, 106.0076143227, 151.615541415);
 }
 .Bar .Workspaces .monitor3 {
-  background: rgb(187.2, 144.9, 105.2);
-  box-shadow: inset -2px -2px 2px rgb(150.9703125, 108.33984375, 68.3296875);
+  background: rgb(146, 151, 187.6);
+  box-shadow: inset -2px -2px 2px rgb(95.5979591837, 102.6897959184, 154.6020408163);
 }
 .Bar .Workspaces .monitor3:hover {
-  background: rgb(145.7, 108.15, 71.2);
-  box-shadow: inset -2px -2px 2px rgb(109.275, 81.1125, 53.4);
+  background: rgb(108.5, 113.5, 148.1);
+  box-shadow: inset -2px -2px 2px rgb(81.1874704025, 84.9848263615, 111.2625295975);
 }
 .Bar .Media > box {
   transition: 200ms;
@@ -158,7 +164,7 @@ popover modelbutton:only-child {
   font-size: 1.1rem;
 }
 .Bar .Media.active > box {
-  background: rgba(70, 54, 45, 0.4);
+  background: rgba(53, 57, 67, 0.4);
 }
 .Bar .Media .cover {
   background-size: cover;
@@ -181,26 +187,26 @@ popover modelbutton:only-child {
   margin-right: -0.3rem;
 }
 .Bar .SysTray.active {
-  background: rgba(70, 54, 45, 0.4);
+  background: rgba(53, 57, 67, 0.4);
 }
 .Bar menu {
-  background: #1D1009;
+  background: rgb(15, 19, 28);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 .Bar menu separator {
-  background-color: rgba(70, 54, 45, 0.4);
+  background-color: rgba(53, 57, 67, 0.4);
 }
 .Bar menu menuitem {
   transition: 200ms;
-  background: rgba(70, 54, 45, 0.4);
+  background: rgba(53, 57, 67, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
   border-radius: 0;
   padding: 0.4rem 0.7rem;
 }
 .Bar menu menuitem:hover, .Bar menu menuitem:focus {
-  background: #46362d;
+  background: #353943;
 }
 .Bar menu menuitem:first-child {
   border-radius: 8px 8px 0 0;
@@ -218,45 +224,53 @@ popover modelbutton:only-child {
   -gtk-icon-size: 1.1rem;
 }
 .Bar .system-menu-toggler.active box {
-  background: rgba(70, 54, 45, 0.4);
-}
-.Bar .bar-hardware-progress-circle, .Bar .bar-hw-cpu-box circularprogress progress, .Bar .bar-hw-ram-box circularprogress progress {
-  min-width: 2.2rem;
-  min-height: 1.3rem;
-  font-size: 0.35rem;
-}
-.Bar .bar-hardware-progress-inner-circle, .Bar .bar-hw-cpu-box circularprogress radius, .Bar .bar-hw-ram-box circularprogress radius {
-  font-size: 0.7rem;
-  margin: 1px 4px 0px 0px;
-  color: rgba(29, 16, 9, 0.5);
+  background: rgba(53, 57, 67, 0.4);
 }
 .Bar .bar-hw-ram-box {
   margin-right: 0.4rem;
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(208.42, 137.46, 93.06);
+  color: rgb(112.2, 154.8, 216.24);
+  min-width: 2.3rem;
+}
+.Bar .bar-hw-ram-box circularprogress radius {
+  color: rgba(15, 19, 28, 0.5);
 }
 .Bar .bar-hw-ram-box button label {
-  margin: 2px 0px 0px 2px;
   font-family: "Material Symbols Outlined";
+}
+.Bar .bar-hw-ram-box circularprogress progress {
+  color: rgb(112.2, 154.8, 216.24);
+}
+.Bar .bar-hw-ram-box button label {
+  margin: 1px 0px 0px 2px;
   font-size: 1.2rem;
 }
 .Bar .bar-hw-cpu-box {
-  margin-left: 0.4rem;
-  margin-right: 0.3rem;
+  margin-right: 0.4rem;
+  margin-left: 0.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(188.06, 148.16, 80.22);
+  color: rgb(112.2, 154.8, 216.24);
+  min-width: 2.3rem;
+}
+.Bar .bar-hw-cpu-box circularprogress radius {
+  color: rgba(15, 19, 28, 0.5);
 }
 .Bar .bar-hw-cpu-box button label {
-  margin: 2px 0px 0px 2px;
   font-family: "Material Symbols Outlined";
+}
+.Bar .bar-hw-cpu-box circularprogress progress {
+  color: rgb(157.14, 147.82, 201.76);
+}
+.Bar .bar-hw-cpu-box button label {
+  margin: 1px 0px 0px 1px;
   font-size: 1.3rem;
 }
 .Bar .separator {
   font-size: 1.8rem;
-  color: #A68B7D;
+  color: rgb(140, 145, 156);
 }
 .Bar .date {
   margin: 0 1.2rem 0 0.4rem;
@@ -266,9 +280,9 @@ popover modelbutton:only-child {
 }
 
 .music.window {
-  box-shadow: 0 3px 5px 1px rgba(29, 16, 9, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(15, 19, 28, 0.1);
   border-radius: 16px;
-  background: rgba(29, 16, 9, 0.5);
+  background: rgba(15, 19, 28, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   background: none;
@@ -279,7 +293,7 @@ popover modelbutton:only-child {
   background-position: center;
   background-size: cover;
   border-radius: 8px;
-  box-shadow: 0 1px 2px -1px rgba(29, 16, 9, 0.5);
+  box-shadow: 0 1px 2px -1px rgba(15, 19, 28, 0.5);
   margin: 0.4rem;
   min-height: 13rem;
   min-width: 13rem;
@@ -328,9 +342,9 @@ popover modelbutton:only-child {
 }
 
 .osd {
-  box-shadow: 0 3px 5px 1px rgba(29, 16, 9, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(15, 19, 28, 0.1);
   border-radius: 16px;
-  background: rgba(29, 16, 9, 0.5);
+  background: rgba(15, 19, 28, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border-radius: 3rem;
@@ -356,15 +370,15 @@ popover modelbutton:only-child {
 }
 .osd levelbar block.filled {
   border-radius: 1.5rem;
-  background-color: #F8DDD0;
+  background-color: rgb(223, 226, 239);
 }
 
 /* general */
 .system-menu {
   -gtk-icon-size: 1.1rem;
-  box-shadow: 0 3px 5px 1px rgba(29, 16, 9, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(15, 19, 28, 0.1);
   border-radius: 16px;
-  background: rgba(29, 16, 9, 0.5);
+  background: rgba(15, 19, 28, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   margin-top: 0.7rem;
@@ -372,7 +386,7 @@ popover modelbutton:only-child {
 }
 .system-menu > box {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(70, 54, 45, 0.4);
+  background: rgba(53, 57, 67, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
@@ -419,14 +433,14 @@ popover modelbutton:only-child {
 }
 .system-menu .sliders block filled {
   border-radius: 1.5rem;
-  background-color: #F8DDD0;
+  background-color: rgb(223, 226, 239);
 }
 
 .notification {
   margin: 5px 5px 5px 10px;
   min-width: 20rem;
   border-radius: 16px;
-  background-color: rgba(29, 16, 9, 0.5);
+  background-color: rgba(15, 19, 28, 0.5);
   border: 1px solid transparent;
   padding: 0.25rem 0.75rem;
 }
@@ -436,15 +450,15 @@ popover modelbutton:only-child {
 .notification .header .app-name {
   font-size: 0.9rem;
   font-weight: bold;
-  color: rgba(248, 221, 208, 0.7);
+  color: rgba(223, 226, 239, 0.7);
 }
 .notification .header .time {
   font-size: 0.9rem;
   font-weight: bold;
-  color: rgba(248, 221, 208, 0.7);
+  color: rgba(223, 226, 239, 0.7);
 }
 .notification separator {
-  background: rgba(248, 221, 208, 0.5);
+  background: rgba(223, 226, 239, 0.5);
   min-height: 1px;
 }
 .notification .content {
@@ -468,12 +482,12 @@ popover modelbutton:only-child {
   margin-right: 0.5rem;
   font-size: 1.1rem;
   font-weight: 500;
-  color: #F8DDD0;
+  color: rgb(223, 226, 239);
 }
 .notification .content .body {
   margin-right: 0.5rem;
   font-size: 0.95rem;
-  color: rgba(248, 221, 208, 0.8);
+  color: rgba(223, 226, 239, 0.8);
   margin-top: 0.75rem;
 }
 .notification .actions {
@@ -481,7 +495,7 @@ popover modelbutton:only-child {
 }
 .notification .actions .action-button {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(70, 54, 45, 0.4);
+  background: rgba(53, 57, 67, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
@@ -490,25 +504,25 @@ popover modelbutton:only-child {
   font-size: 0.9rem;
 }
 .notification .actions .action-button:hover {
-  background: #46362d;
+  background: #353943;
 }
 
 box.applauncher {
-  box-shadow: 0 3px 5px 1px rgba(29, 16, 9, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(15, 19, 28, 0.1);
   border-radius: 16px;
-  background: rgba(29, 16, 9, 0.5);
+  background: rgba(15, 19, 28, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background-color: rgba(29, 16, 9, 0.7);
+  background-color: rgba(15, 19, 28, 0.7);
 }
 box.applauncher box.search {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(70, 54, 45, 0.4);
+  background: rgba(53, 57, 67, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
   margin: 1rem 0.5rem 1rem 0.5rem;
-  background-color: rgba(159.1, 101.4, 60.3, 0.4);
+  background-color: rgba(64.2, 116.4, 175.2, 0.4);
 }
 box.applauncher box.search image {
   -gtk-icon-size: 2rem;
@@ -519,23 +533,23 @@ box.applauncher box.search entry {
   margin: 0.3rem;
 }
 box.applauncher box.search entry menu {
-  background: #1D1009;
+  background: rgb(15, 19, 28);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 box.applauncher box.search entry menu separator {
-  background-color: rgba(70, 54, 45, 0.4);
+  background-color: rgba(53, 57, 67, 0.4);
 }
 box.applauncher box.search entry menu menuitem {
   transition: 200ms;
-  background: rgba(70, 54, 45, 0.4);
+  background: rgba(53, 57, 67, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
   border-radius: 0;
   padding: 0.4rem 0.7rem;
 }
 box.applauncher box.search entry menu menuitem:hover, box.applauncher box.search entry menu menuitem:focus {
-  background: #46362d;
+  background: #353943;
 }
 box.applauncher box.search entry menu menuitem:first-child {
   border-radius: 8px 8px 0 0;
@@ -548,7 +562,7 @@ box.applauncher box.search entry menu menuitem:only-child {
 }
 box.applauncher box.apps {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(70, 54, 45, 0.4);
+  background: rgba(53, 57, 67, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
@@ -566,54 +580,54 @@ box.applauncher box.apps button label.name {
   font-size: 1.1rem;
 }
 box.applauncher box.apps button label.description {
-  color: rgba(248, 221, 208, 0.8);
+  color: rgba(223, 226, 239, 0.8);
 }
 box.applauncher box.apps button:hover, box.applauncher box.apps button:focus {
   transition: 200ms;
-  background: rgba(70, 54, 45, 0.4);
+  background: rgba(53, 57, 67, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
 }
 box.applauncher box.apps button:hover:hover, box.applauncher box.apps button:hover:focus, box.applauncher box.apps button:focus:hover, box.applauncher box.apps button:focus:focus {
-  background: #46362d;
+  background: #353943;
 }
 box.applauncher box.not-found {
   padding: 1rem;
 }
 box.applauncher box.not-found image {
   -gtk-icon-size: 6rem;
-  color: rgba(248, 221, 208, 0.7);
+  color: rgba(223, 226, 239, 0.7);
 }
 box.applauncher box.not-found label {
-  color: rgba(248, 221, 208, 0.9);
+  color: rgba(223, 226, 239, 0.9);
   font-size: 1.2em;
 }
 
 box.logout-background {
-  background-color: rgba(29, 16, 9, 0.5);
+  background-color: rgba(15, 19, 28, 0.5);
 }
 box.logout-background .logout-menu {
-  box-shadow: 0 3px 5px 1px rgba(29, 16, 9, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(15, 19, 28, 0.1);
   border-radius: 16px;
-  background: rgba(29, 16, 9, 0.5);
+  background: rgba(15, 19, 28, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background-color: rgba(29, 16, 9, 0.7);
+  background-color: rgba(15, 19, 28, 0.7);
 }
 box.logout-background .logout-menu button {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(70, 54, 45, 0.4);
+  background: rgba(53, 57, 67, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
   transition: 200ms;
-  background: rgba(70, 54, 45, 0.4);
+  background: rgba(53, 57, 67, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
   margin: 1rem;
 }
 box.logout-background .logout-menu button:hover, box.logout-background .logout-menu button:focus {
-  background: #46362d;
+  background: #353943;
 }
 box.logout-background .logout-menu button label {
   font-family: "Material Symbols Outlined";

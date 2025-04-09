@@ -132,60 +132,33 @@
       background: $surface;
     }
   }
-  .bar-hardware-progress-circle {
-    min-width: 2.2rem;
-    min-height: 1.3rem;
-    font-size: 0.35rem;
-  }
-
-  .bar-hardware-progress-inner-circle {
-    font-size: 0.7rem;
-    margin: 1px 4px 0px 0px;
-    color: transparentize($procBg, 0.5);
-  }
 
   .bar-hw-ram-box{
-    margin-right: 0.4rem;
-    margin-left: 0.3rem;
-    circularprogress {
+    @include hw-circular-progress;
 
-      progress {
-        @extend .bar-hardware-progress-circle;
+    circularprogress progress{
         color: $ramProc;
       }
 
-      radius {
-        @extend .bar-hardware-progress-inner-circle;
-      }
-    }
     button{
+
       label {
-        margin: 2px 0px 0px 2px;
-        font-family: 'Material Symbols Outlined';
+        margin: 1px 0px 0px 2px;
         font-size: 1.2rem;
       }
     }
   }
 
   .bar-hw-cpu-box {
+    @include hw-circular-progress;
 
-    margin-left: 0.4rem;
-    margin-right: 0.3rem;
-    circularprogress {
-
-      progress {
-        @extend .bar-hardware-progress-circle;
+    circularprogress progress {
         color: $cpuProc;
       }
 
-      radius {
-        @extend .bar-hardware-progress-inner-circle;
-      }
-    }
     button{
       label {
-        margin: 2px 0px 0px 2px;
-        font-family: 'Material Symbols Outlined';
+        margin: 1px 0px 0px 1px;
         font-size: 1.3rem;
       }
     }

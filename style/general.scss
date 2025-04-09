@@ -135,6 +135,28 @@ scale {
   }
 }
 
+@mixin hw-circular-progress {
+    margin-right: 0.4rem;
+    margin-left: 0.3rem;
+
+    circularprogress {
+
+      progress {
+        color: $ramProc;
+        min-width: 2.3rem;
+      }
+
+      radius {
+        color: transparentize($procBg, 0.5);
+      }
+    }
+    button{
+      label {
+        font-family: 'Material Symbols Outlined';
+      }
+    }
+}
+
 /* popovers */
 popover {
   background: $tooltipBg;
