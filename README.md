@@ -196,6 +196,8 @@ This project wouldn't be possible without:
 - [fufexan's dotfiles](https://github.com/fufexan/dotfiles) for the initial inspiration and foundation
 - [end-4's dots-hyprland](https://github.com/end-4/dots-hyprland) for the color generation scripts
 - [saimoomedits' eww-widgets](https://github.com/saimoomedits/eww-widgets) for design influence
+- [kotontrion](https://github.com/kotontrion/kompass) for the GTK4 CAVA Catmull-Rom spline widget
+- [ARKye03](https://github.com/ARKye03) for the GTK4 circular progress widget which is still on its way to be merged into Astal
 - [Astal](https://github.com/Aylur/astal) for the powerful widget toolkit
 
 ______________________________________________________________________
