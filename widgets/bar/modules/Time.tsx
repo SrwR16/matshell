@@ -18,7 +18,7 @@ export default function Time() {
       onHoverEnter={() => revealPower.set(true)}
       onHoverLeave={() => revealPower.set(false)}
     >
-      <label cssClasses={["date"]} label={bind(time)} />
+      <label cssClasses={["clock"]} label={bind(time)} />
       <revealer
         transitionType={Gtk.RevealerTransitionType.SLIDE_RIGHT}
         transitionDuration={300}

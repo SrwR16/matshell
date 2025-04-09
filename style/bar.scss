@@ -12,6 +12,7 @@
     margin: 0 0.4rem;
   }
 
+  /* OS Icon */
   .OsIcon {
     -gtk-icon-size: 2rem;
     margin-left: 0.8rem;
@@ -19,6 +20,7 @@
     color: $os;
   }
 
+  /* Hyperland */
   .Workspaces {
     margin: 0.4rem 0.8rem;
 
@@ -116,23 +118,7 @@
     }
   }
 
-  menu {
-    @include menu;
-  }
-
-  .system-menu-toggler {
-    box {
-      @include animate;
-      margin: 0.4rem 0;
-      border-radius: $round2;
-      -gtk-icon-size: $font;
-    }
-
-    &.active box {
-      background: $surface;
-    }
-  }
-
+  /* hw-monitor */
   .bar-hw-ram-box{
     @include hw-circular-progress;
 
@@ -164,12 +150,27 @@
     }
   }
 
+  /* System menu */
+  .system-menu-toggler {
+    box {
+      @include animate;
+      margin: 0.4rem 0;
+      border-radius: $round2;
+      -gtk-icon-size: $font;
+    }
+
+    &.active box {
+      background: $surface;
+    }
+  }
+
   .separator {
     font-size: 1.8rem;
     color: $outline;
   }
 
-  .date {
+
+  .clock {
     margin: 0 1.2rem 0 0.4rem;
   }
 
