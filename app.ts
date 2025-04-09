@@ -29,14 +29,27 @@ App.start({
   main() {
     exec(`sass ${scss} ${css}`);
     monitorFile(`./style`, reloadCss);
+    const bars = new Map<Gdk.Monitor, Gtk.Widget>();
+
+    Notifications();
+    OnScreenDisplay();
+    SystemMenu();
+    MusicPlayer();
+    Applauncher();
+    LogoutMenu();
+
+    // initialize
     for (const gdkmonitor of App.get_monitors()) {
-      Bar(gdkmonitor);
-      SystemMenu();
-      OnScreenDisplay();
-      Notifications();
-      LogoutMenu();
-      Applauncher();
-      MusicPlayer();
+      bars.set(gdkmonitor, Bar(gdkmonitor));
     }
+
+    App.connect("monitor-added", (_, gdkmonitor) => {
+      bars.set(gdkmonitor, Bar(gdkmonitor));
+    });
+
+    App.connect("monitor-removed", (_, gdkmonitor) => {
+      bars.get(gdkmonitor)?.destroy();
+      bars.delete(gdkmonitor);
+    });
   },
 });

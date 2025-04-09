@@ -22,6 +22,13 @@ App.start({
   main() {
     const bars = new Map<Gdk.Monitor, Gtk.Widget>();
 
+    Notifications();
+    OnScreenDisplay();
+    SystemMenu();
+    MusicPlayer();
+    Applauncher();
+    LogoutMenu();
+
     // initialize
     for (const gdkmonitor of App.get_monitors()) {
       bars.set(gdkmonitor, Bar(gdkmonitor));
@@ -35,11 +42,5 @@ App.start({
       bars.get(gdkmonitor)?.destroy();
       bars.delete(gdkmonitor);
     });
-    Notifications();
-    OnScreenDisplay();
-    SystemMenu();
-    MusicPlayer();
-    Applauncher();
-    LogoutMenu();
   },
 });
