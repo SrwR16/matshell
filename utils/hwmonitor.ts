@@ -8,7 +8,8 @@ export default class SystemMonitor extends GObject.Object {
   static instance: SystemMonitor;
   private static readonly CPU_INFO_PATH = "/proc/cpuinfo";
 
-  private static readonly UPDATE_INTERVAL = 500;
+  // On lower intervals the tooltips start to take forever to show
+  private static readonly UPDATE_INTERVAL = 1000;
   private static readonly BYTE_UNITS = ["B", "KB", "MB", "GB", "TB"];
 
   // State tracking
