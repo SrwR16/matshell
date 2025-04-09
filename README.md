@@ -56,7 +56,7 @@ This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice
 
 - **Music Player with CAVA**
 
-![2025-03-23T18:53:13,488130463+01:00](https://github.com/user-attachments/assets/302da48d-6a04-4587-bd21-19e90f9fdd9a)
+![2025-04-10T00:02:06,878048376+02:00](https://github.com/user-attachments/assets/cefb1942-4f9b-430e-b499-55ebf32e55e5)
 
 - **Notifications**
 - Light
