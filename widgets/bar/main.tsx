@@ -30,11 +30,7 @@ export default function Bar(monitor: Gdk.Monitor) {
       <overlay>
         {renderCava && (
           <box type="overlay clip">
-            <CavaDraw 
-            vexpand
-            hexpand
-            style={CavaStyle.SMOOTH}
-            />
+            <CavaDraw vexpand hexpand style={CavaStyle.SMOOTH} />
           </box>
         )}
         <centerbox type="overlay measure">

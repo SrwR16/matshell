@@ -83,7 +83,7 @@ export function NotificationWidget({
           label={time(notification.time)}
         />
       </box>
-      <Gtk.Separator visible />
+      <Gtk.Separator />
       <box cssClasses={["content"]}>
         <box
           cssClasses={["thumb"]}

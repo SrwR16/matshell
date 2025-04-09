@@ -3,12 +3,15 @@
   border-radius: calc(#{$round} * 4);
   font-size: $font;
   box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4) , -1px -1px 2px $bg; 
+
   cava {
     opacity: 0.1;
   }
+
   .module {
     margin: 0 0.4rem;
   }
+
   .OsIcon {
     -gtk-icon-size: 2rem;
     margin-left: 0.8rem;
@@ -29,7 +32,6 @@
       box-shadow: inset -2px -2px 2px transparentize($bg , 0.2);
     }
 
-    
     .focused {
       min-width: 2.5rem;
     }
@@ -100,6 +102,7 @@
     image {
       -gtk-icon-size: $font;
     }
+
     .tray-item {
       margin: 0rem 0.3rem;
     }
@@ -187,13 +190,16 @@
       }
     }
   }
+
   .separator {
     font-size: 1.8rem;
     color: $outline;
   }
+
   .date {
     margin: 0 1.2rem 0 0.4rem;
   }
+
   .power-button {
     margin: 0 1.2rem 0 0rem;
   }

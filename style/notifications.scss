@@ -26,8 +26,8 @@
   }
 
   separator {
-      margin: 0 0.75rem ;
-      background-color: transparentize($fg, .5);
+      background: transparentize($fg, .5);
+      min-height: 1px;
   }
 
   .content{
