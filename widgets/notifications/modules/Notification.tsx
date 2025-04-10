@@ -4,16 +4,6 @@ import Notifd from "gi://AstalNotifd";
 import { NotificationIcon } from "./Icon.tsx";
 import { time, urgency, createTimeoutManager } from "utils/notifd.ts";
 
-// TODO There is still an issue with the hover handling on GTK4.
-// The hover signal is apparently handled correctly by the timeoutManager,
-// but the behavior is only as expected if the focused monitor changes 
-// at least once before hovering the notification widget.
-// This also happens without the focused monitor logic
-// when not setting the gdkmonitor property.
-// Causes?: 
-// Visibility handling of upstream window? 
-// Upstream bug? 
-
 export function NotificationWidget({
   notification,
 }: {
@@ -36,7 +26,7 @@ export function NotificationWidget({
         timeoutManager.setupTimeout();
         const clickGesture = Gtk.GestureClick.new();
         clickGesture.set_button(0); // 0 means any button
-        clickGesture.connect("pressed", (gesture, n_press, x, y) => {
+        clickGesture.connect("pressed", (gesture, _) => {
           try {
             // Get which button was pressed (1=left, 2=middle, 3=right)
             const button = gesture.get_current_button();

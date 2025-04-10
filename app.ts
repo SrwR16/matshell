@@ -1,6 +1,8 @@
 import { App, Gdk, Gtk } from "astal/gtk4";
 import { monitorFile } from "astal/file";
 import { exec } from "astal/process";
+import Hyprland from "gi://AstalHyprland";
+import { hyprToGdk } from "utils/hyprland.ts";
 import Bar from "./widgets/bar/main.tsx";
 import SystemMenu from "./widgets/system-menu/main.tsx";
 import OnScreenDisplay from "./widgets/osd/main.tsx";
@@ -30,6 +32,7 @@ App.start({
     exec(`sass ${scss} ${css}`);
     monitorFile(`./style`, reloadCss);
     const bars = new Map<Gdk.Monitor, Gtk.Widget>();
+    const monitorIdMap = new Map();
 
     Notifications();
     OnScreenDisplay();
@@ -38,18 +41,47 @@ App.start({
     Applauncher();
     LogoutMenu();
 
-    // initialize
-    for (const gdkmonitor of App.get_monitors()) {
-      bars.set(gdkmonitor, Bar(gdkmonitor));
+    const hypr = Hyprland.get_default();
+
+    // Initialize
+    for (const hyprMonitor of hypr.monitors) {
+      const gdkmonitor = hyprToGdk(hyprMonitor);
+      if (gdkmonitor) {
+        monitorIdMap.set(hyprMonitor.id, gdkmonitor);
+        bars.set(gdkmonitor, Bar(gdkmonitor));
+        console.log(
+          `Initialized bar for Hyprland monitor ID: ${hyprMonitor.id}`,
+        );
+      }
     }
 
-    App.connect("monitor-added", (_, gdkmonitor) => {
-      bars.set(gdkmonitor, Bar(gdkmonitor));
+    hypr.connect("monitor-added", (_, monitor) => {
+      const gdkmonitor = hyprToGdk(monitor);
+      if (gdkmonitor) {
+        bars.set(gdkmonitor, Bar(gdkmonitor));
+        monitorIdMap.set(monitor.id, gdkmonitor);
+        console.log(`Monitor added - ID: ${monitor.id}`);
+      }
     });
 
-    App.connect("monitor-removed", (_, gdkmonitor) => {
-      bars.get(gdkmonitor)?.destroy();
-      bars.delete(gdkmonitor);
+    hypr.connect("monitor-removed", (_, id) => {
+      const gdkmonitor = monitorIdMap.get(id);
+      console.log(
+        `Monitor removed - ID: ${id}, GDK monitor found: ${!!gdkmonitor}`,
+      );
+
+      if (gdkmonitor) {
+        const bar = bars.get(gdkmonitor);
+
+        // Connect to the destroy signal to clean up after it's fully destroyed
+        // Works fine but still causes some non-critical assertion failures
+        bar.connect("destroy", () => {
+          bars.delete(gdkmonitor);
+        });
+
+        bar.destroy();
+        monitorIdMap.delete(id);
+      }
     });
   },
 });
