@@ -29,6 +29,9 @@ This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice
   
 
 - **Main Status Bar**
+
+  ![2025-04-10 18-58-06](https://github.com/user-attachments/assets/1952d0ed-c9ca-4966-a91f-5f45aae5fdf6)
+
 - Laptop (Light)
     
 ![2025-03-23T18:37:29,615714672+01:00](https://github.com/user-attachments/assets/8656aa43-7793-476b-9e12-f0a58eeccbfb)
