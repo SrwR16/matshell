@@ -30,7 +30,10 @@ This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice
 
 - **Main Status Bar**
 
-  ![2025-04-10 18-58-06](https://github.com/user-attachments/assets/1952d0ed-c9ca-4966-a91f-5f45aae5fdf6)
+![2025-04-10 18-58-06](https://github.com/user-attachments/assets/1952d0ed-c9ca-4966-a91f-5f45aae5fdf6)
+  
+![2025-04-10 23-47-32](https://github.com/user-attachments/assets/e05e8861-2e76-417a-a7b3-369f155b20c1)
+
 
 - Laptop (Light)
     
@@ -59,9 +62,7 @@ This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice
 
 - **Music Player with CAVA**
 
-![2025-04-10T00:02:06,878048376+02:00](https://github.com/user-attachments/assets/cefb1942-4f9b-430e-b499-55ebf32e55e5)
-
-![2025-04-10 18-22-52-8](https://github.com/user-attachments/assets/512b6658-d7e5-44aa-95cc-7a180cf28203)
+![2025-04-10T00:02:06,878048376+02:00](https://github.com/user-attachments/assets/cefb1942-4f9b-430e-b499-55ebf32e55e5) ![2025-04-10 18-22-52-8](https://github.com/user-attachments/assets/512b6658-d7e5-44aa-95cc-7a180cf28203)
 
 - **Notifications**
 - Light
