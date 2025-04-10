@@ -58,6 +58,8 @@ This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice
 
 ![2025-04-10T00:02:06,878048376+02:00](https://github.com/user-attachments/assets/cefb1942-4f9b-430e-b499-55ebf32e55e5)
 
+![2025-04-10 18-22-52-8](https://github.com/user-attachments/assets/512b6658-d7e5-44aa-95cc-7a180cf28203)
+
 - **Notifications**
 - Light
   
