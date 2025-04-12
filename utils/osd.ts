@@ -31,9 +31,4 @@ export default class OSDManager {
       if (this.count === 0) this.params.visible.set(false);
     });
   }
-
-  reset() {
-    this.count = 0;
-    this.params.visible.set(false);
-  }
 }
