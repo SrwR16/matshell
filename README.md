@@ -1,6 +1,7 @@
 <div align="center">
-  
-# Matshell 
+
+# Matshell
+
 ### A GTK4 Material Design desktop shell powered by [Astal](https://github.com/Aylur/astal)
 
 ![GitHub repo size](https://img.shields.io/github/repo-size/neurarian/matshell?style=for-the-badge&logo=gitlfs&logoColor=%23FFDBC9&labelColor=%2346362d&color=%23FFDBC9)
@@ -26,25 +27,24 @@ This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice
 
 <details>
   <summary>Widget List</summary>
-  
 
 - **Main Status Bar**
 
 ![2025-04-10 18-58-06](https://github.com/user-attachments/assets/1952d0ed-c9ca-4966-a91f-5f45aae5fdf6)
-  
+
 ![2025-04-10 23-47-32](https://github.com/user-attachments/assets/e05e8861-2e76-417a-a7b3-369f155b20c1)
 
-
 - Laptop (Light)
-    
+
 ![2025-03-23T18:37:29,615714672+01:00](https://github.com/user-attachments/assets/8656aa43-7793-476b-9e12-f0a58eeccbfb)
+
 - Desktop (Dark)
-    
+
 ![2025-03-23T18:53:49,228938439+01:00](https://github.com/user-attachments/assets/01e4e84c-1901-4532-a924-3a86696aa22c)
 
 - **App Launcher**
 - Light
-  
+
 ![2025-03-23T18:41:51,470421774+01:00](https://github.com/user-attachments/assets/ae8b69a8-8fc1-4a48-a18e-77a8af6f83c8)
 
 - Dark
@@ -53,11 +53,11 @@ This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice
 
 - **Logout Menu**
 - Light
-    
+
 ![2025-03-23T19:00:49,303694058+01:00](https://github.com/user-attachments/assets/df572fad-1783-45fe-b7ca-a43fd3d55319)
 
 - Dark
-      
+
 ![2025-03-23T18:40:10,844462569+01:00](https://github.com/user-attachments/assets/53eb4206-b33d-459c-b3b4-d6cb1154c4f3)
 
 - **Music Player with CAVA**
@@ -66,17 +66,16 @@ This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice
 
 - **Notifications**
 - Light
-  
+
 ![2025-03-23T18:42:09,143344616+01:00](https://github.com/user-attachments/assets/cacd60a8-4941-40d4-802c-54a683ff8b34)
 
 - Dark
 
 ![2025-03-23T19:05:38,240008405+01:00](https://github.com/user-attachments/assets/c949ade2-2d3b-4678-a36e-0ff725859e05)
 
-
 - **On Screen Display**
 - Light
-  
+
 ![2025-03-23T18:47:25,513704415+01:00](https://github.com/user-attachments/assets/86351939-d32a-4063-bd6f-c4f2b9e7292d)
 
 - Dark
@@ -85,7 +84,7 @@ This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice
 
 - **System Menu**
 - Laptop (Light)
-  
+
 ![2025-03-23T18:38:30,002859605+01:00](https://github.com/user-attachments/assets/c520f03b-f365-4782-8008-591a8993eaef)
 
 - Desktop (Dark)
@@ -176,7 +175,7 @@ The color generation works better with wallpapers that have a bit of chroma.
 
 For a NixOS implementation and example [script](https://github.com/Neurarian/NixOS-config/blob/master/home/Liqyid/common/optional/scripts/wal_set.nix) for use with hyprpaper, matugen, and a [custom cli utility](https://github.com/Neurarian/NixOS-config/tree/master/packages/image-hct) to get chroma/tone, check my [NixOS-config](https://github.com/Neurarian/NixOS-config).
 
-On Nix you can test the config via the flake exposed package, but I would recommend to also imperatively copy or symlink this repo to your dotfiles to circumvent nix-store immutability. Otherwise the dynamic theming will not work. One way to do this would be via the home-manager module which adds the following enable option to the set of ags options:
+On Nix you can test out matshell via the flake exposed package `nix run github:Neurarian/matshell` , but I would recommend to also imperatively copy or symlink this repo to your dotfiles to circumvent nix-store immutability. Otherwise the dynamic theming will not work. One way to do this would be via the home-manager module which adds the following enable option to the set of ags options:
 
 ```nix
 # ...
@@ -186,19 +185,32 @@ imports = [
 ];
 
 programs.ags = {
-  matshell.enable = true;
-    };
+  matshell = { 
+    # Enable the basic shell
+    enable = true; 
+    # Enable a systemd service for matshell
+    service = true;
+    # Enable matugen theming via custom random wallpaper setter script and rust utility
+    # used to base theme and scheme on the HCT properties of the main color.
+    # Run this via "wal_set"
+    matugenThemeSetter = true;
+    # This also sets up the entire matugen config & templates. If you already have matugen
+    # set up you may want to omit this.
+    matugenConfig = true;
+  };
+};
 #...
 
 ```
 
 This will simply clone the repo for you to .config/ags if that dir does not exist, build ags wrapped with all dependencies for matshell, and start a systemd service. You will have to <ins>remove the ags home-manager module</ins> from your config, as enabling matshell will handle everything ags-related for you.
 
-This is absolutely hacky, probably unsafe, and not the nix way to do it, but it gets the job done. To get the latest version of matshell, you would have to pull the updates manually or delete .config/ags and rebuild the system/home-manager profile.
+This is absolutely hacky, probably unsafe, and not the nix way to do it, but it gets the job done for now. To get the latest version of matshell, you would have to pull the updates manually or delete .config/ags and rebuild the system/home-manager profile.
 
 ## Acknowledgements
 
 This project wouldn't be possible without:
+
 - [fufexan's dotfiles](https://github.com/fufexan/dotfiles) for the initial inspiration and foundation
 - [end-4's dots-hyprland](https://github.com/end-4/dots-hyprland) for the color generation scripts
 - [saimoomedits' eww-widgets](https://github.com/saimoomedits/eww-widgets) for design influence
@@ -211,25 +223,25 @@ ______________________________________________________________________
 ## Screenshots
 
 ### 🌚 Dark Theme (Desktop)
+
 <p align="center">
-  
+
 ![2025-03-21T22:42:06,141625834+01:00](https://github.com/user-attachments/assets/c6c66f14-35b1-418c-839c-e66fbdffbb3c)
 ![2025-03-21T23:02:56,372784904+01:00](https://github.com/user-attachments/assets/c10ab60a-c8e1-43e8-ad7a-9723437af4f1)
-
-
 
 </p>
 
 ### 🌞 Light Theme (Desktop)
+
 <p align="center">
 
 ![2025-03-21T22:37:54,320570898+01:00](https://github.com/user-attachments/assets/45bf6c1a-d931-40a1-8644-fd7ccbfb4f95)
 ![2025-03-21T22:52:59,913307252+01:00](https://github.com/user-attachments/assets/444a6624-9c36-412a-b265-2a887717c933)
 
-
 </p>
 
 ### Video Demo
+
 <p align="center">
   <video src="https://github.com/Neurarian/ags-bar/assets/110474238/3f01073e-552a-479b-99f9-d82647138e55" controls width="600"></video>
 </p>

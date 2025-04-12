@@ -11,7 +11,7 @@ import {
 /**
  * Configuration manager for Astal/AGS
  *
- * To keep it simple, configuration files should use flattened dot notation for paths:
+ * To keep it simple, configuration files must use flattened dot notation for paths:
  * {
  *   "section.subsection.option": "value",
  *   "section.another.option": 123

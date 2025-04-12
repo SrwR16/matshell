@@ -1,12 +1,15 @@
 {
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
+
     flake-parts = {
       url = "github:hercules-ci/flake-parts";
     };
+
     systems = {
       url = "systems";
     };
+
     ags = {
       url = "github:aylur/ags";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -15,15 +18,25 @@
         inputs.nixpkgs.follows = "nixpkgs";
       };
     };
+    matugen = {
+      url = "github:InioX/matugen";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+
+    image-hct = {
+      url = "github:Neurarian/image-hct";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = {
+  outputs = inputs @ {
     self,
     nixpkgs,
-    flake-parts,
-    systems,
     ags,
-  } @ inputs: let
+    systems,
+    flake-parts,
+    ...
+  }: let
     mkPkgs = system:
       import nixpkgs {
         inherit system;
