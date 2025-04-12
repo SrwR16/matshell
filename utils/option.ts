@@ -209,43 +209,58 @@ export class ConfigManager {
 
   // Save all non-cached configuration values to file
   save(): void {
-    if (GLib.file_test(this.configPath, GLib.FileTest.EXISTS)) {
-      try {
-        // Read existing config
-        const existingConfig = JSON.parse(readFile(this.configPath) || "{}");
-
-        // Prepare new config
-        const newConfig: Record<string, ConfigValue> = {};
-        let hasChanges = false;
-
-        for (const [name, option] of this.options.entries()) {
-          if (!option.useCache) {
-            newConfig[name] = option.value;
-
-            // Check if value has changed
-            if (
-              JSON.stringify(existingConfig[name]) !==
-              JSON.stringify(option.value)
-            ) {
-              hasChanges = true;
-            }
-          }
+    // Check if the file exists
+    if (!GLib.file_test(this.configPath, GLib.FileTest.EXISTS)) {
+      // Create a new configuration file with default values
+      const newConfig: Record<string, ConfigValue> = {};
+      for (const [name, option] of this.options.entries()) {
+        if (!option.useCache) {
+          newConfig[name] = option.value;
         }
-
-        // Only write if something actually changed
-        if (hasChanges) {
-          writeFile(this.configPath, JSON.stringify(newConfig, null, 2));
-        }
-      } catch (err) {
-        // Fallback to full save if anything goes wrong
-        const config: Record<string, ConfigValue> = {};
-        for (const [name, option] of this.options.entries()) {
-          if (!option.useCache) {
-            config[name] = option.value;
-          }
-        }
-        writeFile(this.configPath, JSON.stringify(config, null, 2));
       }
+      try {
+        writeFile(this.configPath, JSON.stringify(newConfig, null, 2));
+        console.log("Successfully created a new configuration file.");
+      } catch (err) {
+        console.error(`Failed to create configuration file: ${err}`);
+      }
+      return;
+    }
+    try {
+      // Read existing config
+      const existingConfig = JSON.parse(readFile(this.configPath) || "{}");
+
+      // Prepare new config
+      const newConfig: Record<string, ConfigValue> = {};
+      let hasChanges = false;
+
+      for (const [name, option] of this.options.entries()) {
+        if (!option.useCache) {
+          newConfig[name] = option.value;
+
+          // Check if value has changed
+          if (
+            JSON.stringify(existingConfig[name]) !==
+            JSON.stringify(option.value)
+          ) {
+            hasChanges = true;
+          }
+        }
+      }
+
+      // Only write if something actually changed
+      if (hasChanges) {
+        writeFile(this.configPath, JSON.stringify(newConfig, null, 2));
+      }
+    } catch (err) {
+      // Fallback to full save if anything goes wrong
+      const config: Record<string, ConfigValue> = {};
+      for (const [name, option] of this.options.entries()) {
+        if (!option.useCache) {
+          config[name] = option.value;
+        }
+      }
+      writeFile(this.configPath, JSON.stringify(config, null, 2));
     }
   }
 
