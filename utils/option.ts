@@ -133,6 +133,7 @@ function deepEqual(
 /**
  * Retrieves a deeply nested value from an object using dot notation
  */
+
 function getNestedProperty(
   obj: ConfigObject,
   propertyPath: string,
@@ -146,7 +147,12 @@ function getNestedProperty(
         !Array.isArray(current) &&
         key in current
       ) {
-        return current[key];
+        const value = current[key];
+        // If the value is a ConfigOption, get its value
+        if (value instanceof ConfigOption) {
+          return value.get();
+        }
+        return value as ConfigValue;
       }
       return undefined;
     }, obj as ConfigValue);
