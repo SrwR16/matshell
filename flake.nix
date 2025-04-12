@@ -80,6 +80,7 @@
           name = "matshell";
           src = ./.;
           entry = "bundleapp.ts";
+          gtk4 = true;
           extraPackages = matshellDeps.${system} ++ [ags.packages.${system}.default];
         };
 

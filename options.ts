@@ -1,5 +1,5 @@
 import { execAsync, GLib } from "astal";
-import { initializeConfig, createOption, ConfigValue} from "./utils/option";
+import { initializeConfig, createOption, ConfigValue } from "./utils/option";
 
 const options = await (async () => {
   const currentWallpaper = await execAsync(
@@ -8,8 +8,10 @@ const options = await (async () => {
 
   return initializeConfig(`${GLib.get_user_config_dir()}/ags/config.json`, {
     wallpaper: {
-      folder: createOption(GLib.get_home_dir(), { useCache: true }),
-      current: createOption(currentWallpaper, { useCache: true }),
+      folder: createOption<ConfigValue>(GLib.get_home_dir(), {
+        useCache: true,
+      }),
+      current: createOption<ConfigValue>(currentWallpaper, { useCache: true }),
     },
     bar: {
       position: createOption<ConfigValue>("top"), // "top", "bottom"
