@@ -413,8 +413,16 @@ export function initializeConfig<T extends Record<string, ConfigItem>>(
   ): void {
     for (const key in newConfig) {
       const fullPath = path ? `${path}.${key}` : key;
-      const newValue = newConfig[key];
-      const oldValue = oldConfig?.[key];
+      let newValue = newConfig[key];
+      let oldValue = oldConfig?.[key];
+
+      // Unwrap ConfigOption instances
+      if (newValue instanceof ConfigOption) {
+        newValue = newValue.get();
+      }
+      if (oldValue instanceof ConfigOption) {
+        oldValue = oldValue.get();
+      }
 
       if (
         newValue &&
@@ -426,20 +434,24 @@ export function initializeConfig<T extends Record<string, ConfigItem>>(
           newValue as ConfigObject,
           fullPath,
         );
-      } else if (!deepEqual(oldValue, newValue)) {
+      } else if (
+        !deepEqual(
+          oldValue as ConfigValue | undefined,
+          newValue as ConfigValue | undefined,
+        )
+      ) {
         const option = configOptionsMap.get(fullPath);
 
         if (option) {
           console.log(`Config updated: ${fullPath}`);
           const updatedConfig = currentConfig.get();
-          setNestedProperty(updatedConfig, fullPath, newValue);
+          setNestedProperty(updatedConfig, fullPath, newValue as ConfigValue);
           currentConfig.set(updatedConfig);
-          option.set(newValue);
+          option.set(newValue as ConfigValue);
         }
       }
     }
   }
-
   // Monitor config file for changes
   monitorFile(configPath, (_, event) => {
     if (event === Gio.FileMonitorEvent.ATTRIBUTE_CHANGED) {
