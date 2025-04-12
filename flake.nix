@@ -38,6 +38,7 @@
         typescript
         dart-sass
         mission-center
+        gnome-control-center
         imagemagick
         libgtop
       ])
