@@ -175,7 +175,7 @@ The color generation works better with wallpapers that have a bit of chroma.
 
 For a NixOS implementation and example [script](https://github.com/Neurarian/matshell/blob/master/nix/hm-module.nix) for use with hyprpaper, matugen, and a [custom cli utility](https://github.com/Neurarian/image-hct) to get chroma/tone, you can enable dedicated options in the home-manager module exposed by the flake (see below).
 
-You can generally test out matshell via the flake exposed package `nix run github:Neurarian/matshell` , but I would recommend to also imperatively copy or symlink this repo to your dotfiles to circumvent nix-store immutability. Otherwise the dynamic theming will not work. One way to do this would be via the home-manager module which adds the following enable option to the set of ags options:
+You can generally test out matshell via the flake exposed package `nix run github:Neurarian/matshell` , but I would recommend to also imperatively copy or symlink this repo to your dotfiles to circumvent nix-store immutability. Otherwise the dynamic theming will not work. One way to do this would be via the home-manager module which overwrites the ags options with the following:
 
 ```nix
 # ...
