@@ -702,9 +702,9 @@ const CircularProgressBarWidget = GObject.registerClass(
     private _child: Gtk.Widget | null = null;
 
     // Child widget components
-    private _progress_arc: ProgressArcWidget;
-    private _center_fill: CenterFillWidget;
-    private _radius_fill: RadiusFillWidget;
+    private _progress_arc: typeof ProgressArcWidget;
+    private _center_fill: typeof CenterFillWidget;
+    private _radius_fill: typeof RadiusFillWidget;
 
     constructor() {
       super();
