@@ -1,5 +1,5 @@
 import { execAsync, GLib } from "astal";
-import { initializeConfig, createOption } from "./utils/option";
+import { initializeConfig, createOption, ConfigValue} from "./utils/option";
 
 const options = await (async () => {
   const currentWallpaper = await execAsync(
@@ -12,16 +12,16 @@ const options = await (async () => {
       current: createOption(currentWallpaper, { useCache: true }),
     },
     bar: {
-      position: createOption("top"), // "top", "bottom"
+      position: createOption<ConfigValue>("top"), // "top", "bottom"
       margins: {
-        top: createOption(5),
-        left: createOption(5),
-        right: createOption(5),
-        bottom: createOption(0),
+        top: createOption<ConfigValue>(5),
+        left: createOption<ConfigValue>(5),
+        right: createOption<ConfigValue>(5),
+        bottom: createOption<ConfigValue>(0),
       },
       modules: {
-        showCava: createOption(false),
-        showOsIcon: createOption(true),
+        showCava: createOption<ConfigValue>(false),
+        showOsIcon: createOption<ConfigValue>(true),
       },
     },
   });

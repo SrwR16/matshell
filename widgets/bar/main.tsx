@@ -79,7 +79,7 @@ function Bar({ gdkmonitor, ...props }: any) {
 export default function (monitor: Gdk.Monitor) {
   function createBar() {
     console.log("Creating bar for monitor");
-    <Bar gdkmonitor={monitor} animation="slide top" />;
+    <Bar gdkmonitor={monitor} />;
   }
 
   // Create the initial bar
