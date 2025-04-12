@@ -226,13 +226,44 @@ export class ConfigManager {
 
   // Save all non-cached configuration values to file
   save(): void {
-    const config: Record<string, ConfigValue> = {};
-    for (const [name, option] of this.options.entries()) {
-      if (!option.useCache) {
-        config[name] = option.value;
+    if (GLib.file_test(this.configPath, GLib.FileTest.EXISTS)) {
+      try {
+        // Read existing config
+        const existingConfig = JSON.parse(readFile(this.configPath) || "{}");
+
+        // Prepare new config
+        const newConfig: Record<string, ConfigValue> = {};
+        let hasChanges = false;
+
+        for (const [name, option] of this.options.entries()) {
+          if (!option.useCache) {
+            newConfig[name] = option.value;
+
+            // Check if value has changed
+            if (
+              JSON.stringify(existingConfig[name]) !==
+              JSON.stringify(option.value)
+            ) {
+              hasChanges = true;
+            }
+          }
+        }
+
+        // Only write if something actually changed
+        if (hasChanges) {
+          writeFile(this.configPath, JSON.stringify(newConfig, null, 2));
+        }
+      } catch (err) {
+        // Fallback to full save if anything goes wrong
+        const config: Record<string, ConfigValue> = {};
+        for (const [name, option] of this.options.entries()) {
+          if (!option.useCache) {
+            config[name] = option.value;
+          }
+        }
+        writeFile(this.configPath, JSON.stringify(config, null, 2));
       }
     }
-    writeFile(this.configPath, JSON.stringify(config, null, 2));
   }
 
   // Watch for configuration file changes
@@ -249,10 +280,6 @@ export class ConfigManager {
 export function initConfig(configPath: string): ConfigManager {
   return new ConfigManager(configPath);
 }
-
-//
-// ADAPTER FOR NESTED CONFIGURATION STRUCTURE
-//
 
 // Store a single instance of the config manager
 let configManager: ConfigManager | null = null;
@@ -306,7 +333,7 @@ export function createOption<T extends ConfigValue>(
   return {
     defaultValue,
     useCache: options.useCache,
-    autoSave: options.autoSave ?? true, // Enable auto-save by default
+    autoSave: options.autoSave ?? true,
   };
 }
 
