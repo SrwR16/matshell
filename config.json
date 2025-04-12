@@ -1,0 +1,15 @@
+{
+  "bar": {
+    "position": "top",
+    "margins": {
+      "top": 5,
+      "left": 5,
+      "right": 5,
+      "bottom": 0
+    },
+    "modules": {
+      "showCava": true,
+      "showOsIcon": true
+    }
+  }
+}

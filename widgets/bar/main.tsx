@@ -1,4 +1,5 @@
-import { Astal, Gtk, Gdk } from "astal/gtk4";
+import { App, Astal, Gtk, Gdk } from "astal/gtk4";
+import { idle, bind } from "astal";
 import SysTray from "./modules/SysTray.tsx";
 import Separator from "./modules/Separator.tsx";
 import Workspaces from "./modules/Workspaces.tsx";
@@ -9,33 +10,51 @@ import Media from "./modules/Media.tsx";
 import SystemInfo from "./modules/SystemInfo/main.tsx";
 import Time from "./modules/Time.tsx/";
 import OsIcon from "./modules/OsIcon.tsx";
+import options from "options.ts";
 
-export default function Bar(monitor: Gdk.Monitor) {
-  const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
-  // Set this to true for some action on the main bar.
-  // Probably too distracting to leave this on all the time.
-  let renderCava = false;
+function Bar({ gdkmonitor, ...props }: any) {
+  console.log("Bar initialization started");
+
+  const { TOP, LEFT, RIGHT, BOTTOM } = Astal.WindowAnchor;
+
+  // Calculate anchor based on position
+  const getAnchor = (position: string) => {
+    switch (position) {
+      case "top":
+        return TOP | LEFT | RIGHT;
+      case "bottom":
+        return BOTTOM | LEFT | RIGHT;
+      default:
+        return TOP | LEFT | RIGHT;
+    }
+  };
 
   return (
     <window
       visible
+      setup={(self) => self.set_default_size(1, 1)}
+      name="bar"
+      namespace="bar"
       cssClasses={["Bar"]}
-      gdkmonitor={monitor}
+      gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
-      anchor={TOP | LEFT | RIGHT}
-      margin_left={5}
-      margin_right={5}
-      margin_top={5}
+      application={App}
+      anchor={getAnchor(options.bar.position.get())}
+      margin_top={bind(options.bar.margins.top)}
+      margin_left={bind(options.bar.margins.left)}
+      margin_right={bind(options.bar.margins.right)}
+      margin_bottom={bind(options.bar.margins.bottom)}
+      {...props}
     >
       <overlay>
-        {renderCava && (
-          <box type="overlay clip">
-            <CavaDraw vexpand hexpand style={CavaStyle.SMOOTH} />
-          </box>
-        )}
+        <box type="overlay clip" visible={bind(options.bar.modules.showCava)}>
+          <CavaDraw vexpand hexpand style={CavaStyle.CATMULL_ROM} />
+        </box>
         <centerbox type="overlay measure">
           <box hexpand halign={Gtk.Align.START}>
-            <OsIcon />
+            <box visible={bind(options.bar.modules.showOsIcon)}>
+              <OsIcon />
+            </box>
             <Workspaces />
           </box>
           <box>
@@ -55,4 +74,26 @@ export default function Bar(monitor: Gdk.Monitor) {
       </overlay>
     </window>
   );
+}
+
+export default function (monitor: Gdk.Monitor) {
+  function createBar() {
+    console.log("Creating bar for monitor");
+    <Bar gdkmonitor={monitor} animation="slide top" />;
+  }
+
+  // Create the initial bar
+  createBar();
+
+  // Only recreate the bar when position changes (which affects anchor)
+  options.bar.position.subscribe(() => {
+    console.log("Position changed, recreating bar");
+    const barWindow = App.get_window("bar");
+    if (barWindow) {
+      App.toggle_window("bar");
+      barWindow.set_child(null);
+      App.remove_window(barWindow);
+      idle(createBar);
+    }
+  });
 }
