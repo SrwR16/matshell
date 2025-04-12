@@ -1,12 +1,3 @@
-/**
- * Configuration Management System
- *
- * A reactive configuration system for managing application settings,
- * with support for file monitoring, caching, and structured updates.
- *
- * @see https://github.com/ezerinz/epik-shell
- */
-
 import {
   readFile,
   readFileAsync,
@@ -18,276 +9,50 @@ import {
 } from "astal";
 
 /**
- * Represents all possible configuration value types
+ * Configuration manager for Astal/AGS
+ *
+ * To keep it simple, configuration files should use flattened dot notation for paths:
+ * {
+ *   "section.subsection.option": "value",
+ *   "section.another.option": 123
+ * }
+ *
+ * Rather than nested objects:
+ * {
+ *   "section": {
+ *     "subsection": {
+ *       "option": "value"
+ *     }
+ *   }
+ * }
  */
+export interface ConfigValueObject {
+  [key: string]: ConfigValue;
+}
+export interface ConfigValueArray extends Array<ConfigValue> {}
+
 export type ConfigValue =
   | string
   | number
   | boolean
   | null
-  | ConfigObject
-  | ConfigArray;
+  | ConfigValueObject
+  | ConfigValueArray;
 
-/**
- * Represents a configuration object structure
- */
-export interface ConfigObject {
-  [key: string]: ConfigValue | ConfigOption<ConfigValue> | ConfigObject;
-}
-
-/**
- * Represents an array of configuration values
- */
-export type ConfigArray = ConfigValue[];
-
-/**
- * Represents a configuration item that can be either an option or an object
- */
-type ConfigItem = ConfigOption<ConfigValue> | ConfigObject;
-
-/**
- * Represents values that can be serialized
- */
-type SerializableValue =
-  | ConfigValue
-  | ConfigOption<ConfigValue>
-  | SerializableObject;
-
-/**
- * Represents an object with serializable values
- */
-interface SerializableObject {
-  [key: string]: SerializableValue;
-}
-
-/**
- * Represents a nested configuration structure
- */
-type ConfigStructure = {
-  [key: string]: ConfigOption<ConfigValue> | ConfigObject | ConfigStructure;
+// Define a recursive type to properly transform the config structure
+type ConfigOptionsOf<T> = {
+  [K in keyof T]: T[K] extends { defaultValue: any }
+    ? ConfigOption<T[K]["defaultValue"] & ConfigValue>
+    : T[K] extends object
+      ? ConfigOptionsOf<T[K]>
+      : T[K];
 };
 
-/**
- * Extends a configuration type with helper methods
- */
-type ConfigWithHelpers<T> = T & {
-  configPath: string;
-  watchChanges: (paths: string[], callback: () => void) => void;
-};
-
-/**
- * Directory for caching configuration values
- */
-const cacheDir = `${GLib.get_user_cache_dir()}/ags`;
-
-/**
- * Ensures a directory exists, creating it if necessary
- */
-function ensureDirectory(path: string): void {
-  if (!GLib.file_test(path, GLib.FileTest.EXISTS))
-    Gio.File.new_for_path(path).make_directory_with_parents(null);
-}
-
-/**
- * Performs a deep equality check between two values
- */
-function deepEqual(
-  a: ConfigValue | undefined,
-  b: ConfigValue | undefined,
-  visited = new WeakMap(),
-): boolean {
-  if (a === b) return true;
-
-  if (a === null || b === null || a === undefined || b === undefined)
-    return a === b;
-
-  if (typeof a !== "object" || typeof b !== "object") return a === b;
-
-  if (typeof a === "object" && a !== null) {
-    if (visited.has(a)) return visited.get(a) === b;
-    visited.set(a, b);
-  }
-
-  // Handle arrays
-  if (Array.isArray(a) && Array.isArray(b)) {
-    if (a.length !== b.length) return false;
-    return a.every((val, i) => deepEqual(val, b[i]));
-  }
-
-  // If one is array and other isn't
-  if (Array.isArray(a) !== Array.isArray(b)) return false;
-
-  // Both are objects
-  const keysA = Object.keys(a);
-  const keysB = Object.keys(b);
-
-  if (keysA.length !== keysB.length) return false;
-
-  return keysA.every(
-    (key) =>
-      Object.prototype.hasOwnProperty.call(b, key) &&
-      deepEqual(a[key as keyof typeof a], b[key as keyof typeof b]),
-  );
-}
-
-/**
- * Retrieves a deeply nested value from an object using dot notation
- */
-
-function getNestedProperty(
-  obj: ConfigObject,
-  propertyPath: string,
-): ConfigValue | undefined {
-  return propertyPath
-    .split(".")
-    .reduce<ConfigValue | undefined>((current, key) => {
-      if (
-        current &&
-        typeof current === "object" &&
-        !Array.isArray(current) &&
-        key in current
-      ) {
-        const value = current[key];
-        // If the value is a ConfigOption, get its value
-        if (value instanceof ConfigOption) {
-          return value.get();
-        }
-        return value as ConfigValue;
-      }
-      return undefined;
-    }, obj as ConfigValue);
-}
-
-/**
- * Sets a deeply nested value in an object using dot notation
- */
-function setNestedProperty<T extends ConfigValue>(
-  obj: ConfigObject,
-  propertyPath: string,
-  value: T,
-): void {
-  const keys = propertyPath.split(".");
-  const lastKey = keys.pop();
-
-  if (!lastKey) return;
-
-  // Create path if it doesn't exist
-  const target = keys.reduce((current, key) => {
-    current[key] = current[key] || {};
-    return current[key] as ConfigObject;
-  }, obj);
-
-  target[lastKey] = value;
-}
-
-/**
- * Maps all ConfigOption instances in an object structure with their paths
- */
-function mapConfigOptionPaths(
-  object: ConfigStructure,
-  basePath = "",
-): Map<string, ConfigOption<ConfigValue>> {
-  const optionsMap = new Map<string, ConfigOption<ConfigValue>>();
-
-  Object.entries(object).forEach(([key, value]) => {
-    const fullPath = basePath ? `${basePath}.${key}` : key;
-
-    if (value instanceof ConfigOption) {
-      optionsMap.set(fullPath, value);
-    } else if (value && typeof value === "object" && !Array.isArray(value)) {
-      const nestedMap = mapConfigOptionPaths(
-        value as ConfigStructure,
-        fullPath,
-      );
-      nestedMap.forEach((option, path) => {
-        optionsMap.set(path, option);
-      });
-    }
-  });
-
-  return optionsMap;
-}
-
-/**
- * Converts a configuration object tree to a plain object
- */
-function serializeConfig(
-  obj: SerializableValue,
-  useDefaultValues = false,
-): ConfigValue | undefined {
-  if (obj instanceof ConfigOption) {
-    // Skip cached options when serializing
-    if (obj.useCache) return undefined;
-    return useDefaultValues ? obj.defaultValue : obj.get();
-  }
-
-  if (!obj || typeof obj !== "object" || Array.isArray(obj))
-    return obj as ConfigValue;
-
-  const result: ConfigObject = {};
-  let hasProperties = false;
-
-  for (const [key, value] of Object.entries(obj as SerializableObject)) {
-    const serialized = serializeConfig(value, useDefaultValues);
-    if (serialized !== undefined) {
-      result[key] = serialized;
-      hasProperties = true;
-    }
-  }
-
-  return hasProperties ? result : undefined;
-}
-
-/**
- * Recursively merges two objects
- */
-function deepMergeObjects<T extends ConfigObject>(
-  target: T,
-  source: Partial<T>,
-): T {
-  if (!target || typeof target !== "object") return (source as T) || ({} as T);
-  if (!source || typeof source !== "object") return (source as T) || target;
-
-  const result = { ...target } as T;
-
-  // Get string keys from source
-  const keys = Object.keys(source) as Array<Extract<keyof T, string>>;
-
-  // Process each key properly typed
-  for (const key of keys) {
-    if (Object.prototype.hasOwnProperty.call(source, key)) {
-      const sourceValue = source[key];
-      const targetValue = target[key];
-
-      if (Array.isArray(sourceValue)) {
-        // For arrays, create a copy
-        result[key] = [...sourceValue] as unknown as T[typeof key];
-      } else if (sourceValue && typeof sourceValue === "object") {
-        // For objects, recursively merge
-        result[key] = (targetValue &&
-        typeof targetValue === "object" &&
-        !Array.isArray(targetValue)
-          ? deepMergeObjects(
-              targetValue as unknown as ConfigObject,
-              sourceValue as unknown as ConfigObject,
-            )
-          : sourceValue) as unknown as T[typeof key];
-      } else {
-        result[key] = sourceValue as unknown as T[typeof key];
-      }
-    }
-  }
-
-  return result;
-}
-
-/**
- * Represents a configuration option with reactive updates
- */
+// Reactive configuration option
 export class ConfigOption<T extends ConfigValue> extends Variable<T> {
   readonly defaultValue: T;
-  path = "";
-  useCache = false;
+  useCache: boolean;
+  name: string = "";
 
   constructor(defaultValue: T, options: { useCache?: boolean } = {}) {
     super(defaultValue);
@@ -295,206 +60,289 @@ export class ConfigOption<T extends ConfigValue> extends Variable<T> {
     this.useCache = options.useCache || false;
   }
 
-  set(value: T): void {
-    super.set(value);
-  }
-
+  // Use parent's get method directly
   get(): T {
     return super.get();
   }
 
-  subscribe(callback: (value: T) => void): () => void {
+  // Use parent's set method directly
+  set(value: T): void {
+    super.set(value);
+  }
+
+  // Simply pass through parent's subscribe method
+  subscribe(callback: (value: T) => void): any {
     return super.subscribe(callback);
   }
 
-  /**
-   * Initializes the option with values from configuration file
-   */
+  // Allow direct value access
+  get value(): T {
+    return this.get();
+  }
 
-  initialize(configPath: string): void {
-    const filePath = this.useCache ? `${cacheDir}/options.json` : configPath;
+  set value(newValue: T) {
+    this.set(newValue);
+  }
+}
+
+// Configuration manager
+export class ConfigManager {
+  private options: Map<string, ConfigOption<ConfigValue>> = new Map();
+  private cacheDir: string;
+
+  constructor(public readonly configPath: string) {
+    this.cacheDir = `${GLib.get_user_cache_dir()}/ags`;
+    this.ensureDirectory(this.cacheDir);
+    this.ensureDirectory(configPath.split("/").slice(0, -1).join("/"));
+  }
+
+  // Create and register an option
+  createOption<T extends ConfigValue>(
+    name: string,
+    defaultValue: T,
+    options: { useCache?: boolean; autoSave?: boolean } = {},
+  ): ConfigOption<T> {
+    const option = new ConfigOption<T>(defaultValue, options);
+    option.name = name;
+    this.options.set(name, option as ConfigOption<ConfigValue>);
+    this.initializeOption(name, option);
+
+    // Add auto-save for non-cached options
+    if (!option.useCache && options.autoSave !== false) {
+      option.subscribe(() => {
+        console.log(`Auto-saving due to change in ${name}`);
+        this.save();
+      });
+    }
+
+    return option;
+  }
+
+  // Initialize option from saved values
+  private initializeOption<T extends ConfigValue>(
+    name: string,
+    option: ConfigOption<T>,
+  ): void {
+    const filePath = option.useCache
+      ? `${this.cacheDir}/options.json`
+      : this.configPath;
 
     if (GLib.file_test(filePath, GLib.FileTest.EXISTS)) {
       try {
-        const config = JSON.parse(readFile(filePath) || "{}") as ConfigObject;
-        let storedValue: ConfigValue | ConfigOption<ConfigValue> | undefined;
-
-        if (this.useCache) {
-          storedValue = config[this.path];
-        } else {
-          storedValue = getNestedProperty(config, this.path);
-        }
-
-        if (storedValue !== undefined) {
-          // Handle the case where storedValue is a ConfigOption
-          if (storedValue instanceof ConfigOption) {
-            this.set(storedValue.get() as T);
-          } else {
-            this.set(storedValue as T);
-          }
+        const config = JSON.parse(readFile(filePath) || "{}");
+        if (config[name] !== undefined) {
+          option.set(config[name] as T);
         }
       } catch (err) {
-        console.error(`Failed to initialize option at ${this.path}:`, err);
+        console.error(`Failed to initialize option ${name}:`, err);
       }
     }
-    if (this.useCache) {
-      this.subscribe(this.saveCachedValue);
+
+    // Setup cache saving - use connect instead of subscribe
+    if (option.useCache) {
+      const cleanup = option.subscribe((value) => {
+        this.saveCachedValue(name, value);
+      });
+      // Store connection for cleanup if needed
     }
   }
 
-  /**
-   * Saves the current value to the cache file
-   */
-  private saveCachedValue = (value: T): void => {
-    type CacheObject = Record<string, ConfigValue>;
-
-    readFileAsync(`${cacheDir}/options.json`)
-      .then((content): void => {
-        const cache: CacheObject = JSON.parse(content || "{}");
-        cache[this.path] = value;
-        writeFile(`${cacheDir}/options.json`, JSON.stringify(cache, null, 2));
+  // Save a cached value
+  private saveCachedValue(name: string, value: ConfigValue): void {
+    readFileAsync(`${this.cacheDir}/options.json`)
+      .then((content) => {
+        const cache = JSON.parse(content || "{}");
+        cache[name] = value;
+        writeFile(
+          `${this.cacheDir}/options.json`,
+          JSON.stringify(cache, null, 2),
+        );
       })
-      .catch((err: unknown): void => {
-        console.error(`Failed to save cached value for ${this.path}:`, err);
+      .catch((err) => {
+        console.error(`Failed to save cached value for ${name}:`, err);
       });
-  };
+  }
+
+  // Ensure directory exists
+  private ensureDirectory(path: string): void {
+    if (!GLib.file_test(path, GLib.FileTest.EXISTS)) {
+      Gio.File.new_for_path(path).make_directory_with_parents(null);
+    }
+  }
+
+  // Load all configuration values from file
+  load(): void {
+    console.log(`Loading configuration from ${this.configPath}`);
+
+    if (!GLib.file_test(this.configPath, GLib.FileTest.EXISTS)) {
+      console.log(`Configuration file doesn't exist, creating with defaults`);
+      this.save(); // Create the file with defaults
+      return;
+    }
+
+    try {
+      const fileContent = readFile(this.configPath);
+      if (!fileContent || fileContent.trim() === "") {
+        console.log(`Configuration file is empty, using defaults`);
+        this.save();
+        return;
+      }
+
+      const config = JSON.parse(fileContent);
+      console.log(
+        `Loaded configuration with ${Object.keys(config).length} settings`,
+      );
+
+      let loadedCount = 0;
+      for (const [name, option] of this.options.entries()) {
+        if (!option.useCache && config[name] !== undefined) {
+          option.set(config[name]);
+          loadedCount++;
+        }
+      }
+
+      console.log(`Applied ${loadedCount} settings from configuration file`);
+    } catch (err) {
+      console.error(`Failed to load configuration: ${err}`);
+      // Create a backup of the corrupted file
+      if (GLib.file_test(this.configPath, GLib.FileTest.EXISTS)) {
+        const backupPath = `${this.configPath}.backup-${Date.now()}`;
+        try {
+          GLib.file_get_contents(this.configPath);
+          GLib.file_set_contents(
+            backupPath,
+            GLib.file_get_contents(this.configPath)[1],
+          );
+          console.log(`Created backup of corrupted config at ${backupPath}`);
+        } catch (backupErr) {
+          console.error(`Could not create backup: ${backupErr}`);
+        }
+      }
+
+      // Save defaults
+      this.save();
+    }
+  }
+
+  // Save all non-cached configuration values to file
+  save(): void {
+    const config: Record<string, ConfigValue> = {};
+    for (const [name, option] of this.options.entries()) {
+      if (!option.useCache) {
+        config[name] = option.value;
+      }
+    }
+    writeFile(this.configPath, JSON.stringify(config, null, 2));
+  }
+
+  // Watch for configuration file changes
+  watchChanges(): void {
+    monitorFile(this.configPath, (_, event) => {
+      if (event === Gio.FileMonitorEvent.ATTRIBUTE_CHANGED) {
+        this.load();
+      }
+    });
+  }
+}
+
+// Initialize configuration
+export function initConfig(configPath: string): ConfigManager {
+  return new ConfigManager(configPath);
+}
+
+//
+// ADAPTER FOR NESTED CONFIGURATION STRUCTURE
+//
+
+// Store a single instance of the config manager
+let configManager: ConfigManager | null = null;
+
+// Store options with their paths for retrieval
+const optionsMap = new Map<string, ConfigOption<ConfigValue>>();
+
+// Helper to flatten nested structure
+function flattenPath(path: string[], key: string): string {
+  return [...path, key].join(".");
+}
+
+// Recursive function to handle nested configuration
+function processConfig(
+  config: Record<string, any>,
+  manager: ConfigManager,
+  path: string[] = [],
+): Record<string, any> {
+  const result: Record<string, any> = {};
+
+  for (const [key, value] of Object.entries(config)) {
+    if (value && typeof value === "object" && "defaultValue" in value) {
+      // It's a ConfigOption-like object
+      const flatKey = flattenPath(path, key);
+      const option = manager.createOption(flatKey, value.defaultValue, {
+        useCache: value.useCache || false,
+      });
+
+      optionsMap.set(flatKey, option);
+      result[key] = option;
+    } else if (value && typeof value === "object") {
+      // It's a nested configuration object
+      result[key] = processConfig(value, manager, [...path, key]);
+    } else {
+      // Shouldn't happen in normal usage
+      result[key] = value;
+    }
+  }
+
+  return result;
 }
 
 /**
- * Creates a new configuration option
+ * Creates a configuration option with the given default value
  */
-export const createOption = <T extends ConfigValue>(
+
+export function createOption<T extends ConfigValue>(
   defaultValue: T,
-  options = {},
-) => new ConfigOption(defaultValue, options);
+  options: { useCache?: boolean; autoSave?: boolean } = {},
+): { defaultValue: T; useCache?: boolean; autoSave?: boolean } {
+  return {
+    defaultValue,
+    useCache: options.useCache,
+    autoSave: options.autoSave ?? true, // Enable auto-save by default
+  };
+}
+
+export function getOption<T extends ConfigValue>(
+  path: string,
+): ConfigOption<T> {
+  return optionsMap.get(path) as ConfigOption<T>;
+}
 
 /**
- * Initializes a configuration system
+ * Initializes configuration with nested structure support
  */
-export function initializeConfig<T extends Record<string, ConfigItem>>(
+export async function initializeConfig<T extends Record<string, any>>(
   configPath: string,
-  configObject: T,
-): ConfigWithHelpers<T> {
-  // Initialize all options
-  const configOptionsMap = mapConfigOptionPaths(configObject);
-  const configOptions = Array.from(configOptionsMap.entries()).map(
-    ([path, option]) => {
-      option.path = path;
-      return option;
-    },
-  );
-  configOptions.forEach((option) => option.initialize(configPath));
+  config: T,
+): Promise<ConfigOptionsOf<T>> {
+  // Create the config manager
+  configManager = new ConfigManager(configPath);
 
-  // Ensure config directory exists
-  const configDir = configPath.split("/").slice(0, -1).join("/");
-  ensureDirectory(configDir);
+  // Process the nested configuration
+  const result = processConfig(config, configManager) as T;
 
-  // Create config state
-  const defaultConfig = serializeConfig(configObject, true);
-  const currentConfig = Variable(serializeConfig(configObject) || {});
+  // Load the saved values
+  configManager.load();
 
-  // Load existing configuration if available
-  if (GLib.file_test(configPath, GLib.FileTest.EXISTS)) {
-    try {
-      const savedConfig = JSON.parse(readFile(configPath) || "{}");
-      currentConfig.set(deepMergeObjects(currentConfig.get(), savedConfig));
-    } catch {
-      // If parsing fails, keep using defaults
-    }
+  // Set up file watching
+  configManager.watchChanges();
+
+  return result;
+}
+
+/**
+ * Manually save all configuration options to disk
+ */
+export function saveConfig(): void {
+  if (configManager) {
+    configManager.save();
   }
-
-  /**
-   * Updates configuration options when the file changes
-   */
-  function applyConfigChanges(
-    oldConfig: ConfigObject,
-    newConfig: ConfigObject,
-    path = "",
-  ): void {
-    for (const key in newConfig) {
-      const fullPath = path ? `${path}.${key}` : key;
-      let newValue = newConfig[key];
-      let oldValue = oldConfig?.[key];
-
-      // Unwrap ConfigOption instances
-      if (newValue instanceof ConfigOption) {
-        newValue = newValue.get();
-      }
-      if (oldValue instanceof ConfigOption) {
-        oldValue = oldValue.get();
-      }
-
-      if (
-        newValue &&
-        typeof newValue === "object" &&
-        !Array.isArray(newValue)
-      ) {
-        applyConfigChanges(
-          (oldValue as ConfigObject) || {},
-          newValue as ConfigObject,
-          fullPath,
-        );
-      } else if (
-        !deepEqual(
-          oldValue as ConfigValue | undefined,
-          newValue as ConfigValue | undefined,
-        )
-      ) {
-        const option = configOptionsMap.get(fullPath);
-
-        if (option) {
-          console.log(`Config updated: ${fullPath}`);
-          const updatedConfig = currentConfig.get();
-          setNestedProperty(updatedConfig, fullPath, newValue as ConfigValue);
-          currentConfig.set(updatedConfig);
-          option.set(newValue as ConfigValue);
-        }
-      }
-    }
-  }
-  // Monitor config file for changes
-  monitorFile(configPath, (_, event) => {
-    if (event === Gio.FileMonitorEvent.ATTRIBUTE_CHANGED) {
-      try {
-        const fileConfig = JSON.parse(readFile(configPath) || "{}");
-
-        // Verify that both are objects before merging
-        const defaultConfigObj =
-          defaultConfig &&
-          typeof defaultConfig === "object" &&
-          !Array.isArray(defaultConfig)
-            ? (defaultConfig as ConfigObject)
-            : {};
-
-        const fileConfigObj =
-          fileConfig &&
-          typeof fileConfig === "object" &&
-          !Array.isArray(fileConfig)
-            ? (fileConfig as ConfigObject)
-            : {};
-
-        applyConfigChanges(
-          currentConfig.get(),
-          deepMergeObjects(defaultConfigObj, fileConfigObj),
-        );
-      } catch {
-        // Ignore file read/parse errors
-      }
-    }
-  });
-
-  // Return enhanced configuration with helper methods
-  const enhancedConfig = {
-    ...configObject,
-    configPath,
-    watchChanges(paths: string[], callback: () => void) {
-      for (const option of configOptions) {
-        if (paths.some((path) => option.path.startsWith(path))) {
-          option.subscribe(callback);
-        }
-      }
-    },
-  };
-
-  return enhancedConfig as ConfigWithHelpers<T>;
 }

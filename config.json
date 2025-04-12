@@ -1,15 +1,10 @@
 {
-  "bar": {
-    "position": "top",
-    "margins": {
-      "top": 5,
-      "left": 5,
-      "right": 5,
-      "bottom": 0
-    },
-    "modules": {
-      "showCava": true,
-      "showOsIcon": true
-    }
-  }
+  "bar.position": "top",
+  "bar.margins.top": 5,
+  "bar.margins.left": 5,
+  "bar.margins.right": 5,
+  "bar.margins.bottom": 0,
+  "bar.modules.showCava": true,
+  "bar.modules.showOsIcon": true,
+  "bar.modules.showBar": false
 }

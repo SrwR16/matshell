@@ -85,7 +85,6 @@ export default function (monitor: Gdk.Monitor) {
   // Create the initial bar
   createBar();
 
-  // Only recreate the bar when position changes (which affects anchor)
   options.bar.position.subscribe(() => {
     console.log("Position changed, recreating bar");
     const barWindow = App.get_window("bar");

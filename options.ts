@@ -1,12 +1,12 @@
 import { execAsync, GLib } from "astal";
-import { initializeConfig, createOption, ConfigValue } from "./utils/option";
+import { initializeConfig, createOption, ConfigValue, saveConfig } from "./utils/option";
 
 const options = await (async () => {
   const currentWallpaper = await execAsync(
     "hyprctl hyprpaper listloaded",
   ).catch(() => "");
 
-  return initializeConfig(`${GLib.get_user_config_dir()}/ags/config.json`, {
+  const config = initializeConfig(`${GLib.get_user_config_dir()}/ags/config.json`, {
     wallpaper: {
       folder: createOption<ConfigValue>(GLib.get_home_dir(), {
         useCache: true,
@@ -27,6 +27,10 @@ const options = await (async () => {
       },
     },
   });
+
+  saveConfig();
+  return config;
+
 })();
 
 export default options;
