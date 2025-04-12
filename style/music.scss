@@ -26,10 +26,22 @@
 }
 
 .music.window .info {
+
+
   margin: 0.5rem;
+
   label,
-  scale {
+  scale,
+  {
     margin: 0.3rem 0;
+  }
+
+  // Always use light colors on player text and controls.
+  // Dark almost never works on on top of most cover arts.
+  label, .title, image, {
+    @if $darkmode {} @else {
+      color: $background;
+    }
   }
 
   label.position,
@@ -54,6 +66,10 @@
   button {
     margin: 0 1.6rem;
     -gtk-icon-size: 1.5rem;
+      @if $darkmode { 
+      } @else {
+        color: $background;
+      }
   }
 }
 

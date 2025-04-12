@@ -72,6 +72,21 @@ in {
 
         matugen -t "$scheme" -m "$mode" image "$wallpaper_path"
 
+        # Append mode and scheme to the matshell colors SCSS file
+        matugen_scss_file="$HOME/.config/ags/style/colors.scss"
+
+        # Append variables to the end of the file
+        {
+          echo ""
+          echo "/* Theme mode and scheme variables */"
+          if [ "$mode" = "dark" ]; then
+            echo "\$darkmode: true;"
+          else
+            echo "\$darkmode: false;"
+          fi
+          echo "\$material-color-scheme: \"$scheme\";"
+        } >> "$matugen_scss_file"
+
         # unload previous wallpaper
 
         hyprctl hyprpaper unload all
@@ -83,7 +98,7 @@ in {
         # Get wallpaper image name & send notification
 
         newwall=$(basename "$wallpaper_path")
-        notify-send "Colors and Wallpaper updated" "with image $newwall" -i "$wallpaper_path"
+        notify-send "Colors and Wallpaper updated" "with image: $newwall"
 
 
         echo "DONE!"

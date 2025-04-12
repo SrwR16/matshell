@@ -243,7 +243,7 @@ ______________________________________________________________________
 
 </p>
 
-### Video Demo
+### Video Demo (quite outdated)
 
 <p align="center">
   <video src="https://github.com/Neurarian/ags-bar/assets/110474238/3f01073e-552a-479b-99f9-d82647138e55" controls width="600"></video>
