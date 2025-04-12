@@ -20,7 +20,7 @@ import {
 /**
  * Represents all possible configuration value types
  */
-type ConfigValue =
+export type ConfigValue =
   | string
   | number
   | boolean
@@ -31,14 +31,14 @@ type ConfigValue =
 /**
  * Represents a configuration object structure
  */
-interface ConfigObject {
-  [key: string]: ConfigValue;
+export interface ConfigObject {
+  [key: string]: ConfigValue | ConfigOption<ConfigValue> | ConfigObject;
 }
 
 /**
  * Represents an array of configuration values
  */
-type ConfigArray = ConfigValue[];
+export type ConfigArray = ConfigValue[];
 
 /**
  * Represents a configuration item that can be either an option or an object
