@@ -204,23 +204,6 @@ export class ConfigManager {
       console.log(`Applied ${loadedCount} settings from configuration file`);
     } catch (err) {
       console.error(`Failed to load configuration: ${err}`);
-      // Create a backup of the corrupted file
-      if (GLib.file_test(this.configPath, GLib.FileTest.EXISTS)) {
-        const backupPath = `${this.configPath}.backup-${Date.now()}`;
-        try {
-          GLib.file_get_contents(this.configPath);
-          GLib.file_set_contents(
-            backupPath,
-            GLib.file_get_contents(this.configPath)[1],
-          );
-          console.log(`Created backup of corrupted config at ${backupPath}`);
-        } catch (backupErr) {
-          console.error(`Could not create backup: ${backupErr}`);
-        }
-      }
-
-      // Save defaults
-      this.save();
     }
   }
 
