@@ -31,7 +31,7 @@ export default function OnScreenProgress({
   const value = Variable(0);
   const labelText = Variable("");
   const iconName = Variable("");
-  const showProgress = Variable(true);
+  const showProgress = Variable(false);
 
   const osd = new OSDManager({
     visible,
@@ -47,6 +47,15 @@ export default function OnScreenProgress({
       transitionDuration={200}
       revealChild={visible()}
       setup={(self) => {
+        const handleVolumeChange = (endpoint: Wp.Endpoint) => () => {
+          {
+            osd.show(
+              endpoint.volume,
+              endpoint.description || "",
+              endpoint.volumeIcon,
+            );
+          }
+        };
         if (brightness) {
           hook(self, brightness, "notify::screen", () =>
             osd.show(
@@ -58,28 +67,21 @@ export default function OnScreenProgress({
         }
 
         if (speaker) {
-          hook(self, speaker, "notify::volume", () =>
-            osd.show(
-              speaker.volume,
-              speaker.description || "",
-              speaker.volumeIcon,
-            ),
-          );
+          hook(self, speaker, "notify::volume", handleVolumeChange(speaker));
         }
         if (microphone) {
-          hook(self, microphone, "notify::volume", () =>
-            osd.show(
-              microphone.volume,
-              microphone.description || "",
-              microphone.volumeIcon,
-            ),
+          hook(
+            self,
+            microphone,
+            "notify::volume",
+            handleVolumeChange(microphone),
           );
         }
         if (bluetooth) {
           hook(self, bluetooth, "notify::devices", () => {
             bluetooth.devices.forEach((device) => {
               // Monitor connection state changes for new devices
-              self.hook(device, "notify::connected", () => {
+              hook(self, device, "notify::connected", () => {
                 if (device.connected) {
                   osd.show(
                     0,
