@@ -310,13 +310,14 @@ export class ConfigOption<T extends ConfigValue> extends Variable<T> {
   /**
    * Initializes the option with values from configuration file
    */
+
   initialize(configPath: string): void {
     const filePath = this.useCache ? `${cacheDir}/options.json` : configPath;
 
     if (GLib.file_test(filePath, GLib.FileTest.EXISTS)) {
       try {
         const config = JSON.parse(readFile(filePath) || "{}") as ConfigObject;
-        let storedValue: ConfigValue | undefined;
+        let storedValue: ConfigValue | ConfigOption<ConfigValue> | undefined;
 
         if (this.useCache) {
           storedValue = config[this.path];
@@ -325,13 +326,17 @@ export class ConfigOption<T extends ConfigValue> extends Variable<T> {
         }
 
         if (storedValue !== undefined) {
-          this.set(storedValue as T);
+          // Handle the case where storedValue is a ConfigOption
+          if (storedValue instanceof ConfigOption) {
+            this.set(storedValue.get() as T);
+          } else {
+            this.set(storedValue as T);
+          }
         }
       } catch (err) {
         console.error(`Failed to initialize option at ${this.path}:`, err);
       }
     }
-
     if (this.useCache) {
       this.subscribe(this.saveCachedValue);
     }
