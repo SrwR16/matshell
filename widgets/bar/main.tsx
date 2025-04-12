@@ -77,9 +77,11 @@ function Bar({ gdkmonitor, ...props }: any) {
 }
 
 export default function (monitor: Gdk.Monitor) {
+  const windowName = `bar-${monitor.get_connector()}`;
+
   function createBar() {
-    console.log("Creating bar for monitor");
-    <Bar gdkmonitor={monitor} />;
+    console.log(`Creating bar for monitor ${monitor.get_connector()}`);
+    return <Bar gdkmonitor={monitor} name={windowName} />;
   }
 
   // Create the initial bar
@@ -95,4 +97,5 @@ export default function (monitor: Gdk.Monitor) {
       idle(createBar);
     }
   });
+  return windowName;
 }
