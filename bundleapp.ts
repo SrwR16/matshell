@@ -1,7 +1,7 @@
 /* Slightly different from app.ts. 
 Used for bundled Nix package demo only.
 Static CSS colors.  */
-import { App, Gdk, Gtk } from "astal/gtk4";
+import { App } from "astal/gtk4";
 import Hyprland from "gi://AstalHyprland";
 import { hyprToGdk } from "utils/hyprland.ts";
 import Bar from "./widgets/bar/main.tsx";
@@ -22,8 +22,7 @@ App.start({
     res("ok");
   },
   main() {
-    const bars = new Map<Gdk.Monitor, Gtk.Widget>();
-    const monitorIdMap = new Map();
+    const barNames = new Map<number, string>(); // Map Hyprland ID to window name
 
     Notifications();
     OnScreenDisplay();
@@ -38,40 +37,32 @@ App.start({
     for (const hyprMonitor of hypr.monitors) {
       const gdkmonitor = hyprToGdk(hyprMonitor);
       if (gdkmonitor) {
-        monitorIdMap.set(hyprMonitor.id, gdkmonitor);
-        bars.set(gdkmonitor, Bar(gdkmonitor));
-        console.log(
-          `Initialized bar for Hyprland monitor ID: ${hyprMonitor.id}`,
-        );
+        const windowName = Bar(gdkmonitor);
+        barNames.set(hyprMonitor.id, windowName);
       }
     }
 
     hypr.connect("monitor-added", (_, monitor) => {
       const gdkmonitor = hyprToGdk(monitor);
       if (gdkmonitor) {
-        bars.set(gdkmonitor, Bar(gdkmonitor));
-        monitorIdMap.set(monitor.id, gdkmonitor);
+        const windowName = Bar(gdkmonitor);
+        barNames.set(monitor.id, windowName);
         console.log(`Monitor added - ID: ${monitor.id}`);
       }
     });
 
     hypr.connect("monitor-removed", (_, id) => {
-      const gdkmonitor = monitorIdMap.get(id);
-      console.log(
-        `Monitor removed - ID: ${id}, GDK monitor found: ${!!gdkmonitor}`,
-      );
-
-      if (gdkmonitor) {
-        const bar = bars.get(gdkmonitor);
-
-        // Connect to the destroy signal to clean up after it's fully destroyed
-        // Works fine but still causes some non-critical assertion failures
-        bar.connect("destroy", () => {
-          bars.delete(gdkmonitor);
-        });
-
-        bar.destroy();
-        monitorIdMap.delete(id);
+      console.log(`Monitor removed - ID: ${id}`);
+      const windowName = barNames.get(id);
+      if (windowName) {
+        const window = App.get_window(windowName);
+        if (window) {
+          console.log(`Removing bar: ${windowName}`);
+          App.toggle_window(windowName);
+          window.set_child(null);
+          App.remove_window(window);
+        }
+        barNames.delete(id);
       }
     });
   },
