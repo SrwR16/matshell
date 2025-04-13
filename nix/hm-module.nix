@@ -73,7 +73,7 @@ in {
         matugen -t "$scheme" -m "$mode" image "$wallpaper_path"
 
         # Append mode and scheme to the matshell colors SCSS file
-        matugen_scss_file="$HOME/.config/ags/style/colors.scss"
+        matugen_scss_file="$HOME/.config/ags/style/abstracts/_variables.scss"
 
         # Append variables to the end of the file
         {

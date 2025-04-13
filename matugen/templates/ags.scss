@@ -1,4 +1,5 @@
 @use "sass:color";
+
 /*
 * Css Colors
 * Generated with Matugen
@@ -8,11 +9,21 @@
 ${{name}}: {{value.default.rgba}};
 <* endfor *>
 
+/* general color variables */
 $red: #d17678;
 $accent_green: #afbea2;
+$tooltipBg: $background;
+$fg: $on_background;
+$bg: color.adjust($background, $alpha: -0.5);
+$barBg: color.adjust($background, $alpha: -0.5);
+$surface: color.adjust($surface_bright, $alpha: -0.6);
+$overlay: color.adjust($on_surface, $alpha: -0.25);
+$accent: $tertiary_container;
 
+/* os icon colors */
 $os: $on_surface_variant;
 
+/* workspaces colors */
 $primaryMon: color.mix(
   $primary_container,
   $on_primary_container,
@@ -52,36 +63,23 @@ $tertiaryMonHover: color.mix(
 $fourthMon: color.mix($secondary, $on_secondary, 70%, $method: rgb);
 $fourthMonHover: color.mix($secondary, $on_secondary, 45%, $method: rgb);
 
-$tooltipBg: $background;
-$fg: $on_background;
-$bg: color.adjust($background, $alpha: -0.5);
-$barBg: color.adjust($background, $alpha: -0.5);
-
-$surface: color.adjust($surface_bright, $alpha: -0.6);
-$overlay: color.adjust($on_surface, $alpha: -0.25);
-
-$accent: $tertiary_container;
-
-/* buttons */
+/* button colors */
 $buttonEnabled: $accent;
 $buttonEnabledHover: color.adjust($buttonEnabled, $lightness: -15%);
 
 $buttonDisabled: $surface;
 $buttonDisabledHover: color.adjust($buttonDisabled, $alpha: +0.8);
 
-/* hw circular proc */
+/* hw circular proc colors */
 $ramProc: color.mix($primary_fixed_dim, $on_primary_fixed_variant, 66%);
 $cpuProc: color.mix($tertiary_fixed_dim, $on_tertiary_fixed_variant, 66%);
 $procBg: $surface_dim;
 
-/* Theme mode and scheme variables */
+/* theme mode and scheme variables */
 $darkmode: true;
 $material-color-scheme: "scheme-vibrant";
 
-/* Theme mode and scheme variables */
-$darkmode: true;
-$material-color-scheme: "scheme-neutral";
-
+/* numeric variables */
 $round: 8px;
 $round2: 16px;
 $margin: 0.4rem;
