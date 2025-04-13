@@ -1,3 +1,6 @@
+@use "../layouts" as *;
+@use "../abstracts" as *;
+@use "sass:color";
 
 .notification {
   margin: 5px 5px 5px 10px;
@@ -12,25 +15,24 @@
   }
 
   .header {
-
     .app-name {
       font-size: 0.9rem;
       font-weight: bold;
-      color: transparentize($fg, 0.3);
+      color: color.adjust($fg, $alpha: -0.3);
     }
     .time {
       font-size: 0.9rem;
       font-weight: bold;
-      color: transparentize($fg, 0.3);
+      color: color.adjust($fg, $alpha: -0.3);
     }
   }
 
   separator {
-      background: transparentize($fg, .5);
-      min-height: 1px;
+    color: color.adjust($fg, $alpha: -0.5);
+    min-height: 1px;
   }
 
-  .content{
+  .content {
     margin-top: 0.75rem;
     margin-bottom: 0.5rem;
 
@@ -59,7 +61,7 @@
     .body {
       margin-right: 0.5rem;
       font-size: 0.95rem;
-      color: transparentize($fg, 0.2);
+      color: color.adjust($fg, $alpha: -0.2);
       margin-top: 0.75rem;
     }
   }
@@ -78,4 +80,3 @@
     }
   }
 }
-

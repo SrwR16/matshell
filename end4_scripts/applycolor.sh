@@ -166,24 +166,14 @@ apply_gtk() { # Using gradience-cli
 }
 
 apply_ags() {
-    cp "$STATE_DIR"/scss/_material.scss "$CONFIG_DIR"/style/material.scss
+    cp "$STATE_DIR"/scss/_material.scss "$CONFIG_DIR"/style/abstracts/_material-colors_end4.scss
 }
 
-if [[ "$1" = "--bad-apple" ]]; then
-    lightdark=$(get_light_dark)
-    cp scripts/color_generation/specials/_material_badapple"${lightdark}".scss $STATE_DIR/scss/_material.scss
-    colornames=$(cat scripts/color_generation/specials/_material_badapple"${lightdark}".scss | cut -d: -f1)
-    colorstrings=$(cat scripts/color_generation/specials/_material_badapple"${lightdark}".scss | cut -d: -f2 | cut -d ' ' -f2 | cut -d ";" -f1)
-    IFS=$'\n'
-    colorlist=( $colornames ) # Array of color names
-    colorvalues=( $colorstrings ) # Array of color values
-else
-    colornames=$(cat $STATE_DIR/scss/_material.scss | cut -d: -f1)
-    colorstrings=$(cat $STATE_DIR/scss/_material.scss | cut -d: -f2 | cut -d ' ' -f2 | cut -d ";" -f1)
-    IFS=$'\n'
-    colorlist=( $colornames ) # Array of color names
-    colorvalues=( $colorstrings ) # Array of color values
-fi
+colornames=$(cat $STATE_DIR/scss/_material.scss | cut -d: -f1)
+colorstrings=$(cat $STATE_DIR/scss/_material.scss | cut -d: -f2 | cut -d ' ' -f2 | cut -d ";" -f1)
+IFS=$'\n'
+colorlist=( $colornames ) # Array of color names
+colorvalues=( $colorstrings ) # Array of color values
 
 apply_ags &
 apply_wlogout &

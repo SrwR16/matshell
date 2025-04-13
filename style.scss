@@ -1,12 +1,13 @@
-@import "style/prelude";
-@import "style/colors";
-@import "style/general";
+
+/* prelude */
+@use "style/base" as *;
+
+/* variables & mixins */
+@use "style/abstracts" as *;
+
+/* general styles */
+@use "style/layouts" as *;
 
 /* modules & windows */
-@import "style/bar";
-@import "style/music";
-@import "style/osd";
-@import "style/system-menu";
-@import "style/notifications";
-@import "style/launcher";
-@import "style/logout-menu";
+@use "style/components" as *;
+

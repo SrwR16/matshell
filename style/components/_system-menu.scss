@@ -1,9 +1,12 @@
+@use "../layouts" as *;
+@use "../abstracts" as *;
+
 /* general */
 .system-menu {
   -gtk-icon-size: $font;
   @include window;
-  margin-top: .7rem;
-  margin-right: .7rem;
+  margin-top: 0.7rem;
+  margin-right: 0.7rem;
 
   & > box {
     @include window-box;
@@ -49,7 +52,7 @@
     margin: 0.3rem;
   }
   trough {
-    margin: 0.5rem 0.5rem ;
+    margin: 0.5rem 0.5rem;
   }
   block {
     min-height: 0.5rem;
@@ -59,4 +62,3 @@
     }
   }
 }
-

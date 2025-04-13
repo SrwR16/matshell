@@ -164,7 +164,7 @@ in {
 
           [templates.ags]
           input_path = "${agsTemplate}"
-          output_path = "~/.config/ags/style/colors.scss"
+          output_path = "~/.config/ags/style/abstracts/_variables.scss"
 
           [templates.hypr]
           input_path = "${hyprTemplate}"

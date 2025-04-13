@@ -1,0 +1,115 @@
+@use "sass:color";
+/* comment if using end4 backend*/
+@use "variables" as *;
+/* uncomment if using end4 backend*/
+/* @use "variables_end4" as *;
+@use "_material-colors_end4" as *; */
+
+@mixin animate {
+  transition: 200ms;
+}
+
+@mixin border {
+  // border: 1px solid color.adjust($background, $alpha: -0.9);
+  box-shadow:
+    // inset 0 0 0 1px color.ajust($background, $alpha: -0.9),
+    0 3px 5px 1px color.adjust($background, $alpha: -0.9);
+}
+
+/* mixins */
+@mixin window-rounding {
+  border-radius: $round2;
+}
+
+@mixin rounding {
+  border-radius: calc(#{$round2} - #{$padding} - #{$border-width});
+}
+
+@mixin window-box {
+  @include rounding;
+
+  background: $surface;
+  box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
+  margin: $margin;
+  padding: $padding;
+}
+
+@mixin window {
+  @include border;
+  @include window-rounding;
+
+  background: $bg;
+  margin: 5px 10px 15px;
+  padding: $padding;
+}
+
+/* buttons */
+@mixin button-active {
+  @include animate;
+  background: $buttonEnabled;
+  border-radius: 5rem;
+  padding: 0.4rem;
+
+  &:hover {
+    background: $buttonEnabledHover;
+  }
+}
+
+@mixin button {
+  @include animate;
+  background: $buttonDisabled;
+  border-radius: 5rem;
+  padding: 0.4rem;
+
+  &:hover,
+  &:focus {
+    background: $buttonDisabledHover;
+  }
+}
+
+@mixin menu {
+  background: $tooltipBg;
+  border-radius: $round;
+  font-size: $font;
+
+  separator {
+    background-color: $surface;
+  }
+
+  menuitem {
+    @include button;
+    border-radius: 0;
+    padding: 0.4rem 0.7rem;
+
+    &:first-child {
+      border-radius: $round $round 0 0;
+    }
+    &:last-child {
+      border-radius: 0 0 $round $round;
+    }
+    &:only-child {
+      border-radius: $round;
+    }
+  }
+}
+
+@mixin hw-circular-progress {
+  margin-right: 0.4rem;
+  margin-left: 0.3rem;
+
+  circularprogress {
+    progress {
+      color: $ramProc;
+      min-width: 2.3rem;
+    }
+
+    radius {
+      color: color.adjust($procBg, $alpha: -0.5);
+    }
+  }
+  button {
+    label {
+      font-family: "Material Symbols Outlined";
+    }
+  }
+}

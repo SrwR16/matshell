@@ -1,4 +1,4 @@
-import { App, Gdk, Gtk } from "astal/gtk4";
+import { App } from "astal/gtk4";
 import { monitorFile } from "astal/file";
 import { exec } from "astal/process";
 import Hyprland from "gi://AstalHyprland";
@@ -13,6 +13,7 @@ import MusicPlayer from "./widgets/music/main.tsx";
 
 const scss = "./style.scss";
 const css = "./style.css";
+const styleDirectories = ["abstracts", "components", "layouts", "base"];
 
 function reloadCss() {
   console.log("scss change detected");
@@ -30,7 +31,8 @@ App.start({
   },
   main() {
     exec(`sass ${scss} ${css}`);
-    monitorFile(`./style`, reloadCss);
+    styleDirectories.forEach((dir) => monitorFile(`./style/${dir}`, reloadCss));
+
     const barNames = new Map<number, string>(); // Map Hyprland ID to window name
 
     Notifications();

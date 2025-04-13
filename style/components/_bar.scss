@@ -1,8 +1,15 @@
+@use "../layouts" as *;
+@use "../abstracts" as *;
+@use "sass:color";
+
+/* general */
 .Bar {
   background: $barBg;
   border-radius: calc(#{$round} * 4);
   font-size: $font;
-  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4) , -1px -1px 2px $bg; 
+  box-shadow:
+    inset -2px -2px 3px rgba(0, 0, 0, 0.4),
+    -1px -1px 2px $bg;
 
   cava {
     opacity: 0.1;
@@ -31,7 +38,7 @@
       min-width: 1.5rem;
       min-height: 1.5rem;
       transition: 100ms linear;
-      box-shadow: inset -2px -2px 2px transparentize($bg , 0.2);
+      box-shadow: inset -2px -2px 2px color.adjust($bg, $alpha: -0.2);
     }
 
     .focused {
@@ -40,37 +47,43 @@
 
     .monitor0 {
       background: $primaryMon;
-      box-shadow: inset -2px -2px 2px scale_color($primaryMon, $lightness: -25%);
+      box-shadow: inset -2px -2px 2px color.scale($primaryMon, $lightness: -25%);
       &:hover {
         background: $primaryMonHover;
-        box-shadow: inset -2px -2px 2px scale_color($primaryMonHover, $lightness: -25%);
+        box-shadow: inset -2px -2px 2px
+          color.scale($primaryMonHover, $lightness: -25%);
       }
     }
 
     .monitor1 {
       background: $secondaryMon;
-      box-shadow: inset -2px -2px 2px scale_color($secondaryMon, $lightness: -25%);
+      box-shadow: inset -2px -2px 2px
+        color.scale($secondaryMon, $lightness: -25%);
       &:hover {
         background: $secondaryMonHover;
-        box-shadow: inset -2px -2px 2px scale_color($secondaryMonHover, $lightness: -25%);
+        box-shadow: inset -2px -2px 2px
+          color.scale($secondaryMonHover, $lightness: -25%);
       }
     }
 
     .monitor2 {
       background: $tertiaryMon;
-      box-shadow: inset -2px -2px 2px scale_color($tertiaryMon, $lightness: -25%);
+      box-shadow: inset -2px -2px 2px
+        color.scale($tertiaryMon, $lightness: -25%);
       &:hover {
         background: $tertiaryMonHover;
-        box-shadow: inset -2px -2px 2px scale_color($tertiaryMonHover, $lightness: -25%);
+        box-shadow: inset -2px -2px 2px
+          color.scale($tertiaryMonHover, $lightness: -25%);
       }
     }
 
     .monitor3 {
       background: $fourthMon;
-      box-shadow: inset -2px -2px 2px scale_color($fourthMon, $lightness: -25%);
+      box-shadow: inset -2px -2px 2px color.scale($fourthMon, $lightness: -25%);
       &:hover {
         background: $fourthMonHover;
-        box-shadow: inset -2px -2px 2px scale_color($fourthMonHover, $lightness: -25%);
+        box-shadow: inset -2px -2px 2px
+          color.scale($fourthMonHover, $lightness: -25%);
       }
     }
   }
@@ -119,15 +132,14 @@
   }
 
   /* hw-monitor */
-  .bar-hw-ram-box{
+  .bar-hw-ram-box {
     @include hw-circular-progress;
 
-    circularprogress progress{
-        color: $ramProc;
-      }
+    circularprogress progress {
+      color: $ramProc;
+    }
 
-    button{
-
+    button {
       label {
         margin: 1px 0px 0px 2px;
         font-size: 1.2rem;
@@ -139,10 +151,10 @@
     @include hw-circular-progress;
 
     circularprogress progress {
-        color: $cpuProc;
-      }
+      color: $cpuProc;
+    }
 
-    button{
+    button {
       label {
         margin: 1px 0px 0px 1px;
         font-size: 1.3rem;
@@ -169,7 +181,6 @@
     color: $outline;
   }
 
-
   .clock {
     margin: 0 1.2rem 0 0.4rem;
   }
@@ -178,4 +189,3 @@
     margin: 0 1.2rem 0 0rem;
   }
 }
-
