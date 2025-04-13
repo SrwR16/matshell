@@ -24,8 +24,8 @@ function MusicBox({ player }: { player: Mpris.Player }) {
           contentFit={Gtk.ContentFit.COVER}
         />
       </Gtk.ScrolledWindow>
-      <box cssClasses={["cava-container"]} type="overlay clip">
-        <CavaDraw hexpand vexpand style={bind(options.bar.modules.cava.style)} />
+      <box cssClasses={["cava-container"]} type="overlay clip" visible={bind(options.musicPlayer.modules.cava.show)}>
+        <CavaDraw hexpand vexpand style={bind(options.musicPlayer.modules.cava.style)} />
       </box>
       <box type="overlay measure">
         <Cover player={player} />
