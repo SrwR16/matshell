@@ -27,7 +27,7 @@ export function updateParticles(
     // Update particle position
     particle.y += particle.velocity * deltaTime;
     particle.velocity += 120 * deltaTime; // Gravity
-    particle.life -= deltaTime * 0.8; // Fade out
+    particle.life -= deltaTime * 0.1; // Fade out
 
     // Remove dead particles
     if (particle.life <= 0 || particle.y > height) {
@@ -36,7 +36,7 @@ export function updateParticles(
   }
 
   // Limit particle count
-  if (state.particles.length > 300) {
-    state.particles.splice(0, state.particles.length - 300);
+  if (state.particles.length > 600) {
+    state.particles.splice(0, state.particles.length - 600);
   }
 }

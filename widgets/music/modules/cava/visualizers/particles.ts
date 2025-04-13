@@ -46,7 +46,7 @@ function generateParticles(
   height: number
 ) {
   // Base number of particles per frame
-  const particlesPerFrame = 10;
+  const particlesPerFrame = 4;
 
   // Calculate average audio intensity
   let avgIntensity = values.reduce((sum, val) => sum + val, 0) / values.length;
@@ -74,7 +74,7 @@ function generateParticles(
         x: position,
         y: height,
         velocity: -300 * intensity * (Math.random() * 0.5 + 0.75),
-        life: 1.0,
+        life: 5.0,
       });
     }
   }
