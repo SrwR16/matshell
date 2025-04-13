@@ -22,7 +22,10 @@ const options = await (async () => {
         bottom: createOption<ConfigValue>(0),
       },
       modules: {
-        showCava: createOption<ConfigValue>(false),
+        cava: {
+          show:createOption<ConfigValue>(false),
+          style:createOption<ConfigValue>("catmull_rom"), // "smooth", "lines"
+        },
         showOsIcon: createOption<ConfigValue>(true),
       },
     },

@@ -5,7 +5,7 @@ import Separator from "./modules/Separator.tsx";
 import Workspaces from "./modules/Workspaces.tsx";
 import Mem from "./modules/Mem.tsx";
 import Cpu from "./modules/Cpu.tsx";
-import { CavaDraw, CavaStyle } from "widgets/music/modules/Cava.tsx";
+import { CavaDraw } from "widgets/music/modules/cava";
 import Media from "./modules/Media.tsx";
 import SystemInfo from "./modules/SystemInfo/main.tsx";
 import Time from "./modules/Time.tsx/";
@@ -47,8 +47,12 @@ function Bar({ gdkmonitor, ...props }: any) {
       {...props}
     >
       <overlay>
-        <box type="overlay clip" visible={bind(options.bar.modules.showCava)}>
-          <CavaDraw vexpand hexpand style={CavaStyle.CATMULL_ROM} />
+        <box type="overlay clip" visible={bind(options.bar.modules.cava.show)}>
+          <CavaDraw
+            vexpand
+            hexpand
+            style={bind(options.bar.modules.cava.style)}
+          />
         </box>
         <centerbox type="overlay measure">
           <box hexpand halign={Gtk.Align.START}>

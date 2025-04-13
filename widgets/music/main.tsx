@@ -4,8 +4,9 @@ import { bind, Variable, Gio } from "astal";
 import { findPlayer, generateBackground } from "utils/mpris";
 import { Cover } from "./modules/Cover";
 import { Info } from "./modules/Info";
-import { CavaDraw, CavaStyle } from "./modules/Cava";
+import { CavaDraw } from "./modules/cava";
 import { astalify, Gtk } from "astal/gtk4";
+import options from "options.ts";
 
 const Picture = astalify<Gtk.Picture, Gtk.Picture.ConstructorProps>(
   Gtk.Picture,
@@ -24,7 +25,7 @@ function MusicBox({ player }: { player: Mpris.Player }) {
         />
       </Gtk.ScrolledWindow>
       <box cssClasses={["cava-container"]} type="overlay clip">
-        <CavaDraw hexpand vexpand style={CavaStyle.CATMULL_ROM} />
+        <CavaDraw hexpand vexpand style={bind(options.bar.modules.cava.style)} />
       </box>
       <box type="overlay measure">
         <Cover player={player} />
