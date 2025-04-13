@@ -172,8 +172,8 @@ apply_ags() {
 colornames=$(cat $STATE_DIR/scss/_material.scss | cut -d: -f1)
 colorstrings=$(cat $STATE_DIR/scss/_material.scss | cut -d: -f2 | cut -d ' ' -f2 | cut -d ";" -f1)
 IFS=$'\n'
-colorlist=( $colornames ) # Array of color names
-colorvalues=( $colorstrings ) # Array of color values
+colorlist=( "$colornames" ) # Array of color names
+colorvalues=( "$colorstrings" ) # Array of color values
 
 apply_ags &
 apply_wlogout &
