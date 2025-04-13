@@ -14,7 +14,7 @@ export default function Mem() {
         radiusFilled={true}
         inverted={true}
         startAt={-0.75}
-        endAt={0.75}
+        endAt={0.25}
         lineWidth={3.5}
         lineCap={Gsk.LineCap.ROUND}
       >
