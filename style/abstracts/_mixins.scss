@@ -63,7 +63,14 @@
 
   &:hover,
   &:focus {
-    background: $buttonDisabledHover;
+    /* would prefer to handle this with transparency, 
+    but that currently glitches on Hyprland */
+    @if $darkmode {
+      background: color.adjust($buttonDisabled, $lightness: +20%);
+    }
+    @else {
+      background: color.adjust($buttonDisabled, $lightness: -10%);
+    }
   }
 }
 

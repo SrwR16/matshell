@@ -75,10 +75,6 @@ $ramProc: color.mix($primary_fixed_dim, $on_primary_fixed_variant, 66%);
 $cpuProc: color.mix($tertiary_fixed_dim, $on_tertiary_fixed_variant, 66%);
 $procBg: $surface_dim;
 
-/* theme mode and scheme variables */
-$darkmode: true;
-$material-color-scheme: "scheme-vibrant";
-
 /* numeric variables */
 $round: 8px;
 $round2: 16px;
