@@ -62,3 +62,82 @@
     }
   }
 }
+
+.wifi-menu {
+}
+.network-list {
+  @include window;
+  margin: 0.3rem;
+}
+
+.network-item {
+  @include button;
+  @include rounding;
+  margin: 0.3rem;
+  margin: 0.1rem 0.3rem;
+  padding: 0.7rem;
+  margin-bottom: 0.5rem;
+}
+
+.password-dialog {
+  @include window-box;
+  margin-bottom: 12px;
+}
+
+.error-message {
+  color: $red;
+  margin: 4px 0;
+}
+
+.section-label {
+  font-weight: bold;
+  margin: 8px 0 4px 0;
+}
+
+.refresh-button,
+.disconnect-button,
+.settings-button {
+  @include button;
+  margin: 0.3rem;
+}
+
+.disconnect-button {
+  padding: 0.55rem 0;
+
+}
+
+.connect-button,
+.cancel-button {
+  @include button-active;
+  margin: 0.2rem 0.5rem;
+  margin-top: 0.4rem;
+}
+image {
+  margin: 0.4rem;
+}
+.password-search {
+  @include window-box;
+  background: $bg;
+
+  entry {
+    menu {
+      @include menu;
+    }
+  }
+}
+
+.empty-label {
+  margin: 0.5rem;
+  color: $red;
+}
+.saved-network {
+  @include window-box;
+  margin: 0.1rem 0.3rem;
+  padding: 0.2rem;
+  margin-bottom: 0.5rem;
+
+  .forget-button {
+    @include button-active;
+    margin: 0.5rem;
+  }
+}
