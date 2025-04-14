@@ -9,7 +9,6 @@ export const Toggles = () => {
   return (
     <box cssClasses={["toggles"]} vertical>
       <WiFiBox />
-
       {/* Bluetooth Toggle */}
       <box cssClasses={["toggle"]}>
         <button

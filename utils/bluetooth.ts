@@ -6,7 +6,10 @@ export const getBluetoothIcon = (bt: Bluetooth.Bluetooth) => {
   return "bluetooth-disconnected-symbolic";
 };
 
-export const getBluetoothText = (devs: Bluetooth.Device, bt: Bluetooth.Bluetooth) => {
+export const getBluetoothText = (
+  devs: Bluetooth.Device,
+  bt: Bluetooth.Bluetooth,
+) => {
   if (!bt.is_powered) return "Bluetooth off";
 
   if (bt.is_connected) {
@@ -15,7 +18,7 @@ export const getBluetoothText = (devs: Bluetooth.Device, bt: Bluetooth.Bluetooth
         let battery_str = "";
 
         if (dev.battery_percentage > 0) {
-          battery_str = ` ${dev.battery_percentage}%`;
+          battery_str = ` ${dev.battery_percentage * 100}%`;
         }
         return `${dev.name} ${battery_str}`;
       }
