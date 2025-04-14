@@ -1,6 +1,6 @@
 import { execAsync, bind } from "astal";
 import Bluetooth from "gi://AstalBluetooth";
-import { WiFiBox } from "./WifiBox.tsx";
+import { WiFiBox } from "./wifi-box/main.tsx";
 import { getBluetoothIcon, getBluetoothText } from "utils/bluetooth.ts";
 
 export const Toggles = () => {
