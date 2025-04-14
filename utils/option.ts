@@ -267,7 +267,13 @@ export class ConfigManager {
   // Watch for configuration file changes
   watchChanges(): void {
     monitorFile(this.configPath, (_, event) => {
-      if (event === Gio.FileMonitorEvent.ATTRIBUTE_CHANGED) {
+      if (
+        event === Gio.FileMonitorEvent.CHANGED ||
+        event === Gio.FileMonitorEvent.CHANGES_DONE_HINT ||
+        event === Gio.FileMonitorEvent.ATTRIBUTE_CHANGED ||
+        event === Gio.FileMonitorEvent.CREATED
+      ) {
+        console.log("Config file changed, reloading...");
         this.load();
       }
     });
