@@ -1,4 +1,5 @@
 import { bind } from "astal";
+import { Gtk } from "astal/gtk4";
 import {
   selectedNetwork,
   showPasswordDialog,
