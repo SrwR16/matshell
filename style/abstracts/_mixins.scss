@@ -57,7 +57,11 @@
 
 @mixin button {
   @include animate;
-  background: $buttonDisabled;
+  @if $darkmode {
+    background: $buttonDisabled;
+  } @else {
+    background: color.adjust($buttonDisabled, $alpha: +0.5);
+  }
   border-radius: 5rem;
   padding: 0.4rem;
 
@@ -67,9 +71,8 @@
     but that currently glitches on Hyprland */
     @if $darkmode {
       background: color.adjust($buttonDisabled, $lightness: +20%);
-    }
-    @else {
-      background: color.adjust($buttonDisabled, $lightness: -10%);
+    } @else {
+      background: color.adjust($accent, $lightness: +10%);
     }
   }
 }

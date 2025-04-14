@@ -23,15 +23,15 @@
 * {
   all: unset;
   font-family: FiraCode Nerd Font;
-  color: rgb(227, 226, 226);
-  text-shadow: 0 2px 3px rgba(18, 19, 20, 0.2);
+  color: rgb(221, 226, 238);
+  text-shadow: 0 2px 3px rgba(14, 20, 28, 0.2);
 }
 
 /* variables & mixins */
 /* general styles */
 tooltip.background,
 tooltip > box {
-  background-color: rgb(18, 19, 20);
+  background-color: rgb(14, 20, 28);
   border-radius: 8px;
   box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1), 0 0 rgba(0, 0, 0, 0.4);
 }
@@ -42,14 +42,14 @@ tooltip > box label {
 
 /* scales */
 scale trough {
-  background-color: rgba(56, 57, 58, 0.4);
+  background-color: rgba(52, 57, 67, 0.4);
   border-radius: 0.5rem;
   min-width: calc(0.5rem * 10);
   padding: 0 calc(0.5rem / 2);
 }
 scale highlight,
 scale progress {
-  background: rgba(227, 226, 226, 0.75);
+  background: rgba(221, 226, 238, 0.75);
   border-radius: 0.5rem;
   margin: 0 calc(0px - 0.5rem / 2);
   min-height: 0.5rem;
@@ -57,13 +57,13 @@ scale progress {
 
 /* popovers */
 popover {
-  background: rgb(18, 19, 20);
+  background: rgb(14, 20, 28);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 popover modelbutton {
   transition: 200ms;
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
   border-radius: 0;
@@ -72,7 +72,7 @@ popover modelbutton {
 popover modelbutton:hover, popover modelbutton:focus {
   /* would prefer to handle this with transparency, 
   but that currently glitches on Hyprland */
-  background: rgba(106.1052631579, 108, 109.8947368421, 0.4);
+  background: rgba(96.5714285714, 105.8571428571, 124.4285714286, 0.4);
 }
 popover modelbutton:first-child {
   border-radius: 8px 8px 0 0;
@@ -87,24 +87,24 @@ popover modelbutton:only-child {
 /* buttons */
 .button {
   transition: 200ms;
-  background: rgb(53, 74, 83);
+  background: rgb(86.0893854749, 84.8044692737, 145.1955307263);
   border-radius: 5rem;
   padding: 0.4rem;
 }
 .button:hover {
-  background: rgb(23.1875, 32.375, 36.3125);
+  background: rgb(57.4553072626, 56.5977653631, 96.9022346369);
 }
 
 .button-disabled {
   transition: 200ms;
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
 }
 .button-disabled:hover, .button-disabled:focus {
   /* would prefer to handle this with transparency, 
   but that currently glitches on Hyprland */
-  background: rgba(106.1052631579, 108, 109.8947368421, 0.4);
+  background: rgba(96.5714285714, 105.8571428571, 124.4285714286, 0.4);
 }
 
 /* modules & windows */
@@ -112,10 +112,10 @@ popover modelbutton:only-child {
 /* general styles */
 /* general */
 .Bar {
-  background: rgba(18, 19, 20, 0.5);
+  background: rgba(14, 20, 28, 0.5);
   border-radius: calc(8px * 4);
   font-size: 1.1rem;
-  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(18, 19, 20, 0.5);
+  box-shadow: inset -2px -2px 3px rgba(0, 0, 0, 0.4), -1px -1px 2px rgba(14, 20, 28, 0.5);
   /* OS Icon */
   /* Hyperland */
   /* music */
@@ -133,7 +133,7 @@ popover modelbutton:only-child {
   -gtk-icon-size: 2rem;
   margin-left: 0.8rem;
   margin-right: -0.5rem;
-  color: rgb(199, 198, 199);
+  color: rgb(193, 199, 210);
 }
 .Bar .Workspaces {
   margin: 0.4rem 0.8rem;
@@ -145,42 +145,42 @@ popover modelbutton:only-child {
   min-width: 1.5rem;
   min-height: 1.5rem;
   transition: 100ms linear;
-  box-shadow: inset -2px -2px 2px rgba(18, 19, 20, 0.3);
+  box-shadow: inset -2px -2px 2px rgba(14, 20, 28, 0.3);
 }
 .Bar .Workspaces .focused {
   min-width: 2.5rem;
 }
 .Bar .Workspaces .monitor0 {
-  background: rgb(105.5, 119.8, 126.4);
-  box-shadow: inset -2px -2px 2px rgb(79.125, 89.85, 94.8);
+  background: rgb(63.3, 118.8, 167.5);
+  box-shadow: inset -2px -2px 2px rgb(47.475, 89.1, 125.625);
 }
 .Bar .Workspaces .monitor0:hover {
-  background: rgb(144.25, 158.8, 165.9);
-  box-shadow: inset -2px -2px 2px rgb(103.7066487366, 120.6419095572, 128.9058512634);
+  background: rgb(116.05, 157.8, 198.75);
+  box-shadow: inset -2px -2px 2px rgb(68.0359887295, 118.5338114754, 168.0640112705);
 }
 .Bar .Workspaces .monitor1 {
-  background: #8298a2;
-  box-shadow: inset -2px -2px 2px rgb(93.4266055046, 115.5275229358, 125.5733944954);
+  background: rgb(146.5, 144.5, 184);
+  box-shadow: inset -2px -2px 2px rgb(99.0929752066, 96.3780991736, 149.9969008264);
 }
 .Bar .Workspaces .monitor1:hover {
-  background: rgb(160.8, 183.2, 193.6);
-  box-shadow: inset -2px -2px 2px rgb(107.1616966581, 142.3164524422, 158.6383033419);
+  background: rgb(178.3, 175.9, 212.4);
+  box-shadow: inset -2px -2px 2px rgb(117.1196179129, 112.8052382909, 178.4197617091);
 }
 .Bar .Workspaces .monitor2 {
-  background: rgb(110.8, 118.8, 122.8);
-  box-shadow: inset -2px -2px 2px rgb(83.1, 89.1, 92.1);
+  background: rgb(107.7, 116.5, 147.2);
+  box-shadow: inset -2px -2px 2px rgb(80.775, 87.375, 110.4);
 }
 .Bar .Workspaces .monitor2:hover {
-  background: rgb(149.8, 157.8, 161.8);
-  box-shadow: inset -2px -2px 2px rgb(109.7824596774, 119.2058467742, 123.9175403226);
+  background: rgb(147.45, 155.25, 185.7);
+  box-shadow: inset -2px -2px 2px rgb(97.9104961832, 108.9307251908, 151.9520038168);
 }
 .Bar .Workspaces .monitor3 {
-  background: rgb(146.3, 155, 158.7);
-  box-shadow: inset -2px -2px 2px rgb(107.4567073171, 117.1646341463, 121.2932926829);
+  background: rgb(142.7, 152, 187.6);
+  box-shadow: inset -2px -2px 2px rgb(92.9141068447, 105.7345993322, 154.8108931553);
 }
 .Bar .Workspaces .monitor3:hover {
-  background: rgb(109.05, 117.5, 120.95);
-  box-shadow: inset -2px -2px 2px rgb(81.7875, 88.125, 90.7125);
+  background: rgb(104.95, 114.5, 148.1);
+  box-shadow: inset -2px -2px 2px rgb(78.7125, 85.875, 111.075);
 }
 .Bar .Media > box {
   transition: 200ms;
@@ -189,7 +189,7 @@ popover modelbutton:only-child {
   font-size: 1.1rem;
 }
 .Bar .Media.active > box {
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
 }
 .Bar .Media .cover {
   background-size: cover;
@@ -212,24 +212,24 @@ popover modelbutton:only-child {
   margin-right: -0.3rem;
 }
 .Bar .SysTray.active {
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
 }
 .Bar .bar-hw-ram-box {
   margin-right: 0.4rem;
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(142.82, 157.48, 164.14);
+  color: rgb(106.92, 157.14, 212.5);
   min-width: 2.3rem;
 }
 .Bar .bar-hw-ram-box circularprogress radius {
-  color: rgba(18, 19, 20, 0.5);
+  color: rgba(14, 20, 28, 0.5);
 }
 .Bar .bar-hw-ram-box button label {
   font-family: "Material Symbols Outlined";
 }
 .Bar .bar-hw-ram-box circularprogress progress {
-  color: rgb(142.82, 157.48, 164.14);
+  color: rgb(106.92, 157.14, 212.5);
 }
 .Bar .bar-hw-ram-box button label {
   margin: 1px 0px 0px 2px;
@@ -240,17 +240,17 @@ popover modelbutton:only-child {
   margin-left: 0.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(142.82, 157.48, 164.14);
+  color: rgb(106.92, 157.14, 212.5);
   min-width: 2.3rem;
 }
 .Bar .bar-hw-cpu-box circularprogress radius {
-  color: rgba(18, 19, 20, 0.5);
+  color: rgba(14, 20, 28, 0.5);
 }
 .Bar .bar-hw-cpu-box button label {
   font-family: "Material Symbols Outlined";
 }
 .Bar .bar-hw-cpu-box circularprogress progress {
-  color: rgb(136.16, 158.48, 168.8);
+  color: rgb(151.48, 149.82, 202.76);
 }
 .Bar .bar-hw-cpu-box button label {
   margin: 1px 0px 0px 1px;
@@ -263,11 +263,11 @@ popover modelbutton:only-child {
   -gtk-icon-size: 1.1rem;
 }
 .Bar .system-menu-toggler.active box {
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
 }
 .Bar .separator {
   font-size: 1.8rem;
-  color: rgb(145, 144, 145);
+  color: rgb(139, 145, 156);
 }
 .Bar .clock {
   margin: 0 1.2rem 0 0.4rem;
@@ -279,21 +279,21 @@ popover modelbutton:only-child {
 /* variables & mixins */
 /* general styles */
 box.applauncher {
-  box-shadow: 0 3px 5px 1px rgba(18, 19, 20, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 28, 0.1);
   border-radius: 16px;
-  background: rgba(18, 19, 20, 0.5);
+  background: rgba(14, 20, 28, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background-color: rgba(18, 19, 20, 0.7);
+  background: rgba(52, 57, 67, 0.4);
 }
 box.applauncher box.search {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
   margin: 1rem 0.5rem 1rem 0.5rem;
-  background-color: rgba(105.5, 119.8, 126.4, 0.4);
+  background-color: rgba(63.3, 118.8, 167.5, 0.4);
 }
 box.applauncher box.search image {
   -gtk-icon-size: 2rem;
@@ -304,16 +304,16 @@ box.applauncher box.search entry {
   margin: 0.3rem;
 }
 box.applauncher box.search entry menu {
-  background: rgb(18, 19, 20);
+  background: rgb(14, 20, 28);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 box.applauncher box.search entry menu separator {
-  background-color: rgba(56, 57, 58, 0.4);
+  background-color: rgba(52, 57, 67, 0.4);
 }
 box.applauncher box.search entry menu menuitem {
   transition: 200ms;
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
   border-radius: 0;
@@ -322,7 +322,7 @@ box.applauncher box.search entry menu menuitem {
 box.applauncher box.search entry menu menuitem:hover, box.applauncher box.search entry menu menuitem:focus {
   /* would prefer to handle this with transparency, 
   but that currently glitches on Hyprland */
-  background: rgba(106.1052631579, 108, 109.8947368421, 0.4);
+  background: rgba(96.5714285714, 105.8571428571, 124.4285714286, 0.4);
 }
 box.applauncher box.search entry menu menuitem:first-child {
   border-radius: 8px 8px 0 0;
@@ -335,7 +335,7 @@ box.applauncher box.search entry menu menuitem:only-child {
 }
 box.applauncher box.apps {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
@@ -353,52 +353,52 @@ box.applauncher box.apps button label.name {
   font-size: 1.1rem;
 }
 box.applauncher box.apps button label.description {
-  color: rgba(227, 226, 226, 0.8);
+  color: rgba(221, 226, 238, 0.8);
 }
 box.applauncher box.apps button:hover, box.applauncher box.apps button:focus {
   transition: 200ms;
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
 }
 box.applauncher box.apps button:hover:hover, box.applauncher box.apps button:hover:focus, box.applauncher box.apps button:focus:hover, box.applauncher box.apps button:focus:focus {
   /* would prefer to handle this with transparency, 
   but that currently glitches on Hyprland */
-  background: rgba(106.1052631579, 108, 109.8947368421, 0.4);
+  background: rgba(96.5714285714, 105.8571428571, 124.4285714286, 0.4);
 }
 box.applauncher box.not-found {
   padding: 1rem;
 }
 box.applauncher box.not-found image {
   -gtk-icon-size: 6rem;
-  color: rgba(227, 226, 226, 0.7);
+  color: rgba(221, 226, 238, 0.7);
 }
 box.applauncher box.not-found label {
-  color: rgba(227, 226, 226, 0.9);
+  color: rgba(221, 226, 238, 0.9);
   font-size: 1.2em;
 }
 
 /* variables & mixins */
 /* general styles */
 box.logout-background {
-  background-color: rgba(18, 19, 20, 0.5);
+  background-color: rgba(14, 20, 28, 0.5);
 }
 box.logout-background .logout-menu {
-  box-shadow: 0 3px 5px 1px rgba(18, 19, 20, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 28, 0.1);
   border-radius: 16px;
-  background: rgba(18, 19, 20, 0.5);
+  background: rgba(14, 20, 28, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
-  background-color: rgba(18, 19, 20, 0.7);
+  background-color: rgba(14, 20, 28, 0.7);
 }
 box.logout-background .logout-menu button {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
   transition: 200ms;
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
   margin: 1rem;
@@ -406,7 +406,7 @@ box.logout-background .logout-menu button {
 box.logout-background .logout-menu button:hover, box.logout-background .logout-menu button:focus {
   /* would prefer to handle this with transparency, 
   but that currently glitches on Hyprland */
-  background: rgba(106.1052631579, 108, 109.8947368421, 0.4);
+  background: rgba(96.5714285714, 105.8571428571, 124.4285714286, 0.4);
 }
 box.logout-background .logout-menu button label {
   font-family: "Material Symbols Outlined";
@@ -417,9 +417,9 @@ box.logout-background .logout-menu button label {
 /* variables & mixins */
 /* general styles */
 .music.window {
-  box-shadow: 0 3px 5px 1px rgba(18, 19, 20, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 28, 0.1);
   border-radius: 16px;
-  background: rgba(18, 19, 20, 0.5);
+  background: rgba(14, 20, 28, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   background: none;
@@ -430,7 +430,7 @@ box.logout-background .logout-menu button label {
   background-position: center;
   background-size: cover;
   border-radius: 8px;
-  box-shadow: 0 1px 2px -1px rgba(18, 19, 20, 0.5);
+  box-shadow: 0 1px 2px -1px rgba(14, 20, 28, 0.5);
   margin: 0.4rem;
   min-height: 13rem;
   min-width: 13rem;
@@ -484,7 +484,7 @@ box.logout-background .logout-menu button label {
   margin: 5px 5px 5px 10px;
   min-width: 20rem;
   border-radius: 16px;
-  background-color: rgba(18, 19, 20, 0.5);
+  background-color: rgba(14, 20, 28, 0.5);
   border: 1px solid transparent;
   padding: 0.25rem 0.75rem;
 }
@@ -494,15 +494,15 @@ box.logout-background .logout-menu button label {
 .notification .header .app-name {
   font-size: 0.9rem;
   font-weight: bold;
-  color: rgba(227, 226, 226, 0.7);
+  color: rgba(221, 226, 238, 0.7);
 }
 .notification .header .time {
   font-size: 0.9rem;
   font-weight: bold;
-  color: rgba(227, 226, 226, 0.7);
+  color: rgba(221, 226, 238, 0.7);
 }
 .notification separator {
-  background-color: rgba(227, 226, 226, 0.5);
+  background-color: rgba(221, 226, 238, 0.5);
   min-height: 1px;
 }
 .notification .content {
@@ -526,12 +526,12 @@ box.logout-background .logout-menu button label {
   margin-right: 0.5rem;
   font-size: 1.1rem;
   font-weight: 500;
-  color: rgb(227, 226, 226);
+  color: rgb(221, 226, 238);
 }
 .notification .content .body {
   margin-right: 0.5rem;
   font-size: 0.95rem;
-  color: rgba(227, 226, 226, 0.8);
+  color: rgba(221, 226, 238, 0.8);
   margin-top: 0.75rem;
 }
 .notification .actions {
@@ -539,7 +539,7 @@ box.logout-background .logout-menu button label {
 }
 .notification .actions .action-button {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
@@ -548,15 +548,15 @@ box.logout-background .logout-menu button label {
   font-size: 0.9rem;
 }
 .notification .actions .action-button:hover {
-  background: #38393a;
+  background: #343943;
 }
 
 /* variables & mixins */
 /* general styles */
 .osd {
-  box-shadow: 0 3px 5px 1px rgba(18, 19, 20, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 28, 0.1);
   border-radius: 16px;
-  background: rgba(18, 19, 20, 0.5);
+  background: rgba(14, 20, 28, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   border-radius: 3rem;
@@ -582,7 +582,7 @@ box.logout-background .logout-menu button label {
 }
 .osd levelbar block.filled {
   border-radius: 1.5rem;
-  background-color: rgb(227, 226, 226);
+  background-color: rgb(221, 226, 238);
 }
 
 /* variables & mixins */
@@ -590,9 +590,9 @@ box.logout-background .logout-menu button label {
 /* general */
 .system-menu {
   -gtk-icon-size: 1.1rem;
-  box-shadow: 0 3px 5px 1px rgba(18, 19, 20, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 28, 0.1);
   border-radius: 16px;
-  background: rgba(18, 19, 20, 0.5);
+  background: rgba(14, 20, 28, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   margin-top: 0.7rem;
@@ -600,7 +600,7 @@ box.logout-background .logout-menu button label {
 }
 .system-menu > box {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
@@ -647,13 +647,13 @@ box.logout-background .logout-menu button label {
 }
 .system-menu .sliders block filled {
   border-radius: 1.5rem;
-  background-color: rgb(227, 226, 226);
+  background-color: rgb(221, 226, 238);
 }
 
 .network-list {
-  box-shadow: 0 3px 5px 1px rgba(18, 19, 20, 0.1);
+  box-shadow: 0 3px 5px 1px rgba(14, 20, 28, 0.1);
   border-radius: 16px;
-  background: rgba(18, 19, 20, 0.5);
+  background: rgba(14, 20, 28, 0.5);
   margin: 5px 10px 15px;
   padding: 0.4rem;
   margin: 0.3rem;
@@ -661,7 +661,7 @@ box.logout-background .logout-menu button label {
 
 .network-item {
   transition: 200ms;
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
   border-radius: calc(16px - 0.4rem - 2px);
@@ -673,12 +673,12 @@ box.logout-background .logout-menu button label {
 .network-item:hover, .network-item:focus {
   /* would prefer to handle this with transparency, 
   but that currently glitches on Hyprland */
-  background: rgba(106.1052631579, 108, 109.8947368421, 0.4);
+  background: rgba(96.5714285714, 105.8571428571, 124.4285714286, 0.4);
 }
 
 .password-dialog {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
@@ -699,7 +699,7 @@ box.logout-background .logout-menu button label {
 .disconnect-button,
 .settings-button {
   transition: 200ms;
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
   margin: 0.3rem;
@@ -711,7 +711,7 @@ box.logout-background .logout-menu button label {
 .settings-button:focus {
   /* would prefer to handle this with transparency, 
   but that currently glitches on Hyprland */
-  background: rgba(106.1052631579, 108, 109.8947368421, 0.4);
+  background: rgba(96.5714285714, 105.8571428571, 124.4285714286, 0.4);
 }
 
 .disconnect-button {
@@ -721,7 +721,7 @@ box.logout-background .logout-menu button label {
 .connect-button,
 .cancel-button {
   transition: 200ms;
-  background: rgb(53, 74, 83);
+  background: rgb(86.0893854749, 84.8044692737, 145.1955307263);
   border-radius: 5rem;
   padding: 0.4rem;
   margin: 0.2rem 0.5rem;
@@ -729,7 +729,7 @@ box.logout-background .logout-menu button label {
 }
 .connect-button:hover,
 .cancel-button:hover {
-  background: rgb(23.1875, 32.375, 36.3125);
+  background: rgb(57.4553072626, 56.5977653631, 96.9022346369);
 }
 
 image {
@@ -738,23 +738,23 @@ image {
 
 .password-search {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
-  background: rgba(18, 19, 20, 0.5);
+  background: rgba(14, 20, 28, 0.5);
 }
 .password-search entry menu {
-  background: rgb(18, 19, 20);
+  background: rgb(14, 20, 28);
   border-radius: 8px;
   font-size: 1.1rem;
 }
 .password-search entry menu separator {
-  background-color: rgba(56, 57, 58, 0.4);
+  background-color: rgba(52, 57, 67, 0.4);
 }
 .password-search entry menu menuitem {
   transition: 200ms;
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   border-radius: 5rem;
   padding: 0.4rem;
   border-radius: 0;
@@ -763,7 +763,7 @@ image {
 .password-search entry menu menuitem:hover, .password-search entry menu menuitem:focus {
   /* would prefer to handle this with transparency, 
   but that currently glitches on Hyprland */
-  background: rgba(106.1052631579, 108, 109.8947368421, 0.4);
+  background: rgba(96.5714285714, 105.8571428571, 124.4285714286, 0.4);
 }
 .password-search entry menu menuitem:first-child {
   border-radius: 8px 8px 0 0;
@@ -782,7 +782,7 @@ image {
 
 .saved-network {
   border-radius: calc(16px - 0.4rem - 2px);
-  background: rgba(56, 57, 58, 0.4);
+  background: rgba(52, 57, 67, 0.4);
   box-shadow: 0 1px 5px -5px rgba(0, 0, 0, 0.5);
   margin: 0.4rem;
   padding: 0.4rem;
@@ -792,13 +792,13 @@ image {
 }
 .saved-network .forget-button {
   transition: 200ms;
-  background: rgb(53, 74, 83);
+  background: rgb(86.0893854749, 84.8044692737, 145.1955307263);
   border-radius: 5rem;
   padding: 0.4rem;
   margin: 0.5rem;
 }
 .saved-network .forget-button:hover {
-  background: rgb(23.1875, 32.375, 36.3125);
+  background: rgb(57.4553072626, 56.5977653631, 96.9022346369);
 }
 
 /*# sourceMappingURL=style.css.map */

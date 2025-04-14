@@ -4,7 +4,7 @@
 
 box.applauncher {
   @include window;
-  background-color: color.adjust($background, $alpha: -0.3);
+  background: $buttonDisabled;
 
   box.search {
     @include window-box;
