@@ -95,6 +95,9 @@
       border-radius: $round2;
       margin: 0.4rem;
       font-size: $font;
+      cava {
+        opacity: 0.3;
+      }
     }
 
     &.active > box {
@@ -102,9 +105,10 @@
     }
 
     .cover {
+      @include border;
       background-size: cover;
       background-position: center;
-      border-radius: 100%;
+      border-radius: 50%;
       min-width: 2.5rem;
       min-height: 2rem;
       margin: 0.1rem 0.4rem;
