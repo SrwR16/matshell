@@ -1,6 +1,5 @@
 import { Gtk } from "astal/gtk4";
 import Gsk from "gi://Gsk";
-import Graphene from "gi://Graphene";
 
 // Define a Point interface for type safety
 interface Point {
@@ -88,100 +87,5 @@ export function drawCircular(
 
   snapshot.append_fill(pathBuilder.to_path(), Gsk.FillRule.WINDING, color);
 
-  // More intensity with multiple pulsing inner circles
-  drawInnerElements(snapshot, centerX, centerY, maxRadius, avgIntensity, color);
-
-  // Radiating lines for more dynamic effect
-  drawRadiatingLines(
-    snapshot,
-    centerX,
-    centerY,
-    maxRadius,
-    values,
-    bars,
-    color,
-  );
-
   widget.queue_draw();
-}
-
-// Inner circles that pulse with the music
-function drawInnerElements(
-  snapshot: Gtk.Snapshot,
-  centerX: number,
-  centerY: number,
-  maxRadius: number,
-  intensity: number,
-  color: any,
-) {
-  // Pulsing center circle - size changes with audio intensity
-  const innerCircleRadius = maxRadius * (0.08 + intensity * 0.12);
-  const innerCircleBuilder = new Gsk.PathBuilder();
-  innerCircleBuilder.add_circle(
-    new Graphene.Point().init(centerX, centerY),
-    innerCircleRadius,
-  );
-  snapshot.append_fill(
-    innerCircleBuilder.to_path(),
-    Gsk.FillRule.WINDING,
-    color,
-  );
-
-  // Add a semi-transparent outer ring
-  const outerRingBuilder = new Gsk.PathBuilder();
-  const ringRadius = maxRadius * (0.15 + intensity * 0.15);
-  outerRingBuilder.add_circle(
-    new Graphene.Point().init(centerX, centerY),
-    ringRadius,
-  );
-
-  // Color with transparency
-  const ringColor = color.copy();
-  ringColor.alpha = 0.3;
-  snapshot.append_stroke(
-    outerRingBuilder.to_path(),
-    ringColor,
-    maxRadius * 0.01,
-    new Gsk.StrokeOptions(),
-  );
-}
-
-// Radiating lines that respond to individual frequency bands
-function drawRadiatingLines(
-  snapshot: Gtk.Snapshot,
-  centerX: number,
-  centerY: number,
-  maxRadius: number,
-  values: number[],
-  bars: number,
-  color: any,
-) {
-  // Only draw lines for some bars to avoid overcrowding
-  const lineBuilder = new Gsk.PathBuilder();
-  const lineInterval = Math.max(1, Math.floor(bars / 16)); // Up to 16 lines
-
-  for (let i = 0; i < bars && i < values.length; i += lineInterval) {
-    const angle = (i / bars) * Math.PI * 2;
-
-    // Line length varies with audio intensity
-    const lineLength = maxRadius * (0.4 + values[i] * 0.6);
-
-    const startX = centerX + Math.cos(angle) * (maxRadius * 0.2);
-    const startY = centerY + Math.sin(angle) * (maxRadius * 0.2);
-    const endX = centerX + Math.cos(angle) * lineLength;
-    const endY = centerY + Math.sin(angle) * lineLength;
-
-    lineBuilder.move_to(startX, startY);
-    lineBuilder.line_to(endX, endY);
-  }
-
-  // Semi-transparent
-  const lineColor = color.copy();
-  lineColor.alpha = 0.5;
-  snapshot.append_stroke(
-    lineBuilder.to_path(),
-    lineColor,
-    maxRadius * 0.005, // Thin lines
-    new Gsk.StrokeOptions(),
-  );
 }
