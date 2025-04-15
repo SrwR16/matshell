@@ -19,7 +19,7 @@ export function drawJumpingBars(
 
   const now = GLib.get_monotonic_time() / 1000000;
   const deltaTime =
-    state.lastUpdate === 0 ? 0.016 : Math.min(0.1, now - state.lastUpdate); // Limit deltaTime
+    state.lastUpdate === 0 ? 0.016 : Math.min(0.1, now - state.lastUpdate);
   state.lastUpdate = now;
 
   // Initialize arrays if needed
@@ -56,13 +56,13 @@ export function drawJumpingBars(
     // Update position with velocity
     state.barHeights[i] += state.barVelocities[i] * deltaTime;
 
-    // Apply gravity and damping
+    // Apply gravity
     state.barVelocities[i] -= GRAVITY * deltaTime;
 
     // Ceiling constraint with bounce
     if (state.barHeights[i] > height) {
       state.barHeights[i] = height;
-      state.barVelocities[i] *= BOUNCE_FACTOR; // Bounce with damping
+      state.barVelocities[i] *= BOUNCE_FACTOR;
     }
 
     // Draw the bar
