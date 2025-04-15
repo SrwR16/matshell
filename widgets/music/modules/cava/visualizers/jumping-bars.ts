@@ -18,7 +18,8 @@ export function drawJumpingBars(
   if (bars === 0 || values.length === 0) return;
 
   const now = GLib.get_monotonic_time() / 1000000;
-  const deltaTime = state.lastUpdate === 0 ? 0.016 : now - state.lastUpdate;
+  const deltaTime =
+    state.lastUpdate === 0 ? 0.016 : Math.min(0.1, now - state.lastUpdate); // Limit deltaTime
   state.lastUpdate = now;
 
   // Initialize arrays if needed
@@ -31,34 +32,37 @@ export function drawJumpingBars(
   const barWidth = (width - spacing * (bars - 1)) / bars;
   const pathBuilder = new Gsk.PathBuilder();
 
+  // Physics constants
+  const JUMP_MULTIPLIER = 3.5;
+  const MAX_VELOCITY = height * 3;
+  const GRAVITY = 900;
+  const BOUNCE_FACTOR = -0.3;
+
   // Update and draw each bar
   for (let i = 0; i < bars && i < values.length; i++) {
-    const targetHeight = values[i] * height;
+    const targetHeight = Math.min(height, values[i] * height);
 
     // Jump up when audio increases
     if (targetHeight > state.barHeights[i]) {
-      state.barVelocities[i] = Math.max(
-        state.barVelocities[i],
-        (targetHeight - state.barHeights[i]) * 5,
+      state.barVelocities[i] = Math.min(
+        MAX_VELOCITY,
+        Math.max(
+          state.barVelocities[i],
+          (targetHeight - state.barHeights[i]) * JUMP_MULTIPLIER,
+        ),
       );
     }
 
     // Update position with velocity
     state.barHeights[i] += state.barVelocities[i] * deltaTime;
 
-    // Apply gravity
-    state.barVelocities[i] -= 900 * deltaTime;
-
-    // Floor constraint
-    if (state.barHeights[i] < 0) {
-      state.barHeights[i] = 0;
-      state.barVelocities[i] = 0;
-    }
+    // Apply gravity and damping
+    state.barVelocities[i] -= GRAVITY * deltaTime;
 
     // Ceiling constraint with bounce
     if (state.barHeights[i] > height) {
       state.barHeights[i] = height;
-      state.barVelocities[i] *= -0.5; // Bounce with damping
+      state.barVelocities[i] *= BOUNCE_FACTOR; // Bounce with damping
     }
 
     // Draw the bar
