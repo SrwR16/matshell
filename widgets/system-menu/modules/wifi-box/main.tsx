@@ -54,11 +54,22 @@ export const WiFiBox = () => {
             }
           }}
         >
-          <box hexpand={true} halign={Gtk.Align.START}>
+          <box hexpand={true}>
             <label
+              hexpand={true}
+              xalign={0}
               label={bind(network.wifi, "ssid").as(
                 (ssid) =>
                   ssid || (network.wifi.enabled ? "Not Connected" : "WiFi Off"),
+              )}
+            />
+            <image
+              iconName="pan-end-symbolic"
+              halign={Gtk.Align.END}
+              cssClasses={bind(isExpanded).as((expanded) =>
+                expanded
+                  ? ["arrow-indicator", "arrow-down"]
+                  : ["arrow-indicator"],
               )}
             />
           </box>

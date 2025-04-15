@@ -1,7 +1,7 @@
 import { execAsync, GLib } from "astal";
 import {
   initializeConfig,
-  createOption,
+  defineOption, // Renamed for clarity
   ConfigValue,
   saveConfig,
 } from "./utils/option";
@@ -14,42 +14,25 @@ const options = await (async () => {
   const config = initializeConfig(
     `${GLib.get_user_config_dir()}/ags/config.json`,
     {
-      wallpaper: {
-        folder: createOption<ConfigValue>(GLib.get_home_dir(), {
-          useCache: true,
-        }),
-        current: createOption<ConfigValue>(currentWallpaper, {
-          useCache: true,
-        }),
-      },
-      bar: {
-        position: createOption<ConfigValue>("top"), // "top", "bottom"
-        margins: {
-          top: createOption<ConfigValue>(5),
-          left: createOption<ConfigValue>(5),
-          right: createOption<ConfigValue>(5),
-          bottom: createOption<ConfigValue>(0),
-        },
-        modules: {
-          cava: {
-            show: createOption<ConfigValue>(false),
-            /* "catmull_rom", "smooth", "rounded", "bars","jumping_bars",
-            "dots", "circular", "particles", "wave_particles","waterfall", "mesh" */
-            style: createOption<ConfigValue>("catmull_rom"),
-          },
-          showOsIcon: createOption<ConfigValue>(true),
-        },
-      },
-      musicPlayer: {
-        modules: {
-          cava: {
-            show: createOption<ConfigValue>(true),
-            /* "catmull_rom", "smooth", "rounded", "bars","jumping_bars",
-            "dots", "circular", "particles", "wave_particles","waterfall", "mesh" */
-            style: createOption<ConfigValue>("catmull_rom"),
-          },
-        },
-      },
+      "wallpaper.folder": defineOption<ConfigValue>(GLib.get_home_dir(), {
+        useCache: true,
+      }),
+      "wallpaper.current": defineOption<ConfigValue>(currentWallpaper, {
+        useCache: true,
+      }),
+      "bar.position": defineOption<ConfigValue>("top"), // "top", "bottom"
+      "bar.margins.top": defineOption<ConfigValue>(5),
+      "bar.margins.left": defineOption<ConfigValue>(5),
+      "bar.margins.right": defineOption<ConfigValue>(5),
+      "bar.margins.bottom": defineOption<ConfigValue>(0),
+      "bar.modules.cava.show": defineOption<ConfigValue>(false),
+      /* "catmull_rom", "smooth", "rounded", "bars","jumping_bars",
+      "dots", "circular", "particles", "wave_particles","waterfall", "mesh" */
+      "bar.modules.cava.style": defineOption<ConfigValue>("catmull_rom"),
+      "bar.modules.showOsIcon": defineOption<ConfigValue>(true),
+      "musicPlayer.modules.cava.show": defineOption<ConfigValue>(true),
+      "musicPlayer.modules.cava.style":
+        defineOption<ConfigValue>("catmull_rom"),
     },
   );
 

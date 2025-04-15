@@ -39,24 +39,27 @@ function Bar({ gdkmonitor, ...props }: any) {
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       application={App}
-      anchor={getAnchor(options.bar.position.get())}
-      margin_top={bind(options.bar.margins.top)}
-      margin_left={bind(options.bar.margins.left)}
-      margin_right={bind(options.bar.margins.right)}
-      margin_bottom={bind(options.bar.margins.bottom)}
+      anchor={getAnchor(options["bar.position"].value)}
+      margin_top={bind(options["bar.margins.top"])}
+      margin_left={bind(options["bar.margins.left"])}
+      margin_right={bind(options["bar.margins.right"])}
+      margin_bottom={bind(options["bar.margins.bottom"])}
       {...props}
     >
       <overlay>
-        <box type="overlay clip" visible={bind(options.bar.modules.cava.show)}>
+        <box
+          type="overlay clip"
+          visible={bind(options["bar.modules.cava.show"])}
+        >
           <CavaDraw
             vexpand
             hexpand
-            style={bind(options.bar.modules.cava.style)}
+            style={bind(options["bar.modules.cava.style"])}
           />
         </box>
         <centerbox type="overlay measure">
           <box hexpand halign={Gtk.Align.START}>
-            <box visible={bind(options.bar.modules.showOsIcon)}>
+            <box visible={bind(options["bar.modules.showOsIcon"])}>
               <OsIcon />
             </box>
             <Workspaces />
@@ -91,7 +94,7 @@ export default function (monitor: Gdk.Monitor) {
   // Create the initial bar
   createBar();
 
-  options.bar.position.subscribe(() => {
+  options["bar.position"].subscribe(() => {
     console.log("Position changed, recreating bar");
     const barWindow = App.get_window("bar");
     if (barWindow) {
