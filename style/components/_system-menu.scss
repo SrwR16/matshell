@@ -66,6 +66,14 @@
 
 .wifi-menu {
 }
+.arrow-indicator {
+  @include animate;
+}
+
+.arrow-down {
+  @include animate;
+  transform: rotate(90deg);
+}
 .network-list {
   @include window;
   margin: 0.3rem;
