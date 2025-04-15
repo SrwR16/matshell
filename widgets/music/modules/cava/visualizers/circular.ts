@@ -21,7 +21,7 @@ export function drawCircular(
 
   const centerX = width / 2;
   const centerY = height / 2;
-  const maxRadius = (Math.min(width, height) / 2) * 0.95; // Use more space
+  const maxRadius = (Math.min(width, height) / 2) * 2.5;
 
   // Path for the outer shape
   const pathBuilder = new Gsk.PathBuilder();

@@ -1,16 +1,31 @@
 import { App, Gtk } from "astal/gtk4";
 import Mpris from "gi://AstalMpris";
 import { Variable, bind } from "astal";
+import { CavaDraw, CavaStyle } from "widgets/music/modules/cava";
+import options from "options.ts";
 
 const mpris = Mpris.get_default();
 
 function Cover({ player }) {
   return (
-    <image
-      cssClasses={["cover"]}
-      overflow={Gtk.Overflow.HIDDEN}
-      file={bind(player, "coverArt")}
-    />
+    <overlay>
+      <box
+        type={"overlay"}
+        visible={bind(options["bar.modules.media.cava.show"])}
+      >
+        <CavaDraw
+          vexpand
+          hexpand
+          style={bind(options["bar.modules.media.cava.style"])}
+        />
+      </box>
+      <image
+        type = {"overlay measure"}
+        cssClasses={["cover"]}
+        overflow={Gtk.Overflow.HIDDEN}
+        file={bind(player, "coverArt")}
+      />
+    </overlay>
   );
 }
 
