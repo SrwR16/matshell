@@ -1,4 +1,4 @@
-export { TimeState, calculateTimeDelta } from "./animation.ts";
+export { calculateTimeDelta } from "./animation.ts";
 export { fillPath, createColorWithOpacity } from "./rendering.ts";
 export {
   Point,
