@@ -105,7 +105,6 @@
     }
 
     .cover {
-      @include border;
       background-size: cover;
       background-position: center;
       border-radius: 50%;
