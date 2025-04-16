@@ -1,8 +1,5 @@
 import { GLib } from "astal";
-
-export interface TimeState {
-  lastUpdate: number;
-}
+import { TimeState } from "./types.ts";
 
 export function calculateTimeDelta(state: TimeState): number {
   const now = GLib.get_monotonic_time() / 1000000;

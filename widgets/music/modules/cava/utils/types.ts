@@ -1,4 +1,4 @@
-export interface BaseState {
+export interface TimeState {
   lastUpdate: number;
 }
 
@@ -7,7 +7,7 @@ export interface Point {
   y: number;
 }
 
-export interface ParticleState extends BaseState {
+export interface ParticleState extends TimeState {
   particles: Array<{
     x: number;
     y: number;
@@ -22,7 +22,7 @@ export interface WaterfallState {
   transitionAlpha: number;
 }
 
-export interface JumpingBarsState extends BaseState {
+export interface JumpingBarsState extends TimeState {
   barHeights: number[];
   barVelocities: number[];
 }
