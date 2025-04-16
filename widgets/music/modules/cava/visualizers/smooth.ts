@@ -1,5 +1,6 @@
 import { Gtk } from "astal/gtk4";
 import Gsk from "gi://Gsk";
+import { shouldVisualize, getVisualizerDimensions, fillPath } from "../utils";
 
 export function drawSmooth(
   widget: any,
@@ -7,11 +8,9 @@ export function drawSmooth(
   values: number[],
   bars: number,
 ) {
-  const width = widget.get_width();
-  const height = widget.get_height();
-  const color = widget.get_color();
+  const { width, height, color } = getVisualizerDimensions(widget);
 
-  if (bars === 0 || values.length === 0) return;
+  if (!shouldVisualize(bars, values)) return;
 
   const pathBuilder = new Gsk.PathBuilder();
   let lastX = 0;
@@ -37,11 +36,9 @@ export function drawSmooth(
     lastY = y;
   }
 
-  // Close the path by drawing lines to the bottom
   pathBuilder.line_to(lastX, height);
   pathBuilder.line_to(0, height);
   pathBuilder.close();
 
-  // Fill the path with the color
-  snapshot.append_fill(pathBuilder.to_path(), Gsk.FillRule.WINDING, color);
+  fillPath(snapshot, pathBuilder, color);
 }

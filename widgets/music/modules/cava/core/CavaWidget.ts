@@ -8,7 +8,6 @@ import {
   // Simple visualizers
   drawCatmullRom,
   drawSmooth,
-  drawRounded,
   drawBars,
   drawDots,
   drawCircular,
@@ -16,16 +15,18 @@ import {
 
   // Stateful visualizers
   drawJumpingBars,
-  createJumpingBarsState,
-  JumpingBarsState,
   drawParticles,
   drawWaveParticles,
+  drawWaterfall,
+} from "../visualizers";
+import {
+  createJumpingBarsState,
+  JumpingBarsState,
   createParticleState,
   ParticleState,
-  drawWaterfall,
   createWaterfallState,
   WaterfallState,
-} from "../visualizers";
+} from "../utils";
 
 export const CavaWidget = GObject.registerClass(
   {
@@ -94,9 +95,6 @@ export const CavaWidget = GObject.registerClass(
         case CavaStyle.CATMULL_ROM:
           drawCatmullRom(this, snapshot, values, bars);
           break;
-        case CavaStyle.ROUNDED:
-          drawRounded(this, snapshot, values, bars);
-          break;
         case CavaStyle.BARS:
           drawBars(this, snapshot, values, bars);
           break;
@@ -144,9 +142,6 @@ export const CavaWidget = GObject.registerClass(
                 break;
               case "smooth":
                 this._style = CavaStyle.SMOOTH;
-                break;
-              case "rounded":
-                this._style = CavaStyle.ROUNDED;
                 break;
               case "bars":
                 this._style = CavaStyle.BARS;

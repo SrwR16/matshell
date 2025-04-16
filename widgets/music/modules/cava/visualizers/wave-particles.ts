@@ -1,8 +1,14 @@
 import { Gtk } from "astal/gtk4";
 import Gsk from "gi://Gsk";
-import { GLib } from "astal";
 import Graphene from "gi://Graphene";
-import { ParticleState } from "./particles-base";
+import {
+  ParticleState,
+  Point,
+  shouldVisualize,
+  getVisualizerDimensions,
+  calculateTimeDelta,
+  fillPath,
+} from "../utils";
 
 export function drawWaveParticles(
   widget: any,
@@ -11,18 +17,12 @@ export function drawWaveParticles(
   bars: number,
   state: ParticleState,
 ) {
-  const width = widget.get_width();
-  const height = widget.get_height();
-  const color = widget.get_color();
+  const { width, height, color } = getVisualizerDimensions(widget);
 
-  if (bars === 0 || values.length === 0) return;
+  if (!shouldVisualize(bars, values)) return;
 
-  // Timing
-  const now = GLib.get_monotonic_time() / 1000000;
-  const deltaTime = state.lastUpdate === 0 ? 0.016 : now - state.lastUpdate;
-  state.lastUpdate = now;
+  const deltaTime = calculateTimeDelta(state);
 
-  // First draw the wave and generate particles along it
   drawWaveAndGenerateParticles(
     state,
     snapshot,
@@ -32,18 +32,12 @@ export function drawWaveParticles(
     height,
     color,
   );
-
-  // Now update existing particles (but using custom update for wave particles)
   updateWaveParticles(state, deltaTime);
-
-  // Draw all particles
   drawParticleShapes(state, snapshot, color);
 
-  // Request next frame for animation
   widget.queue_draw();
 }
 
-// Draw the wave and generate particles along the curve
 function drawWaveAndGenerateParticles(
   state: ParticleState,
   snapshot: Gtk.Snapshot,
@@ -58,11 +52,9 @@ function drawWaveAndGenerateParticles(
 
   const barWidth = width / (bars - 1);
 
-  // Draw a smooth curve through all points
   for (let i = 0; i <= bars - 2 && i + 1 < values.length; i++) {
-    let p0, p1, p2, p3;
+    let p0: Point, p1: Point, p2: Point, p3: Point;
 
-    // Set up the four points needed for Catmull-Rom spline
     if (i === 0) {
       p0 = { x: i * barWidth, y: height - height * values[i] };
       p3 = {
@@ -83,25 +75,23 @@ function drawWaveAndGenerateParticles(
     p1 = { x: i * barWidth, y: height - height * values[i] };
     p2 = { x: (i + 1) * barWidth, y: height - height * values[i + 1] };
 
-    // Calculate control points for the cubic Bezier curve
     const c1 = {
       x: p1.x + (p2.x - p0.x) / 6,
       y: p1.y + (p2.y - p0.y) / 6,
     };
+
     const c2 = {
       x: p2.x - (p3.x - p1.x) / 6,
       y: p2.y - (p3.y - p1.y) / 6,
     };
 
-    // Add the cubic Bezier curve to path
     pathBuilder.cubic_to(c1.x, c1.y, c2.x, c2.y, p2.x, p2.y);
 
-    // Generate particles above the wave line
     if (values[i] > 0.1) {
       const particleCount = Math.ceil(values[i] * 2);
+
       for (let p = 0; p < particleCount; p++) {
-        // Position particles along the curve
-        const t = Math.random(); // Position between this point and next point
+        const t = Math.random();
         const x = p1.x + t * (p2.x - p1.x);
         const y = p1.y + t * (p2.y - p1.y);
 
@@ -115,42 +105,37 @@ function drawWaveAndGenerateParticles(
     }
   }
 
-  // Complete and draw the wave
   pathBuilder.line_to(width, height);
   pathBuilder.line_to(0, height);
   pathBuilder.close();
-  snapshot.append_fill(pathBuilder.to_path(), Gsk.FillRule.WINDING, color);
+
+  fillPath(snapshot, pathBuilder, color);
 }
 
-// Custom update function for wave particles (different physics than base particles)
 function updateWaveParticles(state: ParticleState, deltaTime: number) {
   for (let i = state.particles.length - 1; i >= 0; i--) {
     const particle = state.particles[i];
 
-    // Update particle position (no gravity for wave particles)
     particle.y += particle.velocity * deltaTime;
     particle.life -= deltaTime;
 
-    // Remove dead particles
     if (particle.life <= 0) {
       state.particles.splice(i, 1);
     }
   }
 
-  // Limit particle count
   if (state.particles.length > 300) {
     state.particles.splice(0, state.particles.length - 300);
   }
 }
 
-// Helper function to draw all particles
 function drawParticleShapes(
   state: ParticleState,
   snapshot: Gtk.Snapshot,
   color: any,
 ) {
   const particleBuilder = new Gsk.PathBuilder();
-  const particleSize = 1.5; // Smaller particles for wave visualization
+  const particleSize = 1.5;
 
   for (const particle of state.particles) {
     particleBuilder.add_circle(
@@ -162,5 +147,5 @@ function drawParticleShapes(
     );
   }
 
-  snapshot.append_fill(particleBuilder.to_path(), Gsk.FillRule.WINDING, color);
+  fillPath(snapshot, particleBuilder, color);
 }

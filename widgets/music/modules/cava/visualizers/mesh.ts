@@ -1,6 +1,12 @@
 import { Gtk } from "astal/gtk4";
 import Gsk from "gi://Gsk";
 import Graphene from "gi://Graphene";
+import {
+  shouldVisualize,
+  getVisualizerDimensions,
+  createColorWithOpacity,
+  fillPath,
+} from "../utils";
 
 export function drawMesh(
   widget: any,
@@ -8,13 +14,11 @@ export function drawMesh(
   values: number[],
   bars: number,
 ) {
-  const width = widget.get_width();
-  const height = widget.get_height();
-  const color = widget.get_color();
+  const { width, height, color } = getVisualizerDimensions(widget);
 
-  if (bars === 0 || values.length === 0) return;
+  if (!shouldVisualize(bars, values)) return;
 
-  const rows = 8; // Gird rows
+  const rows = 8;
   const cellWidth = width / bars;
   const cellHeight = height / rows;
 
@@ -23,16 +27,12 @@ export function drawMesh(
     const activeRows = Math.ceil(rows * value);
 
     for (let row = 0; row < activeRows; row++) {
-      const opacity = 1 - (row / rows) * 0.9; // Fade out higher rows
+      const opacity = 1 - (row / rows) * 0.9;
       const cellY = height - (row + 1) * cellHeight;
 
-      // Make copy of the color with the calculated opacity
-      const cellColor = color.copy();
-      cellColor.alpha = opacity;
-
+      const cellColor = createColorWithOpacity(color, opacity);
       const pathBuilder = new Gsk.PathBuilder();
 
-      // Draw cell
       pathBuilder.add_rect(
         new Graphene.Rect().init(
           i * cellWidth + 1,
@@ -42,12 +42,7 @@ export function drawMesh(
         ),
       );
 
-      // Apply the color with appropriate opacity
-      snapshot.append_fill(
-        pathBuilder.to_path(),
-        Gsk.FillRule.WINDING,
-        cellColor,
-      );
+      fillPath(snapshot, pathBuilder, cellColor);
     }
   }
 }

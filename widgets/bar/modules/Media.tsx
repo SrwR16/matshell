@@ -1,7 +1,7 @@
 import { App, Gtk } from "astal/gtk4";
 import Mpris from "gi://AstalMpris";
 import { Variable, bind } from "astal";
-import { CavaDraw, CavaStyle } from "widgets/music/modules/cava";
+import { CavaDraw } from "widgets/music/modules/cava";
 import options from "options.ts";
 
 const mpris = Mpris.get_default();
@@ -20,7 +20,7 @@ function Cover({ player }) {
         />
       </box>
       <image
-        type = {"overlay measure"}
+        type={"overlay measure"}
         cssClasses={["cover"]}
         overflow={Gtk.Overflow.HIDDEN}
         file={bind(player, "coverArt")}
