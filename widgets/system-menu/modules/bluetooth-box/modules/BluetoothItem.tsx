@@ -34,7 +34,6 @@ export const BluetoothItem = ({ device }) => {
         )}
         onClicked={() => {
           itemButtonsRevealed.set(!itemButtonsRevealed.get());
-          // Stop scanning for new devices when clicking on a bluetooth item
         }}
         onDestroy={() => {
           connectionButtonIcon.drop();
