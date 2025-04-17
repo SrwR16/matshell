@@ -82,49 +82,48 @@ export const WiFiBox = () => {
         transitionDuration={300}
         revealChild={bind(isExpanded)}
         setup={() => {
-          bind(isExpanded).subscribe((e) => {
-            if (e) {
+          const clearScanInterval = () => {
+            if (refreshIntervalId.get()) {
+              clearInterval(refreshIntervalId.get());
+              refreshIntervalId.set(null);
+            }
+          };
+          bind(isExpanded).subscribe((expanded) => {
+            // Clear existing interval
+            clearScanInterval();
+
+            if (expanded) {
+              // Scan networks
               network.wifi?.scan();
-              if (network.wifi.enabled) {
-                // Clear any existing interval first to avoid duplicates
-                if (refreshIntervalId.get())
-                  clearInterval(refreshIntervalId.get());
 
-                // Create new interval - refresh every 10 seconds
-                const intervalId = setInterval(() => {
-                  scanNetworks();
-                  getSavedNetworks();
-                  print("updated");
-                }, 10000); // 10 seconds interval
-
-                refreshIntervalId.set(intervalId);
+              // Set up new interval if WiFi is enabled
+              if (network.wifi?.enabled) {
+                refreshIntervalId.set(
+                  setInterval(() => {
+                    scanNetworks();
+                    getSavedNetworks();
+                    print("updated");
+                  }, 10000),
+                );
               }
             } else {
-              // Super cheap fix until the revealer bug is fixed
-              // https://github.com/Aylur/astal/issues/258
+              // Apply revealer bug fix when collapsed
               App.toggle_window("system-menu");
               App.toggle_window("system-menu");
-
-              // Clear interval when collapsed
-              if (refreshIntervalId.get()) {
-                clearInterval(refreshIntervalId.get());
-                refreshIntervalId.set(null);
-              }
             }
           });
+
+          // Monitor window toggling
           const windowListener = App.connect("window-toggled", (_, window) => {
-            if (window.name == "system-menu" && isExpanded.get()) {
-              // Window was closed, make sure to collapse the revealer
+            if (window.name === "system-menu" && isExpanded.get()) {
               isExpanded.set(false);
             }
           });
 
+          // Clean up resources when component is destroyed
           return () => {
-            // Clean up the listener when component is destroyed
             App.disconnect(windowListener);
-            if (refreshIntervalId.get()) {
-              clearInterval(refreshIntervalId.get());
-            }
+            clearScanInterval();
           };
         }}
       >
@@ -156,10 +155,11 @@ export const WiFiBox = () => {
                 <label label="Saved Networks" cssClasses={["section-label"]} />
                 {filteredNetworks.map((ssid) => (
                   <box cssClasses={["saved-network"]}>
-                    <label label={ssid} hexpand={true} />
+                    <label label={ssid} />
+                    <box hexpand={true} />
                     <button
                       label="Forget"
-                      cssClasses={["forget-button"]}
+                      cssClasses={["forget-button", "button"]}
                       onClicked={() => forgetNetwork(ssid)}
                     />
                   </box>

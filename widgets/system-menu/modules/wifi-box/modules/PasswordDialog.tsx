@@ -36,7 +36,7 @@ export const PasswordDialog = () => {
           label={bind(isConnecting).as((c) =>
             c ? "Connecting..." : "Connect",
           )}
-          cssClasses={["connect-button"]}
+          cssClasses={["connect-button", "button"]}
           sensitive={!isConnecting.get()}
           onClicked={() =>
             connectToNetwork(selectedNetwork.get()?.ssid, passwordInput.get())
@@ -46,7 +46,7 @@ export const PasswordDialog = () => {
           label="Cancel"
           halign={Gtk.Align.END}
           hexpand
-          cssClasses={["cancel-button"]}
+          cssClasses={["cancel-button", "button"]}
           onClicked={() => {
             showPasswordDialog.set(false);
             errorMessage.set("");

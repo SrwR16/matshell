@@ -1,3 +1,5 @@
+import Pango from "gi://Pango";
+import { Gtk } from "astal/gtk4";
 import { bind } from "astal";
 import {
   activeNetwork,
@@ -38,13 +40,23 @@ export const NetworkItem = ({ network }) => {
     >
       <box cssClasses={["network-item"]} hexpand>
         <image iconName={network.iconName} />
-        <label label={network.ssid} hexpand />
+        <label
+          label={network.ssid}
+          maxWidthChars={24}
+          ellipsize={Pango.EllipsizeMode.END}
+        />
+        <box hexpand={true} />
         {network.secured && (
-          <image iconName="network-wireless-encrypted-symbolic" />
+          <image
+            halign={Gtk.Align.END}
+            iconName="network-wireless-encrypted-symbolic"
+          />
         )}
-        {isActive.get() && <image iconName="emblem-ok-symbolic" />}
+        {isActive.get() && (
+          <image halign={Gtk.Align.END} iconName="emblem-ok-symbolic" />
+        )}
         {savedNetworks.get().includes(network.ssid) && !isActive.get() && (
-          <image iconName="document-save-symbolic" />
+          <image halign={Gtk.Align.END} iconName="document-save-symbolic" />
         )}
       </box>
     </button>
