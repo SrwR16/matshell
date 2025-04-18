@@ -3,6 +3,7 @@ import { Gtk } from "astal/gtk4";
 import { BluetoothItem } from "./BluetoothItem.tsx";
 import Bluetooth from "gi://AstalBluetooth";
 import { scanDevices, stopScan, isExpanded } from "utils/bluetooth.ts";
+import options from "options.ts";
 
 export const BluetoothDevices = () => {
   const bluetooth = Bluetooth.get_default();
@@ -89,17 +90,23 @@ export const BluetoothDevices = () => {
 
               <box hexpand />
 
-              <button
-                cssClasses={["settings-button"]}
-                halign={Gtk.Align.END}
-                hexpand={false}
-                onClicked={() => {
-                  execAsync("overskride");
-                  isExpanded.set(false);
-                }}
-              >
-                <image iconName={"emblem-system-symbolic"} />
-              </button>
+              {bind(
+                options["system-menu.modules.bluetooth.enableOverskride"],
+              ).as((overskride) =>
+                overskride ? (
+                  <button
+                    cssClasses={["settings-button"]}
+                    halign={Gtk.Align.END}
+                    hexpand={false}
+                    onClicked={() => {
+                      execAsync("overskride");
+                      isExpanded.set(false);
+                    }}
+                  >
+                    <image iconName={"emblem-system-symbolic"} />
+                  </button>
+                ) : "",
+              )}
             </box>
           </>
         );

@@ -21,10 +21,7 @@ const options = await (async () => {
         useCache: true,
       }),
       "bar.position": defineOption<ConfigValue>("top"), // "top", "bottom"
-      "bar.margins.top": defineOption<ConfigValue>(5),
-      "bar.margins.left": defineOption<ConfigValue>(5),
-      "bar.margins.right": defineOption<ConfigValue>(5),
-      "bar.margins.bottom": defineOption<ConfigValue>(0),
+      "bar.style": defineOption<ConfigValue>("full"), // "elements" or "full"
       "bar.modules.cava.show": defineOption<ConfigValue>(false),
       /* "catmull_rom", "smooth", "rounded", "bars","jumping_bars",
       "dots", "circular", "particles", "wave_particles","waterfall", "mesh" */
@@ -35,6 +32,10 @@ const options = await (async () => {
       "musicPlayer.modules.cava.show": defineOption<ConfigValue>(true),
       "musicPlayer.modules.cava.style":
         defineOption<ConfigValue>("catmull_rom"),
+      "system-menu.modules.bluetooth.enableOverskride":
+        defineOption<ConfigValue>(true),
+      "system-menu.modules.wifi.enableGnomeControlCenter":
+        defineOption<ConfigValue>(true),
     },
   );
 

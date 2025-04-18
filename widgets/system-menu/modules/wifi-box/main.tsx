@@ -15,6 +15,7 @@ import {
   isExpanded,
   refreshIntervalId,
 } from "utils/wifi.ts";
+import options from "options.ts";
 
 // Main WiFi Box component
 export const WiFiBox = () => {
@@ -199,23 +200,30 @@ export const WiFiBox = () => {
                 ),
               )}
             </box>
-
             {/* Advanced Settings Button */}
-            <button
-              cssClasses={["settings-button"]}
-              halign={Gtk.Align.END}
-              hexpand={false}
-              onClicked={() => {
-                execAsync([
-                  "sh",
-                  "-c",
-                  "XDG_CURRENT_DESKTOP=GNOME gnome-control-center wifi",
-                ]);
-                isExpanded.set(false);
-              }}
-            >
-              <image iconName={"emblem-system-symbolic"} />
-            </button>
+            {bind(
+              options["system-menu.modules.wifi.enableGnomeControlCenter"],
+            ).as((gcc) =>
+              gcc ? (
+                <button
+                  cssClasses={["settings-button"]}
+                  halign={Gtk.Align.END}
+                  hexpand={false}
+                  onClicked={() => {
+                    execAsync([
+                      "sh",
+                      "-c",
+                      "XDG_CURRENT_DESKTOP=GNOME gnome-control-center wifi",
+                    ]);
+                    isExpanded.set(false);
+                  }}
+                >
+                  <image iconName={"emblem-system-symbolic"} />
+                </button>
+              ) : (
+                ""
+              ),
+            )}
           </box>
         </box>
       </revealer>

@@ -2,12 +2,17 @@
 @use "../abstracts" as *;
 @use "sass:color";
 
+/* Variables for consistent spacing */
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.4rem;
+$spacing-md: 0.75rem;
+
 /* general */
 .system-menu {
   -gtk-icon-size: $font;
   @include window;
-  margin-top: 0.7rem;
-  margin-right: 0.7rem;
+  margin-top: $spacing-md;
+  margin-right: $spacing-md;
 
   & > box {
     @include window-box;
@@ -18,11 +23,11 @@
 .system-menu .toggle {
   min-width: 20rem;
   &:not(:last-child) {
-    margin-bottom: 0.3rem;
+    margin-bottom: $spacing-sm;
   }
 
   button {
-    margin-right: 0.5rem;
+    margin-right: $spacing-sm;
   }
 }
 
@@ -31,32 +36,32 @@
   padding: 0;
 
   .current-profile {
-    padding: 0.3rem;
+    padding: $spacing-sm;
   }
 
   image,
   label {
-    margin: 0.3rem;
+    margin: $spacing-sm;
   }
 
   .profile-options {
     box {
-      padding: 0.3rem;
+      padding: $spacing-sm;
     }
   }
 }
 
 /* sliders */
 .system-menu .sliders {
-  min-height: 0.5rem;
+  min-height: $spacing-sm;
   image {
-    margin: 0.3rem;
+    margin: $spacing-sm;
   }
   trough {
-    margin: 0.5rem 0.5rem;
+    margin: $spacing-sm;
   }
   block {
-    min-height: 0.5rem;
+    min-height: $spacing-sm;
     filled {
       border-radius: 1.5rem;
       background-color: $fg;
@@ -76,55 +81,54 @@
 }
 .network-list {
   @include window;
-  margin: 0.3rem;
+  margin: $spacing-sm;
 }
 
 .network-item {
   @include button;
   @include rounding;
-  margin: 0.1rem 0.3rem;
-  margin-left: 0.8rem;
-  margin-bottom: 0.5rem;
-  padding: 0.7rem;
+  margin: $spacing-xs $spacing-sm $spacing-sm $spacing-md;
+  padding: $spacing-md;
   image {
     &:first-child {
-      margin-right: 0.9rem;
+      margin-right: $spacing-sm;
     }
+  }
+  label {
+    margin: 0 $spacing-sm;
   }
 }
 .network-item-connected {
   @include button-active;
   @include rounding;
-  margin: 0.1rem 0.3rem;
-  margin-left: 0.8rem;
-  margin-bottom: 0.5rem;
-  padding: 0.7rem;
+  margin: $spacing-xs $spacing-sm $spacing-sm $spacing-sm;
+  padding: $spacing-md;
 }
 
 .password-dialog {
   @include window-box;
-  margin-bottom: 12px;
+  margin-bottom: $spacing-md;
 }
 
 .error-message {
   color: $red;
-  margin: 4px 0;
+  margin: $spacing-xs 0;
 }
 
 .section-label {
   font-weight: bold;
-  margin: 8px 0 4px 0;
+  margin: $spacing-sm 0 $spacing-xs 0;
 }
 
 .refresh-button,
 .disconnect-button,
 .settings-button {
   @include button;
-  margin: 0.3rem;
+  margin: $spacing-sm;
 }
 
 .disconnect-button {
-  padding: 0.55rem 0;
+  padding: 0.58rem 0;
 }
 
 .connect-button,
@@ -132,12 +136,12 @@
 .forget-button,
 .pair-button,
 .trust-button {
-  margin: 0.2rem 0.5rem;
-  margin-top: 0.4rem;
-  margin-bottom: 0.4rem;
+  margin: $spacing-sm;
+  margin-top: $spacing-sm;
+  margin-bottom: $spacing-sm;
 }
 image {
-  margin: 0.4rem;
+  margin: $spacing-sm;
 }
 .password-search {
   @include window-box;
@@ -151,7 +155,7 @@ image {
 }
 
 .empty-label {
-  margin: 0.5rem;
+  margin: $spacing-sm;
   color: $red;
 }
 .saved-network {
@@ -161,14 +165,12 @@ image {
     background: color.adjust($buttonDisabled, $alpha: +0.5);
   }
   > label {
-    margin-left: 0.9rem;
+    margin-left: $spacing-sm;
   }
-  margin-right: 0.8rem;
-  margin-left: 0.8rem;
-  padding: 0.3rem;
-  margin-bottom: 0.5rem;
+  margin: $spacing-sm $spacing-md $spacing-sm $spacing-md;
+  padding: $spacing-xs;
 }
 
 .bt-button-container {
-  margin: 0 0.2rem 0.3rem 0.4rem;
+  margin: 0 $spacing-xs $spacing-sm $spacing-sm;
 }

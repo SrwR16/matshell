@@ -1,6 +1,12 @@
 import Mpris from "gi://AstalMpris";
 import GLib from "gi://GLib";
-import { exec } from "astal/process";
+import { exec, bind } from "astal";
+
+const mpris = Mpris.get_default();
+
+export const visibleMpris = bind(mpris, "players").as(
+  (players) => players.length > 0,
+);
 
 export function findPlayer(players: Mpris.Player[]): Mpris.Player | undefined {
   // try to get the first active player

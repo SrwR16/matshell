@@ -1,6 +1,6 @@
 import { App, Gtk } from "astal/gtk4";
 import Mpris from "gi://AstalMpris";
-import { Variable, bind } from "astal";
+import { bind } from "astal";
 import { CavaDraw } from "widgets/music/modules/cava";
 import options from "options.ts";
 
@@ -41,16 +41,12 @@ function Title({ player }) {
 }
 
 function MusicBox({ player }) {
-  const revealPower = Variable(false);
   return (
     <box>
       <box>
         <Cover player={player} />
       </box>
-      <box
-        onHoverEnter={() => revealPower.set(true)}
-        onHoverLeave={() => revealPower.set(false)}
-      >
+      <box>
         <Title player={player} />
       </box>
     </box>
@@ -63,7 +59,6 @@ export default function Media() {
     <button
       cssClasses={["Media"]}
       onClicked={() => App.toggle_window("music-player")}
-      visible={bind(mpris, "players").as((players) => players.length > 0)}
     >
       {bind(mpris, "players").as(
         (players) => players[0] && <MusicBox player={players[0]} />,

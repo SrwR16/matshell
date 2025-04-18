@@ -3,14 +3,12 @@
 @use "sass:color";
 
 /* general */
+/* Base bar styles */
 .Bar {
-  background: $barBg;
   border-radius: calc(#{$round} * 4);
   font-size: $font;
-  box-shadow:
-    inset -2px -2px 3px rgba(0, 0, 0, 0.4),
-    -1px -1px 2px $bg;
 
+  /* Common styles for both modes */
   cava {
     opacity: 0.1;
   }
@@ -191,4 +189,27 @@
   .power-button {
     margin: 0 1.2rem 0 0rem;
   }
+}
+/* Floating elements style */
+.bar-style-elements {
+  .centerbox > box {
+    background: $barBg;
+    border-radius: calc(#{$round} * 4);
+    box-shadow:
+      inset -2px -2px 3px rgba(0, 0, 0, 0.4),
+      -1px -1px 2px $bg;
+    padding: 0 0.5rem;
+    margin: 0 0.3rem;
+  }
+}
+
+/* Full-width style */
+.bar-style-full {
+  background: $barBg;
+  border-radius: calc(#{$round} * 4);
+  box-shadow:
+    inset -2px -2px 3px rgba(0, 0, 0, 0.4),
+    -1px -1px 2px $bg;
+  padding: 0 0.5rem;
+  margin: 0 0.3rem;
 }
