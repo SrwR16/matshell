@@ -110,13 +110,13 @@ export function NotificationWidget({
       </box>
       {actions.length > 0 && (
         <box cssClasses={["actions"]}>
-          {actions.map((label, action) => (
+          {actions.map(({ label, action }) => (
             <button
               hexpand
               cssClasses={["action-button"]}
               onClicked={() => notification.invoke(action)}
             >
-              <label label={label.toString()} halign={CENTER} hexpand />
+              <label label={label} halign={CENTER} hexpand />
             </button>
           ))}
         </box>
