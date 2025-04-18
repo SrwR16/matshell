@@ -124,6 +124,7 @@ export const WiFiBox = () => {
           return () => {
             App.disconnect(windowListener);
             clearScanInterval();
+            bind(isExpanded).unsubscribe();
           };
         }}
       >

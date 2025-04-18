@@ -64,6 +64,11 @@ export const BluetoothBox = () => {
         transitionDuration={250}
         revealChild={bind(isExpanded)}
         setup={() => {
+          const windowListener = App.connect("window-toggled", (_, window) => {
+            if (window.name === "system-menu" && isExpanded.get()) {
+              isExpanded.set(false);
+            }
+          });
           bind(isExpanded).subscribe((expanded) => {
             const bluetoothPowered = bluetooth.is_powered;
             const isDiscovering = bluetooth.adapter.discovering;
@@ -84,6 +89,7 @@ export const BluetoothBox = () => {
           return () => {
             // Clean up the listener when component is destroyed
             App.disconnect(windowListener);
+            bind(isExpanded).unsubscribe();
           };
         }}
       >
