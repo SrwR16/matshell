@@ -32,11 +32,10 @@ export default function Workspaces() {
           return (
             <button
               visible={activeWorkspaces[activeWorkspaces.length - 1]?.id >= id}
-              cssClassses={[`workspace-${id}`]} // For stable identification
               cssClasses={bind(hypr, "focusedWorkspace").as((fw) => {
                 const classes = [];
                 if (ws === fw) classes.push("focused");
-                if (ws !== undefined) classes.push(`monitor${ws.monitor.id}`);
+                if (ws && ws.monitor) classes.push(`monitor${ws.monitor.id}`);
                 return classes;
               })}
               onClicked={() => hypr.message(`dispatch workspace ${id}`)}
