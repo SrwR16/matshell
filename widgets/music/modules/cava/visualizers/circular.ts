@@ -17,6 +17,18 @@ export function drawCircular(
 
   if (!shouldVisualize(bars, values)) return;
 
+  // Initialize rotation property if it doesn't exist
+  if (widget._circularRotation === undefined) {
+    widget._circularRotation = 0;
+  }
+
+  // Update rotation for the next frame
+  widget._circularRotation += 0.005;
+  // Keep rotation within 0 to 2π range
+  if (widget._circularRotation > Math.PI * 2) {
+    widget._circularRotation -= Math.PI * 2;
+  }
+
   const centerX = width / 2;
   const centerY = height / 2;
   const maxRadius = (Math.min(width, height) / 2) * 2.5;
@@ -24,9 +36,9 @@ export function drawCircular(
   const pathBuilder = new Gsk.PathBuilder();
   const points: Point[] = [];
 
-  // Perimeter points based on audio values
+  // Perimeter points based on audio values with rotation
   for (let i = 0; i < bars && i < values.length; i++) {
-    const angle = (i / bars) * Math.PI * 2;
+    const angle = (i / bars) * Math.PI * 2 + widget._circularRotation;
     const value = values[i];
     const amplifiedValue = Math.pow(value, 0.8);
     const radius = maxRadius * (0.1 + amplifiedValue * 0.9);
