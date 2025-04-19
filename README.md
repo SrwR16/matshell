@@ -230,10 +230,14 @@ ______________________________________________________________________
 ### 🌚 Dark Theme (Desktop)
 
 <p align="center">
+<b>Floating Mode</b>
 
-![2025-03-21T22:42:06,141625834+01:00](https://github.com/user-attachments/assets/c6c66f14-35b1-418c-839c-e66fbdffbb3c)
-![2025-03-21T23:02:56,372784904+01:00](https://github.com/user-attachments/assets/c10ab60a-c8e1-43e8-ad7a-9723437af4f1)
+![2025-04-19T02:46:56,374664534+02:00](https://github.com/user-attachments/assets/6ca22da1-7bab-4e57-b9c0-96e6ea55b256)
 
+<p align="center">
+<b>Full Bar Mode & Cava in Bar</b>
+
+![2025-04-19T02:53:55,668212228+02:00](https://github.com/user-attachments/assets/7fd14c0b-5a03-412a-a08a-252e7809d0fe)
 </p>
 
 ### 🌞 Light Theme (Desktop)
