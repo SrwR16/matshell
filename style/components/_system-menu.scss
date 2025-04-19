@@ -8,6 +8,7 @@ $spacing-sm: 0.4rem;
 $spacing-md: 0.75rem;
 
 /* general */
+
 .system-menu {
   -gtk-icon-size: $font;
   @include window;
@@ -16,6 +17,14 @@ $spacing-md: 0.75rem;
 
   & > box {
     @include window-box;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    @if $darkmode {
+    } @else {
+      // Light mode enhancements
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    }
+  }
+  button {
   }
 }
 
@@ -89,6 +98,12 @@ $spacing-md: 0.75rem;
   @include rounding;
   margin: $spacing-xs $spacing-sm $spacing-sm $spacing-md;
   padding: $spacing-md;
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  @if $darkmode {
+  } @else {
+    // Light mode enhancements
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  }
   image {
     &:first-child {
       margin-right: $spacing-sm;
@@ -139,6 +154,11 @@ $spacing-md: 0.75rem;
   margin: $spacing-sm;
   margin-top: $spacing-sm;
   margin-bottom: $spacing-sm;
+  @if $darkmode {
+  } @else {
+    // Light mode enhancements
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  }
 }
 image {
   margin: $spacing-sm;
@@ -158,17 +178,20 @@ image {
   margin: $spacing-sm;
   color: $red;
 }
+
 .saved-network {
   @include window-box;
-  @if $darkmode {
-  } @else {
-    background: color.adjust($buttonDisabled, $alpha: +0.5);
-  }
+  border: 1px solid rgba(0, 0, 0, 0.1);
+  margin: $spacing-sm $spacing-md $spacing-sm $spacing-md;
+  padding: $spacing-xs;
   > label {
     margin-left: $spacing-sm;
   }
-  margin: $spacing-sm $spacing-md $spacing-sm $spacing-md;
-  padding: $spacing-xs;
+  @if $darkmode {
+  } @else {
+    // Light mode enhancements
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  }
 }
 
 .bt-button-container {
