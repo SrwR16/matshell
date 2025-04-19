@@ -102,7 +102,7 @@ $spacing-md: 0.75rem;
   @if $darkmode {
   } @else {
     // Light mode enhancements
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   }
   image {
     &:first-child {
@@ -190,7 +190,7 @@ image {
   @if $darkmode {
   } @else {
     // Light mode enhancements
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
   }
 }
 
