@@ -1,6 +1,8 @@
-import { Astal, Gdk, Gtk } from "astal/gtk4";
+import { Gtk } from "astal/gtk4";
 import Tray from "gi://AstalTray";
 import { bind } from "astal";
+
+const tray = Tray.get_default();
 
 function SysTrayItem({ item }) {
   return (
@@ -20,9 +22,9 @@ function SysTrayItem({ item }) {
   );
 }
 
-export default function SysTray() {
-  const tray = Tray.get_default();
+export const hasTrayItems = bind(tray, "items").as((items) => items.length > 0);
 
+export function SysTray() {
   return (
     <box cssClasses={["SysTray", "module"]}>
       {bind(tray, "items").as((items) =>

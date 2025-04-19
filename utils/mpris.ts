@@ -1,12 +1,10 @@
 import Mpris from "gi://AstalMpris";
 import GLib from "gi://GLib";
-import { exec, bind } from "astal";
+import { execAsync, bind } from "astal";
 
 const mpris = Mpris.get_default();
-
-export const visibleMpris = bind(mpris, "players").as(
-  (players) => players.length > 0,
-);
+const MEDIA_CACHE_PATH = GLib.get_user_cache_dir() + "/media";
+const blurredPath = MEDIA_CACHE_PATH + "/blurred";
 
 export function findPlayer(players: Mpris.Player[]): Mpris.Player | undefined {
   // try to get the first active player
@@ -25,9 +23,6 @@ export function mprisStateIcon(status: Mpris.PlaybackStatus): string {
     : "media-playback-start-symbolic";
 }
 
-const MEDIA_CACHE_PATH = GLib.get_user_cache_dir() + "/media";
-const blurredPath = MEDIA_CACHE_PATH + "/blurred";
-
 export function generateBackground(coverpath: string | null): string {
   if (!coverpath) return "";
 
@@ -42,7 +37,7 @@ export function generateBackground(coverpath: string | null): string {
   }
 
   try {
-    exec(`magick "${coverpath}" -blur 0x22 "${blurred}"`);
+    execAsync(`magick "${coverpath}" -blur 0x22 "${blurred}"`);
   } catch (e) {
     console.error("Background generation failed:", e);
     return ""; // Fallback
@@ -57,3 +52,31 @@ export function lengthStr(length: number) {
     .padStart(2, "0");
   return min + ":" + sec;
 }
+
+export function filterActivePlayers(players) {
+  return players.filter((player) => {
+    // Check for essential properties that indicate a usable player
+    if (!player.title && !player.artist) {
+      return false;
+    }
+
+    // Check playback status
+    // Only include players that are playing or paused
+    if (player.playback_status) {
+      return [
+        Mpris.PlaybackStatus.PLAYING,
+        Mpris.PlaybackStatus.PAUSED,
+      ].includes(player.playback_status);
+    }
+
+    return true;
+  });
+}
+
+export const hasActivePlayers = bind(mpris, "players").as(
+  (players) => filterActivePlayers(players).length > 0,
+);
+export const firstActivePlayer = bind(mpris, "players").as((players) => {
+  const active = filterActivePlayers(players);
+  return active.length > 0 ? active[0] : null;
+});

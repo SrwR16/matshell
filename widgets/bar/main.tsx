@@ -1,13 +1,13 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk4";
 import { bind } from "astal";
-import SysTray from "./modules/SysTray.tsx";
+import { SysTray, hasTrayItems } from "./modules/SysTray.tsx";
 import Separator from "./modules/Separator.tsx";
 import Workspaces from "./modules/Workspaces.tsx";
 import Mem from "./modules/Mem.tsx";
 import Cpu from "./modules/Cpu.tsx";
 import { CavaDraw } from "widgets/music/modules/cava";
-import { visibleMpris } from "utils/mpris.ts";
 import Media from "./modules/Media.tsx";
+import { hasActivePlayers } from "utils/mpris.ts";
 import SystemInfo from "./modules/SystemInfo/main.tsx";
 import Time from "./modules/Time.tsx/";
 import OsIcon from "./modules/OsIcon.tsx";
@@ -70,12 +70,12 @@ function Bar({ gdkmonitor, ...props }: any) {
             </box>
             <Workspaces />
           </box>
-          <box visible={visibleMpris}>
+          <box visible={bind(hasActivePlayers)}>
             <Media />
           </box>
           <box hexpand halign={Gtk.Align.END}>
             <SysTray />
-            <Separator />
+            <Separator visible={bind(hasTrayItems)} />
             <Cpu />
             <Mem />
             <Separator />

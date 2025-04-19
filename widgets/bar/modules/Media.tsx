@@ -1,10 +1,8 @@
 import { App, Gtk } from "astal/gtk4";
-import Mpris from "gi://AstalMpris";
 import { bind } from "astal";
 import { CavaDraw } from "widgets/music/modules/cava";
+import { firstActivePlayer } from "utils/mpris.ts";
 import options from "options.ts";
-
-const mpris = Mpris.get_default();
 
 function Cover({ player }) {
   return (
@@ -60,8 +58,8 @@ export default function Media() {
       cssClasses={["Media"]}
       onClicked={() => App.toggle_window("music-player")}
     >
-      {bind(mpris, "players").as(
-        (players) => players[0] && <MusicBox player={players[0]} />,
+      {bind(firstActivePlayer).as((player) =>
+        player ? <MusicBox player={player} /> : "",
       )}
     </button>
   );

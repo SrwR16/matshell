@@ -1,3 +1,5 @@
-export default function Separator() {
-  return <label cssClasses={["separator", "module"]} label="" />;
+export default function Separator({ visible = true }) {
+  return (
+    <label visible={visible} cssClasses={["separator", "module"]} label="" />
+  );
 }
