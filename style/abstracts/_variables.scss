@@ -6,19 +6,19 @@
 */
 
 
-$background: rgba(255, 248, 245, 1.0);
+$background: rgba(250, 249, 248, 1.0);
 
 $error: rgba(186, 26, 26, 1.0);
 
 $error_container: rgba(255, 218, 214, 1.0);
 
-$inverse_on_surface: rgba(255, 237, 227, 1.0);
+$inverse_on_surface: rgba(242, 240, 240, 1.0);
 
-$inverse_primary: rgba(255, 183, 126, 1.0);
+$inverse_primary: rgba(184, 202, 202, 1.0);
 
-$inverse_surface: rgba(60, 45, 35, 1.0);
+$inverse_surface: rgba(47, 49, 48, 1.0);
 
-$on_background: rgba(37, 25, 15, 1.0);
+$on_background: rgba(26, 28, 28, 1.0);
 
 $on_error: rgba(255, 255, 255, 1.0);
 
@@ -26,85 +26,85 @@ $on_error_container: rgba(65, 0, 2, 1.0);
 
 $on_primary: rgba(255, 255, 255, 1.0);
 
-$on_primary_container: rgba(47, 21, 0, 1.0);
+$on_primary_container: rgba(14, 30, 31, 1.0);
 
-$on_primary_fixed: rgba(47, 21, 0, 1.0);
+$on_primary_fixed: rgba(14, 30, 31, 1.0);
 
-$on_primary_fixed_variant: rgba(110, 57, 0, 1.0);
+$on_primary_fixed_variant: rgba(57, 74, 74, 1.0);
 
 $on_secondary: rgba(255, 255, 255, 1.0);
 
-$on_secondary_container: rgba(42, 24, 0, 1.0);
+$on_secondary_container: rgba(20, 29, 29, 1.0);
 
-$on_secondary_fixed: rgba(42, 24, 0, 1.0);
+$on_secondary_fixed: rgba(20, 29, 29, 1.0);
 
-$on_secondary_fixed_variant: rgba(93, 65, 27, 1.0);
+$on_secondary_fixed_variant: rgba(63, 73, 73, 1.0);
 
-$on_surface: rgba(37, 25, 15, 1.0);
+$on_surface: rgba(26, 28, 28, 1.0);
 
-$on_surface_variant: rgba(84, 68, 56, 1.0);
+$on_surface_variant: rgba(70, 71, 71, 1.0);
 
 $on_tertiary: rgba(255, 255, 255, 1.0);
 
-$on_tertiary_container: rgba(37, 26, 0, 1.0);
+$on_tertiary_container: rgba(4, 31, 32, 1.0);
 
-$on_tertiary_fixed: rgba(37, 26, 0, 1.0);
+$on_tertiary_fixed: rgba(4, 31, 32, 1.0);
 
-$on_tertiary_fixed_variant: rgba(90, 67, 1, 1.0);
+$on_tertiary_fixed_variant: rgba(50, 75, 76, 1.0);
 
-$outline: rgba(135, 115, 102, 1.0);
+$outline: rgba(119, 119, 119, 1.0);
 
-$outline_variant: rgba(217, 194, 178, 1.0);
+$outline_variant: rgba(199, 198, 198, 1.0);
 
-$primary: rgba(145, 77, 0, 1.0);
+$primary: rgba(80, 98, 98, 1.0);
 
-$primary_container: rgba(255, 220, 195, 1.0);
+$primary_container: rgba(212, 230, 230, 1.0);
 
-$primary_fixed: rgba(255, 220, 195, 1.0);
+$primary_fixed: rgba(212, 230, 230, 1.0);
 
-$primary_fixed_dim: rgba(255, 183, 126, 1.0);
+$primary_fixed_dim: rgba(184, 202, 202, 1.0);
 
 $scrim: rgba(0, 0, 0, 1.0);
 
-$secondary: rgba(119, 89, 48, 1.0);
+$secondary: rgba(86, 96, 96, 1.0);
 
-$secondary_container: rgba(255, 221, 181, 1.0);
+$secondary_container: rgba(218, 228, 228, 1.0);
 
-$secondary_fixed: rgba(255, 221, 181, 1.0);
+$secondary_fixed: rgba(218, 228, 228, 1.0);
 
-$secondary_fixed_dim: rgba(232, 192, 142, 1.0);
+$secondary_fixed_dim: rgba(190, 200, 200, 1.0);
 
 $shadow: rgba(0, 0, 0, 1.0);
 
-$source_color: rgba(238, 136, 35, 1.0);
+$source_color: rgba(187, 201, 201, 1.0);
 
-$surface: rgba(255, 248, 245, 1.0);
+$surface: rgba(250, 249, 248, 1.0);
 
-$surface_bright: rgba(255, 248, 245, 1.0);
+$surface_bright: rgba(250, 249, 248, 1.0);
 
-$surface_container: rgba(255, 234, 220, 1.0);
+$surface_container: rgba(239, 238, 237, 1.0);
 
-$surface_container_high: rgba(252, 228, 211, 1.0);
+$surface_container_high: rgba(233, 232, 231, 1.0);
 
-$surface_container_highest: rgba(246, 222, 206, 1.0);
+$surface_container_highest: rgba(227, 226, 226, 1.0);
 
-$surface_container_low: rgba(255, 241, 233, 1.0);
+$surface_container_low: rgba(244, 243, 243, 1.0);
 
 $surface_container_lowest: rgba(255, 255, 255, 1.0);
 
-$surface_dim: rgba(238, 214, 197, 1.0);
+$surface_dim: rgba(219, 218, 217, 1.0);
 
-$surface_tint: rgba(145, 77, 0, 1.0);
+$surface_tint: rgba(80, 98, 98, 1.0);
 
-$surface_variant: rgba(246, 222, 206, 1.0);
+$surface_variant: rgba(227, 226, 226, 1.0);
 
-$tertiary: rgba(116, 91, 26, 1.0);
+$tertiary: rgba(74, 99, 100, 1.0);
 
-$tertiary_container: rgba(255, 223, 153, 1.0);
+$tertiary_container: rgba(204, 232, 232, 1.0);
 
-$tertiary_fixed: rgba(255, 223, 153, 1.0);
+$tertiary_fixed: rgba(204, 232, 232, 1.0);
 
-$tertiary_fixed_dim: rgba(228, 195, 119, 1.0);
+$tertiary_fixed_dim: rgba(176, 204, 204, 1.0);
 
 
 /* general color variables */
@@ -184,4 +184,4 @@ $font: 1.1rem;
 
 /* Theme mode and scheme variables */
 $darkmode: false;
-$material-color-scheme: "scheme-vibrant";
+$material-color-scheme: "scheme-neutral";

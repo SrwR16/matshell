@@ -49,6 +49,11 @@
   background: $buttonEnabled;
   border-radius: 5rem;
   padding: 0.4rem;
+  @if $darkmode {
+  } @else {
+    // Light mode enhancements
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
+  }
 
   &:hover {
     background: $buttonEnabledHover;
@@ -61,6 +66,7 @@
     background: $buttonDisabled;
   } @else {
     background: color.adjust($buttonDisabled, $alpha: +0.5);
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.18);
   }
   border-radius: 5rem;
   padding: 0.4rem;
@@ -72,7 +78,7 @@
     @if $darkmode {
       background: color.adjust($buttonDisabled, $lightness: +20%);
     } @else {
-      background: color.adjust($accent, $lightness: +10%);
+      background: color.adjust($primaryMon, $lightness: +22%);
     }
   }
 }

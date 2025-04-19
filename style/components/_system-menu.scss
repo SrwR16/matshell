@@ -24,8 +24,6 @@ $spacing-md: 0.75rem;
       box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
     }
   }
-  button {
-  }
 }
 
 /* toggles */
@@ -102,7 +100,10 @@ $spacing-md: 0.75rem;
   @if $darkmode {
   } @else {
     // Light mode enhancements
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+    &:hover,
+    &:focus {
+      border: 1px solid rgba(0, 0, 0, 0.04);
+    }
   }
   image {
     &:first-child {
