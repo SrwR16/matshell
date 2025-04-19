@@ -101,7 +101,7 @@ $spacing-md: 0.75rem;
 .network-item-connected {
   @include button-active;
   @include rounding;
-  margin: $spacing-xs $spacing-sm $spacing-sm $spacing-sm;
+  margin: $spacing-xs $spacing-sm $spacing-sm $spacing-md;
   padding: $spacing-md;
 }
 
