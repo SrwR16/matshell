@@ -231,13 +231,13 @@ ______________________________________________________________________
 
 <p align="center">
 <b>Floating Mode</b>
-
-![2025-04-19T02:46:56,374664534+02:00](https://github.com/user-attachments/assets/6ca22da1-7bab-4e57-b9c0-96e6ea55b256)
+  
+![2025-04-19T03:27:33,093645867+02:00](https://github.com/user-attachments/assets/603b7837-ebac-4ff8-90b8-32721ea5aeae)
 
 <p align="center">
 <b>Full Bar Mode & Cava in Bar</b>
-
-![2025-04-19T02:53:55,668212228+02:00](https://github.com/user-attachments/assets/7fd14c0b-5a03-412a-a08a-252e7809d0fe)
+  
+![2025-04-19T03:22:32,664157108+02:00](https://github.com/user-attachments/assets/458f11ac-2de2-455c-847b-15bd515a8f48)
 </p>
 
 ### 🌞 Light Theme (Desktop)
