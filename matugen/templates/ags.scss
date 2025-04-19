@@ -64,7 +64,7 @@ $fourthMon: color.mix($secondary, $on_secondary, 70%, $method: rgb);
 $fourthMonHover: color.mix($secondary, $on_secondary, 45%, $method: rgb);
 
 /* button colors */
-$buttonEnabled: color.adjust($accent, $lightness: +10%);
+$buttonEnabled: color.adjust($primaryMon, $alpha: -0.5);
 $buttonEnabledHover: color.adjust($buttonEnabled, $lightness: -15%);
 
 $buttonDisabled: $surface;
