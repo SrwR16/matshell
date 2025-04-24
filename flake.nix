@@ -71,7 +71,7 @@
       ]);
 
     # Create a static map for all systems.
-    # Required for hm-module.
+    # Required for deprecated hm-module options. TODO: Remove after grace period.
     sys = import systems;
     matshellDeps = builtins.listToAttrs (
       map
@@ -88,13 +88,59 @@
       perSystem = {system, ...}: let
         pkgs = mkPkgs system;
       in {
-        packages.default = ags.lib.bundle {
-          inherit pkgs;
-          name = "matshell";
-          src = ./.;
-          entry = "bundleapp.ts";
-          gtk4 = true;
-          extraPackages = matshellDeps.${system} ++ [ags.packages.${system}.default];
+        packages.default = let
+          matshell-bundle = ags.lib.bundle {
+            inherit pkgs;
+            name = "matshell";
+            src = builtins.path {
+              path = ./.;
+            };
+            entry = "app.ts";
+            gtk4 = true;
+            extraPackages = matshellDeps.${system} ++ [ags.packages.${system}.default];
+          };
+        in
+          pkgs.runCommand "copy-matshell-styles" {
+            nativeBuildInputs = [pkgs.makeWrapper];
+          } ''
+            mkdir -p $out/bin
+
+            # Copy the bundled app
+            cp -r ${matshell-bundle}/* $out/
+
+            # Create a wrapper script for matshell to copy files that require mutability out of the store
+            mv $out/bin/matshell $out/bin/.matshell-unwrapped
+
+            makeWrapper $out/bin/.matshell-unwrapped $out/bin/matshell \
+              --run 'STYLE_DIR="$HOME/.config/ags/style"
+                     ICONS_DIR="$HOME/.config/ags/assets/icons"
+
+                     # Check if either directory needs to be set up
+                     if [ ! -d "$STYLE_DIR" ] || [ ! -d "$ICONS_DIR" ]; then
+                       # Create necessary directories
+                       mkdir -p "$STYLE_DIR"
+                       mkdir -p "$ICONS_DIR"
+
+                       # Copy style files if source exists and destination is empty
+                       if [ -d "'"$out"'/share/style" ]; then
+                         cp -r "'"$out"'/share/style/"* "$STYLE_DIR/"
+                         echo "Installed Matshell styles to $STYLE_DIR"
+                       fi
+
+                       # Copy icon files if source exists and destination is empty
+                       if [ -d "'"$out"'/share/assets/icons" ]; then
+                         cp -r "'"$out"'/share/assets/icons/"* "$ICONS_DIR/"
+                         echo "Installed Matshell icons to $ICONS_DIR"
+                       fi
+
+                       # Make copied files writable by the user
+                       find "$HOME/.config/ags" -type d -exec chmod 755 {} \;
+                       find "$HOME/.config/ags" -type f -exec chmod 644 {} \;
+                     fi'
+          '';
+        apps.default = {
+          type = "app";
+          program = "${self.packages.${system}.default}/bin/matshell";
         };
 
         devShells.default = pkgs.mkShell {
@@ -109,7 +155,7 @@
           default = self.homeManagerModules.matshell;
           matshell = import ./nix/hm-module.nix self;
         };
-        inherit matshellDeps;
+        inherit matshellDeps; #TODO: Deprecated. Remove after grave period
       };
     };
 }

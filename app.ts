@@ -1,6 +1,5 @@
 import { App } from "astal/gtk4";
-import { monitorFile } from "astal/file";
-import { exec } from "astal/process";
+import { exec, monitorFile, GLib } from "astal";
 import Hyprland from "gi://AstalHyprland";
 import { hyprToGdk } from "utils/hyprland.ts";
 import Bar from "./widgets/bar/main.tsx";
@@ -11,8 +10,9 @@ import LogoutMenu from "widgets/logout-menu/main.tsx";
 import Applauncher from "./widgets/launcher/main.tsx";
 import MusicPlayer from "./widgets/music/main.tsx";
 
-const scss = "./style.scss";
-const css = "./style.css";
+const scss = `${GLib.get_user_config_dir()}/ags/style/main.scss`;
+const css = `${GLib.get_user_config_dir()}/ags/style/main.css`;
+const icons = `${GLib.get_user_config_dir()}/ags/assets/icons`;
 const styleDirectories = ["abstracts", "components", "layouts", "base"];
 
 function reloadCss() {
@@ -22,7 +22,7 @@ function reloadCss() {
 }
 
 App.start({
-  icons: "./assets/icons",
+  icons: icons,
   css: css,
   instanceName: "js",
   requestHandler(request, res) {
@@ -31,7 +31,9 @@ App.start({
   },
   main() {
     exec(`sass ${scss} ${css}`);
-    styleDirectories.forEach((dir) => monitorFile(`./style/${dir}`, reloadCss));
+    styleDirectories.forEach((dir) =>
+      monitorFile(`${GLib.get_user_config_dir()}/ags/style/${dir}`, reloadCss),
+    );
 
     const barNames = new Map<number, string>(); // Map Hyprland ID to window name
 

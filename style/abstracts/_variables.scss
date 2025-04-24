@@ -6,105 +6,105 @@
 */
 
 
-$background: rgba(250, 249, 248, 1.0);
+$background: rgba(18, 19, 20, 1.0);
 
-$error: rgba(186, 26, 26, 1.0);
+$error: rgba(255, 180, 171, 1.0);
 
-$error_container: rgba(255, 218, 214, 1.0);
+$error_container: rgba(147, 0, 10, 1.0);
 
-$inverse_on_surface: rgba(242, 240, 240, 1.0);
+$inverse_on_surface: rgba(48, 48, 49, 1.0);
 
-$inverse_primary: rgba(184, 202, 202, 1.0);
+$inverse_primary: rgba(82, 96, 104, 1.0);
 
-$inverse_surface: rgba(47, 49, 48, 1.0);
+$inverse_surface: rgba(227, 226, 226, 1.0);
 
-$on_background: rgba(26, 28, 28, 1.0);
+$on_background: rgba(227, 226, 226, 1.0);
 
-$on_error: rgba(255, 255, 255, 1.0);
+$on_error: rgba(105, 0, 5, 1.0);
 
-$on_error_container: rgba(65, 0, 2, 1.0);
+$on_error_container: rgba(255, 218, 214, 1.0);
 
-$on_primary: rgba(255, 255, 255, 1.0);
+$on_primary: rgba(37, 50, 57, 1.0);
 
-$on_primary_container: rgba(14, 30, 31, 1.0);
+$on_primary_container: rgba(214, 229, 237, 1.0);
 
-$on_primary_fixed: rgba(14, 30, 31, 1.0);
+$on_primary_fixed: rgba(16, 29, 35, 1.0);
 
-$on_primary_fixed_variant: rgba(57, 74, 74, 1.0);
+$on_primary_fixed_variant: rgba(59, 73, 80, 1.0);
 
-$on_secondary: rgba(255, 255, 255, 1.0);
+$on_secondary: rgba(42, 50, 53, 1.0);
 
-$on_secondary_container: rgba(20, 29, 29, 1.0);
+$on_secondary_container: rgba(220, 228, 233, 1.0);
 
-$on_secondary_fixed: rgba(20, 29, 29, 1.0);
+$on_secondary_fixed: rgba(21, 29, 32, 1.0);
 
-$on_secondary_fixed_variant: rgba(63, 73, 73, 1.0);
+$on_secondary_fixed_variant: rgba(64, 72, 76, 1.0);
 
-$on_surface: rgba(26, 28, 28, 1.0);
+$on_surface: rgba(227, 226, 226, 1.0);
 
-$on_surface_variant: rgba(70, 71, 71, 1.0);
+$on_surface_variant: rgba(199, 198, 199, 1.0);
 
-$on_tertiary: rgba(255, 255, 255, 1.0);
+$on_tertiary: rgba(30, 51, 60, 1.0);
 
-$on_tertiary_container: rgba(4, 31, 32, 1.0);
+$on_tertiary_container: rgba(208, 230, 242, 1.0);
 
-$on_tertiary_fixed: rgba(4, 31, 32, 1.0);
+$on_tertiary_fixed: rgba(8, 30, 39, 1.0);
 
-$on_tertiary_fixed_variant: rgba(50, 75, 76, 1.0);
+$on_tertiary_fixed_variant: rgba(53, 74, 83, 1.0);
 
-$outline: rgba(119, 119, 119, 1.0);
+$outline: rgba(145, 144, 145, 1.0);
 
-$outline_variant: rgba(199, 198, 198, 1.0);
+$outline_variant: rgba(70, 71, 71, 1.0);
 
-$primary: rgba(80, 98, 98, 1.0);
+$primary: rgba(186, 201, 209, 1.0);
 
-$primary_container: rgba(212, 230, 230, 1.0);
+$primary_container: rgba(59, 73, 80, 1.0);
 
-$primary_fixed: rgba(212, 230, 230, 1.0);
+$primary_fixed: rgba(214, 229, 237, 1.0);
 
-$primary_fixed_dim: rgba(184, 202, 202, 1.0);
+$primary_fixed_dim: rgba(186, 201, 209, 1.0);
 
 $scrim: rgba(0, 0, 0, 1.0);
 
-$secondary: rgba(86, 96, 96, 1.0);
+$secondary: rgba(192, 200, 205, 1.0);
 
-$secondary_container: rgba(218, 228, 228, 1.0);
+$secondary_container: rgba(64, 72, 76, 1.0);
 
-$secondary_fixed: rgba(218, 228, 228, 1.0);
+$secondary_fixed: rgba(220, 228, 233, 1.0);
 
-$secondary_fixed_dim: rgba(190, 200, 200, 1.0);
+$secondary_fixed_dim: rgba(192, 200, 205, 1.0);
 
 $shadow: rgba(0, 0, 0, 1.0);
 
-$source_color: rgba(187, 201, 201, 1.0);
+$source_color: rgba(112, 204, 242, 1.0);
 
-$surface: rgba(250, 249, 248, 1.0);
+$surface: rgba(18, 19, 20, 1.0);
 
-$surface_bright: rgba(250, 249, 248, 1.0);
+$surface_bright: rgba(57, 57, 58, 1.0);
 
-$surface_container: rgba(239, 238, 237, 1.0);
+$surface_container: rgba(31, 32, 32, 1.0);
 
-$surface_container_high: rgba(233, 232, 231, 1.0);
+$surface_container_high: rgba(41, 42, 43, 1.0);
 
-$surface_container_highest: rgba(227, 226, 226, 1.0);
+$surface_container_highest: rgba(52, 53, 53, 1.0);
 
-$surface_container_low: rgba(244, 243, 243, 1.0);
+$surface_container_low: rgba(27, 28, 28, 1.0);
 
-$surface_container_lowest: rgba(255, 255, 255, 1.0);
+$surface_container_lowest: rgba(13, 14, 15, 1.0);
 
-$surface_dim: rgba(219, 218, 217, 1.0);
+$surface_dim: rgba(18, 19, 20, 1.0);
 
-$surface_tint: rgba(80, 98, 98, 1.0);
+$surface_tint: rgba(186, 201, 209, 1.0);
 
-$surface_variant: rgba(227, 226, 226, 1.0);
+$surface_variant: rgba(70, 71, 71, 1.0);
 
-$tertiary: rgba(74, 99, 100, 1.0);
+$tertiary: rgba(180, 202, 213, 1.0);
 
-$tertiary_container: rgba(204, 232, 232, 1.0);
+$tertiary_container: rgba(53, 74, 83, 1.0);
 
-$tertiary_fixed: rgba(204, 232, 232, 1.0);
+$tertiary_fixed: rgba(208, 230, 242, 1.0);
 
-$tertiary_fixed_dim: rgba(176, 204, 204, 1.0);
+$tertiary_fixed_dim: rgba(180, 202, 213, 1.0);
 
 
 /* general color variables */
@@ -183,5 +183,5 @@ $scale: 0.5rem;
 $font: 1.1rem;
 
 /* Theme mode and scheme variables */
-$darkmode: false;
+$darkmode: true;
 $material-color-scheme: "scheme-neutral";

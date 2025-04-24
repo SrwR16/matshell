@@ -175,9 +175,7 @@ The color generation works better with wallpapers that have a bit of chroma.
 
 #### ❄️ Nix
 
-For a NixOS implementation and example [script](https://github.com/Neurarian/matshell/blob/master/nix/hm-module.nix) for use with hyprpaper, matugen, and a [custom cli utility](https://github.com/Neurarian/image-hct) to get chroma/tone, you can enable dedicated options in the home-manager module exposed by the flake (see below).
-
-You can generally test out matshell via the flake exposed package `nix run github:Neurarian/matshell` , but I would recommend to also imperatively copy or symlink this repo to your dotfiles to circumvent nix-store immutability. Otherwise the dynamic theming will not work. One way to do this would be via the home-manager module which overwrites the ags options with the following:
+You can generally test out matshell via the flake exposed package `nix run github:Neurarian/matshell`. For a NixOS implementation and example [script](https://github.com/Neurarian/matshell/blob/master/nix/hm-module.nix) for use with hyprpaper, matugen, and a [custom cli utility](https://github.com/Neurarian/image-hct) to get chroma/tone, you can enable dedicated options in the home-manager module:
 
 ```nix
 # ...
@@ -186,30 +184,26 @@ imports = [
   inputs.matshell.homeManagerModules.default
 ];
 
-programs.ags = {
-  matshell = { 
-    # Enable the basic shell
-    enable = true; 
-    # Enable a systemd service for matshell
-    service = true;
-    # Enable matugen theming via custom random wallpaper setter script and rust utility
-    # used to base theme and scheme on the HCT properties of the main color.
-    # Run this via "wal_set"
-    matugenThemeSetter = true;
-    # This also sets up the entire matugen config & templates.
-    # If you already have matugen set up you may want to omit this.
-    # To use the hyprland/hyprlock templates, you would still need to
-    # import the generated files and add the color aliases to your config as desired.
-    matugenConfig = true;
-  };
+programs.matshell= {
+  # Enable the basic shell
+  enable = true; 
+  # Enable a systemd service for matshell
+  autostart = true;
+  # Enable matugen theming via custom random wallpaper setter script and rust utility
+  # used to base theme and scheme on the HCT properties of the main color.
+  # Run this via "wal_set"
+  matugenThemeSetter = true;
+  # This also sets up the entire matugen config & templates.
+  # If you already have matugen set up you may want to omit this.
+  # To use the hyprland/hyprlock templates, you would still need to
+  # import the generated files and add the color aliases to your config as desired.
+  matugenConfig = true;
 };
 #...
 
 ```
 
-This will simply clone the repo for you to .config/ags if that dir does not exist, build ags wrapped with all dependencies for matshell, and start a systemd service. You will have to <ins>remove the ags home-manager module</ins> from your config, as enabling matshell will handle everything ags-related for you.
-
-This is absolutely hacky, probably unsafe, and not the nix way to do it, but it gets the job done for now. To get the latest version of matshell, you would have to pull the updates manually or delete .config/ags and rebuild the system/home-manager profile.
+For now, you will have to <ins>remove the ags home-manager module</ins> from your config, as the now deprecated options of the home-manager module required import of the module itself. This conflict will be removed soon.
 
 ## Acknowledgements
 
@@ -231,13 +225,14 @@ ______________________________________________________________________
 
 <p align="center">
 <b>Floating Mode</b>
-  
+
 ![2025-04-19T03:27:33,093645867+02:00](https://github.com/user-attachments/assets/603b7837-ebac-4ff8-90b8-32721ea5aeae)
 
 <p align="center">
 <b>Full Bar Mode & Cava in Bar</b>
-  
+
 ![2025-04-19T03:22:32,664157108+02:00](https://github.com/user-attachments/assets/458f11ac-2de2-455c-847b-15bd515a8f48)
+
 </p>
 
 ### 🌞 Light Theme (Desktop)
