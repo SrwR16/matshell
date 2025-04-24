@@ -1,6 +1,6 @@
 import Mpris from "gi://AstalMpris";
 import GLib from "gi://GLib";
-import { execAsync, bind } from "astal";
+import { exec, bind } from "astal";
 
 const mpris = Mpris.get_default();
 const MEDIA_CACHE_PATH = GLib.get_user_cache_dir() + "/media";
@@ -37,7 +37,8 @@ export function generateBackground(coverpath: string | null): string {
   }
 
   try {
-    execAsync(`magick "${coverpath}" -blur 0x22 "${blurred}"`);
+    // Async causes race conditions
+    exec(`magick "${coverpath}" -blur 0x22 "${blurred}"`);
   } catch (e) {
     console.error("Background generation failed:", e);
     return ""; // Fallback
