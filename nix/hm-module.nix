@@ -179,7 +179,7 @@ in {
       # Systemd service for matshell autostart
       systemd.user.services.matshell = lib.mkIf cfgNew.autostart {
         Unit = {
-          Description = "Material-inspired desktop shell";
+          Description = "Matshell";
           PartOf = ["graphical-session.target"];
           After = ["graphical-session.target"];
         };
