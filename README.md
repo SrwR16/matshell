@@ -110,9 +110,9 @@ ______________________________________________________________________
 - coreutils
 - dart-sass
 - imagemagick
-- bluez & bluez-utils
 - networkmanager
 - wireplumber
+- bluez & bluez-utils (will also run fine without, but throws some non-critical errors on startup)
 - adwaita-icon-theme
 - Material Symbols Outlined Font
 - Fira Code Nerd Font
@@ -130,13 +130,12 @@ ______________________________________________________________________
   - matugen
   - [image-hct](https://github.com/Neurarian/image-hct) (optional; for additional chroma/tone based theming)
 
-#### Not required but launched by Astal widgets or useful for laptop devices:
+#### Not required but launched by Astal widgets or useful for laptop device features:
 
 - gnome-control-center
 - mission-center
 - overskride
 - pwvucontrol
-
 - upower
 - brightnessctl
 
