@@ -7,7 +7,6 @@ export const refreshIntervalId = Variable(null);
 export const selectedDevice = Variable(null);
 export const isConnecting = Variable(false);
 export const errorMessage = Variable("");
-
 const bluetoothAgent = Variable<BluetoothAgent | null>(null);
 const hasBluetoothAgent = Variable(false);
 
