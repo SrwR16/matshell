@@ -1,4 +1,4 @@
-import { bind } from "astal";
+import { bind, Variable } from "astal";
 import { WiFiBox } from "./wifi-box/main.tsx";
 import { BluetoothBox } from "./bluetooth-box/main.tsx";
 import Bluetooth from "gi://AstalBluetooth";
@@ -7,9 +7,13 @@ import Network from "gi://AstalNetwork";
 export const Toggles = () => {
   const bluetooth = Bluetooth.get_default();
   const network = Network.get_default();
+  const renderToggleBox = Variable.derive(
+    [bind(bluetooth, "adapter"), bind(network, "primary")],
+    (hasAdapter, primary) => hasAdapter || primary === Network.Primary.WIFI,
+  );
 
   return (
-    <box cssClasses={["toggles"]} vertical>
+    <box vertical visible={bind(renderToggleBox)}>
       {/* WiFi Box */}
       <box
         visible={bind(network, "primary").as((p) => p === Network.Primary.WIFI)}

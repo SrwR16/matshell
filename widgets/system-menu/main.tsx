@@ -20,7 +20,7 @@ export default function SystemMenu() {
       keymode={Astal.Keymode.ON_DEMAND}
       visible={visible()}
     >
-      <box cssClasses={["system-menu"]} vertical>
+      <box cssClasses={["system-menu"]} widthRequest={285} vertical>
         <Toggles />
         {hasProfiles && <PowerProfileBox />}
         <Sliders />
