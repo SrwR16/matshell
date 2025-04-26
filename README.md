@@ -104,18 +104,19 @@ ______________________________________________________________________
 
 #### Required:
 
-- astal
-- ags
-- glibtop
+- ags (& thereby astal)
+- libgtop
 - hyprland
-- adw-gtk3-git
-- adwaita-icon-theme
 - coreutils
 - dart-sass
 - imagemagick
+- bluez & bluez-utils
+- networkmanager
+- wireplumber
+- adwaita-icon-theme
 - Material Symbols Outlined Font
 - Fira Code Nerd Font
-- ***For the end-4 scripts:***
+- ***For theming with the end-4 scripts:***
   - python-materialyoucolor-git
   - gradience-git
   - python-libsass
@@ -125,16 +126,19 @@ ______________________________________________________________________
   - python-pywal
   - python-setuptools-scm
   - python-wheel
-- ***For matugen:***
+- ***For matugen theming:***
   - matugen
   - [image-hct](https://github.com/Neurarian/image-hct) (optional; for additional chroma/tone based theming)
 
-#### Not required but launched by Astal widgets:
+#### Not required but launched by Astal widgets or useful for laptop devices:
 
 - gnome-control-center
 - mission-center
 - overskride
 - pwvucontrol
+
+- upower
+- brightnessctl
 
 </details>
 
