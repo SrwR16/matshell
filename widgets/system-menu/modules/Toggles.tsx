@@ -16,7 +16,9 @@ export const Toggles = () => {
     <box vertical visible={bind(renderToggleBox)}>
       {/* WiFi Box */}
       <box
-        visible={bind(network, "primary").as((p) => p === Network.Primary.WIFI)}
+        visible={bind(network, "primary").as(
+          (p) => p !== Network.Primary.WIRED,
+        )}
       >
         <WiFiBox />
       </box>
