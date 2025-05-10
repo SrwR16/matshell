@@ -44,9 +44,16 @@ box.applauncher {
         color: color.adjust($fg, $alpha: -0.2);
       }
 
-      &:hover,
+      &:hover {
+        @include button;
+      }
       &:focus {
         @include button;
+        @if $darkmode {
+          background: color.adjust($buttonDisabled, $lightness: +20%);
+        } @else {
+          background: color.adjust($primaryMon, $lightness: +22%);
+        }
       }
     }
   }

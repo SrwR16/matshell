@@ -71,8 +71,7 @@
   border-radius: 5rem;
   padding: 0.4rem;
 
-  &:hover,
-  &:focus {
+  &:hover {
     /* would prefer to handle this with transparency, 
     but that currently glitches on Hyprland */
     @if $darkmode {
