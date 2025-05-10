@@ -42,7 +42,7 @@ export const NetworkItem = ({ network }) => {
         <image iconName={network.iconName} />
         <label
           label={network.ssid}
-          maxWidthChars={24}
+          maxWidthChars={18}
           ellipsize={Pango.EllipsizeMode.END}
         />
         <box hexpand={true} />
