@@ -102,6 +102,13 @@ export const WiFiBox = () => {
             }
           });
 
+          // Monitor window toggling to prevent permanent network scan
+          const windowListener = App.connect("window-toggled", (_, window) => {
+            if (window.name === "system-menu" && isExpanded.get()) {
+              isExpanded.set(false);
+            }
+          });
+
           return () => {
             scanTimer.get()?.cancel();
             scanTimer.set(null);
