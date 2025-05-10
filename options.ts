@@ -21,13 +21,12 @@ const options = await (async () => {
         useCache: true,
       }),
       "bar.position": defineOption<ConfigValue>("top"), // "top", "bottom"
-      "bar.style": defineOption<ConfigValue>("full"), // "elements" or "full"
+      "bar.style": defineOption<ConfigValue>("expanded"), // "floating" or "expanded"
       "bar.modules.cava.show": defineOption<ConfigValue>(false),
       /* "catmull_rom", "smooth", "rounded", "bars","jumping_bars",
       "dots", "circular", "particles", "wave_particles","waterfall", "mesh" */
       "bar.modules.cava.style": defineOption<ConfigValue>("catmull_rom"),
       "bar.modules.media.cava.show": defineOption<ConfigValue>(true),
-      "bar.modules.media.cava.style": defineOption<ConfigValue>("circular"),
       "bar.modules.showOsIcon": defineOption<ConfigValue>(true),
       "musicPlayer.modules.cava.show": defineOption<ConfigValue>(true),
       "musicPlayer.modules.cava.style":

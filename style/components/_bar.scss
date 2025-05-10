@@ -31,7 +31,7 @@
 
     button {
       background: rgba(0, 0, 0, 0.3);
-      border-radius: 2rem;
+      border-radius: 0.7rem;
       margin: 0.6rem 0.35rem;
       min-width: 1.5rem;
       min-height: 1.5rem;
@@ -191,7 +191,7 @@
   }
 }
 /* Floating elements style */
-.bar-style-elements {
+.bar-style-floating {
   .centerbox > box {
     background: $barBg;
     border-radius: calc(#{$round} * 4);
@@ -204,7 +204,7 @@
 }
 
 /* Full-width style */
-.bar-style-full {
+.bar-style-expanded {
   background: $barBg;
   border-radius: calc(#{$round} * 4);
   box-shadow:

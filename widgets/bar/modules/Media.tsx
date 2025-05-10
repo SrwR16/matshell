@@ -11,11 +11,7 @@ function Cover({ player }) {
         type={"overlay"}
         visible={bind(options["bar.modules.media.cava.show"])}
       >
-        <CavaDraw
-          vexpand
-          hexpand
-          style={bind(options["bar.modules.media.cava.style"])}
-        />
+        <CavaDraw vexpand hexpand style={"circular"} />
       </box>
       <image
         type={"overlay measure"}
