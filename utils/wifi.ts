@@ -11,7 +11,6 @@ export const errorMessage = Variable("");
 export const isExpanded = Variable(false);
 export const passwordInput = Variable("");
 export const selectedNetwork = Variable(null);
-export const refreshIntervalId = Variable(null);
 
 // Function to scan for available networks
 export const scanNetworks = () => {

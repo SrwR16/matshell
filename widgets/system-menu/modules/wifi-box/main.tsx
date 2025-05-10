@@ -1,4 +1,4 @@
-import { execAsync, bind } from "astal";
+import { Variable, execAsync, bind, interval } from "astal";
 import Network from "gi://AstalNetwork";
 import { App, Gtk } from "astal/gtk4";
 import { NetworkItem } from "./modules/NetworkItem.tsx";
@@ -13,19 +13,12 @@ import {
   disconnectNetwork,
   forgetNetwork,
   isExpanded,
-  refreshIntervalId,
 } from "utils/wifi.ts";
 import options from "options.ts";
 
 // Main WiFi Box component
 export const WiFiBox = () => {
   const network = Network.get_default();
-
-  // Initial scan when component is first used
-  setTimeout(() => {
-    scanNetworks();
-    getSavedNetworks();
-  }, 100);
 
   return (
     <box vertical cssClasses={["wifi-menu", "toggle"]}>
@@ -83,48 +76,36 @@ export const WiFiBox = () => {
         transitionDuration={300}
         revealChild={bind(isExpanded)}
         setup={() => {
-          const clearScanInterval = () => {
-            if (refreshIntervalId.get()) {
-              clearInterval(refreshIntervalId.get());
-              refreshIntervalId.set(null);
-            }
-          };
+          const scanTimer = Variable(null);
           bind(isExpanded).subscribe((expanded) => {
-            // Clear existing interval
-            clearScanInterval();
-
             if (expanded) {
-              // Scan networks
-              network.wifi?.scan();
+              // Cancel any existing timer first
+              scanTimer.get()?.cancel();
 
-              // Set up new interval if WiFi is enabled
               if (network.wifi?.enabled) {
-                refreshIntervalId.set(
-                  setInterval(() => {
+                scanTimer.set(
+                  interval(10000, () => {
                     scanNetworks();
                     getSavedNetworks();
-                    print("updated");
-                  }, 10000),
+                    print("updated, it works");
+                  }),
                 );
               }
             } else {
+              // Cancel timer when collapsed
+              scanTimer.get()?.cancel();
+              scanTimer.set(null);
+
               // Apply revealer bug fix when collapsed
               App.toggle_window("system-menu");
               App.toggle_window("system-menu");
             }
           });
 
-          // Monitor window toggling
-          const windowListener = App.connect("window-toggled", (_, window) => {
-            if (window.name === "system-menu" && isExpanded.get()) {
-              isExpanded.set(false);
-            }
-          });
-
-          // Clean up resources when component is destroyed
           return () => {
+            scanTimer.get()?.cancel();
+            scanTimer.set(null);
             App.disconnect(windowListener);
-            clearScanInterval();
             bind(isExpanded).unsubscribe();
           };
         }}
