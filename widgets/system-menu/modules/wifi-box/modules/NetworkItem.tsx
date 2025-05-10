@@ -19,10 +19,7 @@ export const NetworkItem = ({ network }) => {
     <button
       hexpand
       onClicked={() => {
-        if (isActive.get()) {
-          // Already connected
-          return;
-        }
+        if (isActive.get()) return; // Already connected
 
         // Check if the network is already saved
         const isSaved = savedNetworks.get().includes(network.ssid);

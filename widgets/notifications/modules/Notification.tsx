@@ -31,17 +31,18 @@ export function NotificationWidget({
             // Get which button was pressed (1=left, 2=middle, 3=right)
             const button = gesture.get_current_button();
 
-            if (button === 1) {
-              // PRIMARY/LEFT
-              if (actions.length > 0) n.invoke(actions[0]);
-            } else if (button === 2) {
-              // MIDDLE
-              notifd.notifications?.forEach((n) => {
-                n.dismiss();
-              });
-            } else if (button === 3) {
-              // SECONDARY/RIGHT
-              notification.dismiss();
+            switch (button) {
+              case 1: // PRIMARY/LEFT
+                actions.length > 0 && n.invoke(actions[0]);
+                break;
+              case 2: // MIDDLE
+                notifd.notifications?.forEach((n) => {
+                  n.dismiss();
+                });
+                break;
+              case 3: // SECONDARY/RIGHT
+                notification.dismiss();
+                break;
             }
           } catch (error) {
             console.error(error);

@@ -50,20 +50,19 @@ export const BluetoothItem = ({ device }) => {
         setup={() => {
           bind(isExpanded).as((parentExpanded) => {
             // Close revealer if parent revealer is closed
-            if (!parentExpanded) {
-              // Super cheap fix until the revealer bug is fixed
-              // https://github.com/Aylur/astal/issues/258
-              //itemButtonsRevealed.set(false); // use this instead when fixed
-              App.toggle_window("system-menu");
-              App.toggle_window("system-menu");
-            }
+            // Super cheap fix until the revealer bug is fixed
+            // https://github.com/Aylur/astal/issues/258
+            //itemButtonsRevealed.set(false); // use this instead when fixed
+            !parentExpanded &&
+              (App.toggle_window("system-menu"),
+              App.toggle_window("system-menu"));
           });
           const windowListener = App.connect("window-toggled", (_, window) => {
-            if (window.name == "system-menu" && itemButtonsRevealed.get()) {
-              // Window was closed, make sure to collapse the revealer
+            window.name == "system-menu" &&
+              itemButtonsRevealed.get() &&
               itemButtonsRevealed.set(false);
-            }
-            if (!isExpanded) itemButtonsRevealed.set(false);
+
+            !isExpanded && itemButtonsRevealed.set(false);
           });
 
           return () => {
@@ -89,13 +88,10 @@ export const BluetoothItem = ({ device }) => {
             )}
             visible={bind(device, "paired")}
             onClicked={() => {
-              if (device.connecting) {
-                // do nothing
-              } else if (device.connected) {
-                disconnectDevice(device);
-              } else {
-                connectToDevice(device);
-              }
+              !device.connecting &&
+                (device.connected
+                  ? disconnectDevice(device)
+                  : connectToDevice(device));
             }}
             tooltipText={bind(device, "connected").as((paired) =>
               paired ? "Disconnect" : "Connect",
@@ -130,11 +126,7 @@ export const BluetoothItem = ({ device }) => {
                 : ["button-disabled", "pair-button"],
             )}
             onClicked={() => {
-              if (device.paired) {
-                unpairDevice(device);
-              } else {
-                pairDevice(device);
-              }
+              device.paired ? unpairDevice(device) : pairDevice(device);
             }}
             tooltipText={bind(device, "paired").as((paired) =>
               paired ? "Unpair" : "Pair",

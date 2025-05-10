@@ -60,7 +60,7 @@ export default function Applauncher() {
         width.set(self.get_current_monitor().geometry.width);
       }}
       onKeyPressed={(self, keyval) => {
-        if (keyval === Gdk.KEY_Escape) self.hide();
+        keyval === Gdk.KEY_Escape && self.hide();
       }}
     >
       <box>

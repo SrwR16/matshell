@@ -32,12 +32,12 @@ export function generateBackground(coverpath: string | null): string {
 
   // Create parent directory for blurred file
   const blurredDir = GLib.path_get_dirname(blurred);
-  if (!GLib.file_test(blurredDir, GLib.FileTest.EXISTS)) {
+  !GLib.file_test(blurredDir, GLib.FileTest.EXISTS) &&
     GLib.mkdir_with_parents(blurredDir, 0o755);
-  }
 
   try {
-    // Async causes race conditions
+    // Using async can cause race condition and idk how to use
+    // this function in a binding if the entire function is async.
     exec(`magick "${coverpath}" -blur 0x22 "${blurred}"`);
   } catch (e) {
     console.error("Background generation failed:", e);

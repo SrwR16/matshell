@@ -59,9 +59,7 @@ export class BluetoothAgent {
 
   // Register the agent on D-Bus
   register(): boolean {
-    if (this.isRegistered) {
-      return true;
-    }
+    if (this.isRegistered) return true;
 
     try {
       // Define introspection XML for the agent interface
@@ -154,9 +152,7 @@ export class BluetoothAgent {
 
   // Unregister the agent
   unregister(): boolean {
-    if (!this.isRegistered) {
-      return true;
-    }
+    if (!this.isRegistered) return true;
 
     try {
       // Unregister from BlueZ
@@ -198,8 +194,7 @@ export class BluetoothAgent {
 // Create and register agent
 export function startBluetoothAgent() {
   const agent = new BluetoothAgent();
-  if (agent.register()) {
-    return agent;
-  }
+  if (agent.register()) return agent;
+
   return null;
 }

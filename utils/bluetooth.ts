@@ -58,16 +58,12 @@ export const stopBluetoothAgent = () => {
 // Scanning functions
 export const scanDevices = () => {
   const bluetooth = Bluetooth.get_default();
-  if (bluetooth && bluetooth.adapter) {
-    bluetooth.adapter.start_discovery();
-  }
+  bluetooth && bluetooth.adapter && bluetooth.adapter.start_discovery();
 };
 
 export const stopScan = () => {
   const bluetooth = Bluetooth.get_default();
-  if (bluetooth && bluetooth.adapter) {
-    bluetooth.adapter.stop_discovery();
-  }
+  bluetooth && bluetooth.adapter && bluetooth.adapter.stop_discovery();
 };
 
 // Device interaction functions
@@ -124,9 +120,7 @@ export const pairDevice = (device) => {
     console.log("Pairing timeout reached");
     unsubscribe();
 
-    if (agentWasStarted) {
-      stopBluetoothAgent();
-    }
+    agentWasStarted && stopBluetoothAgent();
   });
 
   try {
@@ -136,17 +130,13 @@ export const pairDevice = (device) => {
     console.error("Error pairing device:", error);
     unsubscribe();
 
-    if (agentWasStarted) {
-      stopBluetoothAgent();
-    }
+    agentWasStarted && stopBluetoothAgent();
   }
 };
 
 export const unpairDevice = (device) => {
   const bluetooth = Bluetooth.get_default();
-  if (bluetooth && bluetooth.adapter) {
-    bluetooth.adapter.remove_device(device);
-  }
+  bluetooth && bluetooth.adapter && bluetooth.adapter.remove_device(device);
 };
 
 export const toggleTrust = (device) => {

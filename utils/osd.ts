@@ -28,7 +28,7 @@ export default class OSDManager {
 
     timeout(this.timeoutMs, () => {
       this.count--;
-      if (this.count === 0) this.params.visible.set(false);
+      this.count === 0 && this.params.visible.set(false);
     });
   }
 }

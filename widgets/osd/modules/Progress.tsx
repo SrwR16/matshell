@@ -11,7 +11,7 @@ export default function OnScreenProgress({
 }: {
   visible: Variable<boolean>;
 }) {
-  // Audio connections
+  // Audio endpoints
   const speaker = Wp.get_default()!.get_default_speaker();
   const microphone = Wp.get_default()!.get_default_microphone();
 
@@ -28,6 +28,7 @@ export default function OnScreenProgress({
   // Bluetooth
   const bluetooth = Bluetooth.get_default();
 
+  // OSDManager vars
   const value = Variable(0);
   const labelText = Variable("");
   const iconName = Variable("");
@@ -44,7 +45,7 @@ export default function OnScreenProgress({
   return (
     <revealer
       transitionType={Gtk.RevealerTransitionType.CROSSFADE}
-      transitionDuration={200}
+      transitionDuration={300}
       revealChild={visible()}
       setup={(self) => {
         const handleVolumeChange = (endpoint: Wp.Endpoint) => () => {
@@ -56,7 +57,7 @@ export default function OnScreenProgress({
             );
           }
         };
-        if (brightness) {
+        brightness &&
           hook(self, brightness, "notify::screen", () =>
             osd.show(
               brightness.screen,
@@ -64,43 +65,39 @@ export default function OnScreenProgress({
               "display-brightness-symbolic",
             ),
           );
-        }
 
-        if (speaker) {
+        speaker &&
           hook(self, speaker, "notify::volume", handleVolumeChange(speaker));
-        }
-        if (microphone) {
+
+        microphone &&
           hook(
             self,
             microphone,
             "notify::volume",
             handleVolumeChange(microphone),
           );
-        }
-        if (bluetooth) {
+
+        bluetooth &&
           hook(self, bluetooth, "notify::devices", () => {
             bluetooth.devices.forEach((device) => {
               // Monitor connection state changes for new devices
               hook(self, device, "notify::connected", () => {
-                if (device.connected) {
-                  osd.show(
-                    0,
-                    `Connected: ${device.name || device.address}`,
-                    device.icon,
-                    false,
-                  );
-                } else {
-                  osd.show(
-                    0,
-                    `Disconnected: ${device.name || device.address}`,
-                    device.icon,
-                    false,
-                  );
-                }
+                device.connected
+                  ? osd.show(
+                      0,
+                      `Connected: ${device.name || device.address}`,
+                      device.icon,
+                      false,
+                    )
+                  : osd.show(
+                      0,
+                      `Disconnected: ${device.name || device.address}`,
+                      device.icon,
+                      false,
+                    );
               });
             });
           });
-        }
       }}
     >
       <box cssClasses={["osd"]}>

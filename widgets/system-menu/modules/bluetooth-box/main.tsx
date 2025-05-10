@@ -65,9 +65,9 @@ export const BluetoothBox = () => {
         revealChild={bind(isExpanded)}
         setup={() => {
           const windowListener = App.connect("window-toggled", (_, window) => {
-            if (window.name === "system-menu" && isExpanded.get()) {
+            window.name === "system-menu" &&
+              isExpanded.get() &&
               isExpanded.set(false);
-            }
           });
           bind(isExpanded).subscribe((expanded) => {
             const bluetoothPowered = bluetooth.is_powered;

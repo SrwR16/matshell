@@ -79,11 +79,10 @@ export class ConfigManager {
     defaultValue: T,
     options: { useCache?: boolean; autoSave?: boolean } = {},
   ): ConfigOption<T> {
-    if (!name.includes(".")) {
+    !name.includes(".") &&
       console.warn(
         `Warning: Config key "${name}" doesn't use dot notation. This is allowed but not recommended.`,
       );
-    }
 
     const option = new ConfigOption<T>(name, defaultValue, options);
     this.options.set(name, option as ConfigOption<ConfigValue>);
@@ -124,7 +123,7 @@ export class ConfigManager {
       // Clean up any existing subscription first
       if (this.subscriptions.has(option.name)) {
         const existingCleanup = this.subscriptions.get(option.name);
-        if (existingCleanup) existingCleanup();
+        existingCleanup && existingCleanup();
       }
 
       // Create new subscription and store the cleanup function
@@ -154,9 +153,8 @@ export class ConfigManager {
 
   // Ensure directory exists
   private ensureDirectory(path: string): void {
-    if (!GLib.file_test(path, GLib.FileTest.EXISTS)) {
+    !GLib.file_test(path, GLib.FileTest.EXISTS) &&
       Gio.File.new_for_path(path).make_directory_with_parents(null);
-    }
   }
 
   // Save all non-cached configuration values to file
@@ -176,21 +174,6 @@ export class ConfigManager {
         writeFile(this.configPath, JSON.stringify(newConfig, null, 2));
         console.log("Created new configuration file with defaults");
         return;
-      }
-
-      // Check if the file was modified since last load
-      const fileInfo = Gio.File.new_for_path(this.configPath).query_info(
-        "time::modified",
-        Gio.FileQueryInfoFlags.NONE,
-        null,
-      );
-      const modTime = fileInfo.get_modification_time().tv_sec;
-
-      if (modTime > this.lastLoadTime && this.lastLoadTime !== 0) {
-        console.warn(
-          "Configuration file was modified externally. Reading changes first.",
-        );
-        this.load(); // Reload to get external changes before saving
       }
 
       // Read existing config to compare
@@ -352,9 +335,7 @@ export function initializeConfig(
  * Manually save all configuration options to disk
  */
 export function saveConfig(): void {
-  if (configManager) {
-    configManager.save();
-  }
+  configManager && configManager.save();
 }
 
 /**

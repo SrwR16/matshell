@@ -25,15 +25,14 @@ export const BluetoothDevices = () => {
         // Any known devices (connected or paired)
         const knownDevices = [...connectedDevices, ...pairedDevices];
 
-        if (validDevices.length === 0) {
+        if (validDevices.length === 0)
           return (
             <label label="No devices found" cssClasses={["empty-label"]} />
           );
-        }
 
         return (
           <>
-            {knownDevices.length > 0 ? (
+            {knownDevices.length > 0 && (
               <>
                 {/* Known Devices Section */}
                 <label label="My Devices" cssClasses={["section-label"]} />
@@ -46,12 +45,10 @@ export const BluetoothDevices = () => {
                   <BluetoothItem device={device} />
                 ))}
               </>
-            ) : (
-              ""
             )}
 
             {/* Available/Unpaired Devices Section */}
-            {unparedDevices.length > 0 ? (
+            {unparedDevices.length > 0 && (
               <>
                 <label
                   label="Available Devices"
@@ -61,8 +58,6 @@ export const BluetoothDevices = () => {
                   <BluetoothItem device={device} />
                 ))}
               </>
-            ) : (
-              ""
             )}
 
             {/* Control buttons */}
@@ -71,11 +66,7 @@ export const BluetoothDevices = () => {
                 halign={Gtk.Align.START}
                 cssClasses={["refresh-button"]}
                 onClicked={() => {
-                  if (bluetooth.adapter.discovering) {
-                    stopScan();
-                  } else {
-                    scanDevices();
-                  }
+                  bluetooth.adapter.discovering ? stopScan() : scanDevices();
                 }}
               >
                 <image
@@ -105,7 +96,9 @@ export const BluetoothDevices = () => {
                   >
                     <image iconName={"emblem-system-symbolic"} />
                   </button>
-                ) : "",
+                ) : (
+                  ""
+                ),
               )}
             </box>
           </>
