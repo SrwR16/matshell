@@ -7,6 +7,7 @@ import {
   connectToNetwork,
   errorMessage,
   isConnecting,
+  scanTimer,
 } from "utils/wifi.ts";
 
 // Password dialog component
@@ -22,15 +23,24 @@ export const PasswordDialog = () => {
         <entry
           placeholderText="Enter Password..."
           visibility={false}
-          onChanged={(entry) => passwordInput.set(entry.text)}
+          onChanged={(entry) => {
+            passwordInput.set(entry.text);
+            scanTimer.get()?.cancel();
+            scanTimer.set(null);
+          }}
           onActivate={() =>
             connectToNetwork(selectedNetwork.get()?.ssid, passwordInput.get())
           }
+          onShow={() => {}}
         />
       </box>
-      {errorMessage.get() && (
-        <label label={errorMessage.get()} cssClasses={["error-message"]} />
-      )}
+      <box visible={bind(errorMessage).as((e) => e !== "")}>
+        <label
+          label={bind(errorMessage)}
+          halign={Gtk.Align.CENTER}
+          cssClasses={["error-message"]}
+        />
+      </box>
       <box>
         <button
           label={bind(isConnecting).as((c) =>

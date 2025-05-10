@@ -11,6 +11,7 @@ export const errorMessage = Variable("");
 export const isExpanded = Variable(false);
 export const passwordInput = Variable("");
 export const selectedNetwork = Variable(null);
+export const scanTimer = Variable(null);
 
 // Function to scan for available networks
 export const scanNetworks = () => {
@@ -46,15 +47,13 @@ export const scanNetworks = () => {
     availableNetworks.set(uniqueNetworks);
 
     // Update active network
-    if (network.wifi.activeAccessPoint) {
-      activeNetwork.set({
-        ssid: network.wifi.activeAccessPoint.ssid,
-        strength: network.wifi.activeAccessPoint.strength,
-        secured: network.wifi.activeAccessPoint.flags !== 0,
-      });
-    } else {
-      activeNetwork.set(null);
-    }
+    network.wifi.activeAccessPoint
+      ? activeNetwork.set({
+          ssid: network.wifi.activeAccessPoint.ssid,
+          strength: network.wifi.activeAccessPoint.strength,
+          secured: network.wifi.activeAccessPoint.flags !== 0,
+        })
+      : activeNetwork.set(null);
   }
 };
 
@@ -81,27 +80,32 @@ export const connectToNetwork = (ssid, password = null) => {
   const network = Network.get_default();
   const currentSsid = network.wifi.ssid;
 
-  // Function to perform the actual connection
   const performConnection = () => {
     let command = "";
-    if (password) {
-      // Connect with password
-      command = `echo '${password}' | nmcli device wifi connect "${ssid}" --ask`;
-    } else {
-      // Connect without password (saved or open network)
-      command = `nmcli connection up "${ssid}" || nmcli device wifi connect "${ssid}"`;
-    }
+    password
+      ? (command = `echo '${password}' | nmcli device wifi connect "${ssid}" --ask`)
+      : (command = `nmcli connection up "${ssid}" || nmcli device wifi connect "${ssid}"`);
 
     execAsync(["bash", "-c", command])
       .then(() => {
         showPasswordDialog.set(false);
         isConnecting.set(false);
-        scanNetworks(); // Refresh network list
+        scanNetworks();
+        getSavedNetworks();
       })
       .catch((error) => {
         console.error("Connection error:", error);
-        errorMessage.set("Failed to connect. Check password.");
         isConnecting.set(false);
+        errorMessage.set("Check Password");
+
+        // Immediately remove network again when the connection failed
+        execAsync(["bash", "-c", `nmcli connection show "${ssid}" 2>/dev/null`])
+          .then((output) => {
+            output && forgetNetwork(ssid);
+          })
+          .catch(() => {
+            // Network wasn't saved (desired)
+          });
       });
   };
 

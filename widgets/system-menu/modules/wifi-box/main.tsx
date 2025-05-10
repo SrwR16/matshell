@@ -13,6 +13,7 @@ import {
   disconnectNetwork,
   forgetNetwork,
   isExpanded,
+  scanTimer,
 } from "utils/wifi.ts";
 import options from "options.ts";
 
@@ -26,9 +27,9 @@ export const WiFiBox = () => {
       <box cssClasses={["toggle", "wifi-toggle"]}>
         <button
           onClicked={() => {
-            if (network.wifi.enabled) {
-              network.wifi.set_enabled(false);
-            } else network.wifi.set_enabled(true);
+            network.wifi.enabled
+              ? network.wifi.set_enabled(false)
+              : network.wifi.set_enabled(true);
           }}
           cssClasses={bind(network.wifi, "enabled").as((enabled) =>
             enabled ? ["button"] : ["button-disabled"],
@@ -76,21 +77,18 @@ export const WiFiBox = () => {
         transitionDuration={300}
         revealChild={bind(isExpanded)}
         setup={() => {
-          const scanTimer = Variable(null);
           bind(isExpanded).subscribe((expanded) => {
             if (expanded) {
               // Cancel any existing timer first
               scanTimer.get()?.cancel();
 
-              if (network.wifi?.enabled) {
+              network.wifi?.enabled &&
                 scanTimer.set(
                   interval(10000, () => {
                     scanNetworks();
                     getSavedNetworks();
-                    print("updated, it works");
                   }),
                 );
-              }
             } else {
               // Cancel timer when collapsed
               scanTimer.get()?.cancel();
@@ -104,9 +102,9 @@ export const WiFiBox = () => {
 
           // Monitor window toggling to prevent permanent network scan
           const windowListener = App.connect("window-toggled", (_, window) => {
-            if (window.name === "system-menu" && isExpanded.get()) {
+            window.name === "system-menu" &&
+              isExpanded.get() &&
               isExpanded.set(false);
-            }
           });
 
           return () => {
