@@ -31,7 +31,6 @@ export const PasswordDialog = () => {
           onActivate={() =>
             connectToNetwork(selectedNetwork.get()?.ssid, passwordInput.get())
           }
-          onShow={() => {}}
         />
       </box>
       <box visible={bind(errorMessage).as((e) => e !== "")}>
