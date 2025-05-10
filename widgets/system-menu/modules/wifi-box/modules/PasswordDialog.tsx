@@ -36,7 +36,7 @@ export const PasswordDialog = () => {
       <box visible={bind(errorMessage).as((e) => e !== "")}>
         <label
           label={bind(errorMessage)}
-          halign={Gtk.Align.CENTER}
+          hexpand
           cssClasses={["error-message"]}
         />
       </box>
