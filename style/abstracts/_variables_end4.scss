@@ -74,10 +74,12 @@ $ramProc: color.mix($primaryFixedDim, $onPrimaryFixedVariant, 66%);
 $cpuProc: color.mix($tertiaryFixedDim, $onTertiaryFixedVariant, 66%);
 $procBg: $surfaceDim;
 
+/* numeric variables */
 $round: 8px;
 $round2: 16px;
-$margin: 0.4rem;
-$padding: 0.4rem;
+$spacing-xs: 0.25rem;
+$spacing-sm: 0.4rem;
+$spacing-md: 0.75rem;
 $border-width: 2px;
 $scale: 0.5rem;
 $font: 1.1rem;
