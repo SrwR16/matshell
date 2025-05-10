@@ -11,3 +11,27 @@ export enum CavaStyle {
   WATERFALL = 9,
   MESH = 10,
 }
+
+export const styleMap = {
+  catmull_rom: CavaStyle.CATMULL_ROM,
+  smooth: CavaStyle.SMOOTH,
+  bars: CavaStyle.BARS,
+  jumping_bars: CavaStyle.JUMPING_BARS,
+  dots: CavaStyle.DOTS,
+  circular: CavaStyle.CIRCULAR,
+  particles: CavaStyle.PARTICLES,
+  wave_particles: CavaStyle.WAVE_PARTICLES,
+  waterfall: CavaStyle.WATERFALL,
+  mesh: CavaStyle.MESH,
+};
+
+// Utility function to convert style value to enum
+export function getStyleEnum(styleValue: string | number | any): CavaStyle {
+  if (typeof styleValue === "string") {
+    return styleMap[styleValue.toLowerCase()] || CavaStyle.CATMULL_ROM;
+  } else if (typeof styleValue === "number") {
+    return styleValue;
+  }
+  // Default style
+  return CavaStyle.CATMULL_ROM;
+}

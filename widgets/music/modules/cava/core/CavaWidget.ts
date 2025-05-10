@@ -2,7 +2,7 @@ import { Gtk, Gdk } from "astal/gtk4";
 import Cava from "gi://AstalCava";
 import GObject from "gi://GObject";
 
-import { CavaStyle } from "./CavaStyle";
+import { CavaStyle, getStyleEnum, styleMap } from "./CavaStyle";
 
 import {
   // Simple visualizers
@@ -133,46 +133,7 @@ export const CavaWidget = GObject.registerClass(
       ) {
         // Handle it as a binding object
         const updateStyle = () => {
-          const styleValue = binding.get();
-          if (typeof styleValue === "string") {
-            // Convert string to enum
-            switch (styleValue.toLowerCase()) {
-              case "catmull_rom":
-                this._style = CavaStyle.CATMULL_ROM;
-                break;
-              case "smooth":
-                this._style = CavaStyle.SMOOTH;
-                break;
-              case "bars":
-                this._style = CavaStyle.BARS;
-                break;
-              case "jumping_bars":
-                this._style = CavaStyle.JUMPING_BARS;
-                break;
-              case "dots":
-                this._style = CavaStyle.DOTS;
-                break;
-              case "circular":
-                this._style = CavaStyle.CIRCULAR;
-                break;
-              case "particles":
-                this._style = CavaStyle.PARTICLES;
-                break;
-              case "wave_particles":
-                this._style = CavaStyle.WAVE_PARTICLES;
-                break;
-              case "waterfall":
-                this._style = CavaStyle.WATERFALL;
-                break;
-              case "mesh":
-                this._style = CavaStyle.MESH;
-                break;
-              default:
-                this._style = CavaStyle.CATMULL_ROM;
-            }
-          } else if (typeof styleValue === "number") {
-            this._style = styleValue;
-          }
+          this._style = getStyleEnum(binding.get());
           this.queue_draw();
         };
 
@@ -187,26 +148,23 @@ export const CavaWidget = GObject.registerClass(
 );
 
 export function CavaDraw(props: {
-  style?: CavaStyle | { subscribe: Function; get: Function };
+  style?: CavaStyle | string | { subscribe: Function; get: Function };
   hexpand?: boolean;
   vexpand?: boolean;
 }) {
   const cavaWidget = new CavaWidget();
 
-  if (props.hexpand !== undefined) {
-    cavaWidget.set_hexpand(props.hexpand);
-  } else {
-    cavaWidget.set_hexpand(false);
-  }
-
-  if (props.vexpand !== undefined) {
-    cavaWidget.set_vexpand(props.vexpand);
-  } else {
-    cavaWidget.set_vexpand(false);
-  }
+  cavaWidget.set_hexpand(props.hexpand ?? false);
+  cavaWidget.set_vexpand(props.vexpand ?? false);
 
   if (props.style !== undefined) {
-    cavaWidget.set_style_from_binding(props.style);
+    if (typeof props.style === "string" || typeof props.style === "number") {
+      cavaWidget.style = getStyleEnum(props.style);
+    } else {
+      // Handle binding object
+      cavaWidget.set_style_from_binding(props.style);
+    }
   }
+
   return cavaWidget;
 }
