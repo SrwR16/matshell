@@ -133,6 +133,8 @@ export const WiFiBox = () => {
           <box visible={bind(showPasswordDialog)}>
             <PasswordDialog />
           </box>
+
+          {/* Available Networks */}
           <label label="Available Networks" cssClasses={["section-label"]} />
           {bind(availableNetworks).as((networks) =>
             networks.length === 0 ? (

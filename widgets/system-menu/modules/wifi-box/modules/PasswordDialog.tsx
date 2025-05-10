@@ -14,7 +14,7 @@ export const PasswordDialog = () => {
   return (
     <box vertical cssClasses={["password-dialog"]}>
       <label
-        label={`${selectedNetwork.get()?.ssid}`}
+        label={bind(selectedNetwork).as((sn) => (sn ? sn.ssid : ""))}
         cssClasses={["password-label"]}
       />
       <box cssClasses={["password-search"]}>
