@@ -4,7 +4,7 @@ import options from "options.ts";
 
 export function OptionToggle({ option, label, icon = null }) {
   return (
-    <box spacing={10} cssClasses={["option-row", "option-toggle"]}>
+    <box cssClasses={["option-row", "option-toggle"]}>
       {icon && <image iconName={icon} cssClasses={["option-icon"]} />}
       <label
         label={label}
