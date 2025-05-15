@@ -57,7 +57,11 @@ export default function ControlPanel() {
         >
           <box hexpand={true}>
             <image iconName={"view-grid-symbolic"} />
-            <label label={"App Launcher"} halign={Gtk.Align.START} hexpand={true} />
+            <label
+              label={"App Launcher"}
+              halign={Gtk.Align.START}
+              hexpand={true}
+            />
           </box>
         </button>
         <Gtk.Separator />
