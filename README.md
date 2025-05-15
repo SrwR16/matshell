@@ -163,7 +163,7 @@ Run the installation script:
 For the color generation with the end-4-scripts to work, run this command to create the necessary additional directories:
 
 ```console
-mkdir -p $XDG_STATE_HOME/astal/{scss,user} $XDG_CACHE_HOME/astal/user/generated
+mkdir -p $XDG_STATE_HOME/ags/{scss,user} $XDG_CACHE_HOME/ags/user/generated
 ```
 
 </details>
@@ -171,7 +171,7 @@ mkdir -p $XDG_STATE_HOME/astal/{scss,user} $XDG_CACHE_HOME/astal/user/generated
 After using hyprpaper or some other means to set your wallpaper, run the script from [end-4](https://github.com/end-4/dots-hyprland) like this:
 
 ```console
-$HOME/.config/astal/scripts/colorgen.sh "$HOME/.cache/current_wallpaper.jpg" --apply --smart
+$HOME/.config/ags/scripts/colorgen.sh "$HOME/.cache/current_wallpaper.jpg" --apply --smart
 ```
 
 The color generation works better with wallpapers that have a bit of chroma.
