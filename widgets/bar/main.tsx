@@ -21,7 +21,6 @@ function Bar({ gdkmonitor, ...props }: any) {
   return (
     <window
       visible
-      setup={(self) => self.set_default_size(1, 1)}
       name="bar"
       namespace="bar"
       cssClasses={bind(options["bar.style"]).as((style) => {

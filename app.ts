@@ -9,6 +9,7 @@ import Notifications from "./widgets/notifications/main.tsx";
 import LogoutMenu from "widgets/logout-menu/main.tsx";
 import Applauncher from "./widgets/launcher/main.tsx";
 import MusicPlayer from "./widgets/music/main.tsx";
+import ControlPanel from "./widgets/control-panel/main.tsx";
 
 const scss = `${GLib.get_user_config_dir()}/ags/style/main.scss`;
 const css = `${GLib.get_user_config_dir()}/ags/style/main.css`;
@@ -43,6 +44,7 @@ App.start({
     MusicPlayer();
     Applauncher();
     LogoutMenu();
+    ControlPanel();
 
     const hypr = Hyprland.get_default();
 

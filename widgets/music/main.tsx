@@ -45,7 +45,7 @@ function MusicBox({ player }: { player: Mpris.Player }) {
 
 export default function MusicPlayer() {
   const mpris = Mpris.get_default();
-  const { TOP } = Astal.WindowAnchor;
+  const { TOP, BOTTOM } = Astal.WindowAnchor;
   const visible = Variable(false);
   return (
     <window
@@ -53,7 +53,16 @@ export default function MusicPlayer() {
       cssClasses={["music", "window"]}
       application={App}
       layer={Astal.Layer.OVERLAY}
-      anchor={TOP}
+      anchor={bind(options["bar.position"]).as((pos) => {
+        switch (pos) {
+          case "top":
+            return TOP;
+          case "bottom":
+            return BOTTOM;
+          default:
+            return TOP;
+        }
+      })}
       keymode={Astal.Keymode.ON_DEMAND}
       visible={visible()}
     >
