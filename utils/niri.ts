@@ -1,6 +1,6 @@
 import { execAsync, subprocess } from "astal/process";
 import { Variable } from "astal";
-import { App, Gdk } from "astal/gtk4";
+import { App, Gdk, GLib } from "astal/gtk4";
 
 export interface NiriWorkspace {
   id: number;
@@ -57,7 +57,7 @@ class NiriClient {
   get focusedWindow() { return this._focusedWindow; }
 
   private async sendRequest(request: any): Promise<any> {
-    const socketPath = process.env.NIRI_SOCKET;
+    const socketPath = GLib.getenv("NIRI_SOCKET");
     if (!socketPath) {
       throw new Error("NIRI_SOCKET environment variable not set");
     }
@@ -81,7 +81,7 @@ class NiriClient {
   }
 
   private async startEventStream() {
-    const socketPath = process.env.NIRI_SOCKET;
+    const socketPath = GLib.getenv("NIRI_SOCKET");
     if (!socketPath) {
       console.error("NIRI_SOCKET environment variable not set");
       return;
