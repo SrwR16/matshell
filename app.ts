@@ -1,7 +1,6 @@
 import { App } from "astal/gtk4";
 import { exec, monitorFile, GLib } from "astal";
-import Hyprland from "gi://AstalHyprland";
-import { hyprToGdk } from "utils/hyprland.ts";
+import { getNiriClient, niriToGdk } from "utils/niri.ts";
 import Bar from "./widgets/bar/main.tsx";
 import SystemMenu from "./widgets/system-menu/main.tsx";
 import OnScreenDisplay from "./widgets/osd/main.tsx";
@@ -36,7 +35,8 @@ App.start({
       monitorFile(`${GLib.get_user_config_dir()}/ags/style/${dir}`, reloadCss),
     );
 
-    const barNames = new Map<number, string>(); // Map Hyprland ID to window name
+    const barNames = new Map<string, string>(); // Map output name to window name
+    const niri = getNiriClient();
 
     Notifications();
     OnScreenDisplay();
@@ -46,38 +46,32 @@ App.start({
     LogoutMenu();
     ControlPanel();
 
-    const hypr = Hyprland.get_default();
-
-    // Initialize
-    for (const hyprMonitor of hypr.monitors) {
-      const gdkmonitor = hyprToGdk(hyprMonitor);
-      if (gdkmonitor) {
-        const windowName = Bar(gdkmonitor);
-        barNames.set(hyprMonitor.id, windowName);
-      }
-    }
-
-    hypr.connect("monitor-added", (_, monitor) => {
-      const gdkmonitor = hyprToGdk(monitor);
-      if (gdkmonitor) {
-        const windowName = Bar(gdkmonitor);
-        barNames.set(monitor.id, windowName);
-        console.log(`Monitor added - ID: ${monitor.id}`);
-      }
-    });
-
-    hypr.connect("monitor-removed", (_, id) => {
-      console.log(`Monitor removed - ID: ${id}`);
-      const windowName = barNames.get(id);
-      if (windowName) {
-        const window = App.get_window(windowName);
-        if (window) {
-          console.log(`Removing bar: ${windowName}`);
-          App.toggle_window(windowName);
-          window.set_child(null);
-          App.remove_window(window);
+    // Initialize bars for existing outputs
+    niri.outputs.subscribe((outputs) => {
+      for (const output of outputs) {
+        if (!barNames.has(output.name)) {
+          const gdkMonitor = niriToGdk(output);
+          if (gdkMonitor) {
+            const windowName = Bar(gdkMonitor);
+            barNames.set(output.name, windowName);
+            console.log(`Created bar for output: ${output.name}`);
+          }
         }
-        barNames.delete(id);
+      }
+
+      // Remove bars for outputs that no longer exist
+      for (const [outputName, windowName] of barNames.entries()) {
+        const outputExists = outputs.some(output => output.name === outputName);
+        if (!outputExists) {
+          console.log(`Removing bar for disconnected output: ${outputName}`);
+          const window = App.get_window(windowName);
+          if (window) {
+            App.toggle_window(windowName);
+            window.set_child(null);
+            App.remove_window(window);
+          }
+          barNames.delete(outputName);
+        }
       }
     });
   },

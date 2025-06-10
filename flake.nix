@@ -59,7 +59,6 @@
         io
         notifd
         apps
-        hyprland
         wireplumber
         mpris
         network

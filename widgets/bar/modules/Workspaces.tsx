@@ -1,46 +1,59 @@
-import Hyprland from "gi://AstalHyprland";
+import { getNiriClient } from "utils/niri.ts";
 import { bind } from "astal";
 
 // May implement this later
 function FocusedClient() {
-  const hypr = Hyprland.get_default();
-  const focused = bind(hypr, "focusedClient");
+  const niri = getNiriClient();
+  const focused = bind(niri.focusedWindow);
 
   return (
     <box cssClasses={["Focused"]} visible={focused.as(Boolean)}>
       {focused.as(
-        (client) =>
-          client && <label label={bind(client, "title").as(String)} />,
+        (window) => {
+          if (window) {
+            return <label label={window.title} />;
+          }
+          return null;
+        },
       )}
     </box>
   );
 }
 
 export default function Workspaces() {
-  const hypr = Hyprland.get_default();
+  const niri = getNiriClient();
 
   return (
     <box cssClasses={["Workspaces"]}>
-      {bind(hypr, "workspaces").as((wss) => {
-        const activeWorkspaces = wss
-          .filter((ws) => !(ws.id >= -99 && ws.id <= -2))
-          .sort((a, b) => a.id - b.id);
+      {bind(niri.workspaces).as((workspaces) => {
+        // Sort workspaces by ID and show up to 10
+        const sortedWorkspaces = workspaces
+          .sort((a, b) => a.id - b.id)
+          .slice(0, 10);
 
         return [...Array(10)].map((_, i) => {
-          const id = i + 1;
-          const ws = activeWorkspaces.find((w) => w.id === id);
+          const index = i + 1;
+          const ws = sortedWorkspaces.find((w) => w.id === index);
+          const hasWorkspace = ws !== undefined;
+          
           return (
             <button
-              visible={activeWorkspaces[activeWorkspaces.length - 1]?.id >= id}
-              cssClasses={bind(hypr, "focusedWorkspace").as((fw) => {
-                const classes = [];
-                ws === fw && classes.push("focused");
-                ws && ws.monitor && classes.push(`monitor${ws.monitor.id}`);
+              visible={hasWorkspace || index <= Math.max(1, sortedWorkspaces.length)}
+              cssClasses={bind(niri.focusedWorkspace).as((focused) => {
+                const classes: string[] = [];
+                if (ws?.is_focused) {
+                  classes.push("focused");
+                }
+                if (ws?.is_active) {
+                  classes.push("active");
+                }
                 return classes;
               })}
-              onClicked={() => hypr.message(`dispatch workspace ${id}`)}
+              onClicked={() => {
+                niri.focusWorkspaceByIndex(index - 1);
+              }}
             >
-              {id} {/* Add content to make button visible */}
+              {index}
             </button>
           );
         });

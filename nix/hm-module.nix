@@ -19,7 +19,6 @@ self: {
   wal_set = pkgs.writeShellApplication {
     name = "wal_set";
     runtimeInputs = with pkgs; [
-      hyprpaper
       fd
       ripgrep
       libnotify
@@ -38,16 +37,6 @@ self: {
       else
         wallpaper_path="$(fd . "$HOME/Pictures/wallpapers" -t f | shuf -n 1)"
       fi
-
-      apply_hyprpaper() {
-        # Preload the wallpaper once, since it doesn't change per monitor
-        hyprctl hyprpaper preload "$wallpaper_path"
-
-        # Set wallpaper for each monitor
-        hyprctl monitors | rg 'Monitor' | awk '{print $2}' | while read -r monitor; do
-        hyprctl hyprpaper wallpaper "$monitor, $wallpaper_path"
-        done
-      }
 
       if [ "$(image-hct "$wallpaper_path" tone)" -gt 60 ]; then
         mode="light"
@@ -79,15 +68,9 @@ self: {
         echo "\$material-color-scheme: \"$scheme\";"
       } >> "$matugen_scss_file"
 
-      # unload previous wallpaper
-      hyprctl hyprpaper unload all
-
-      # Set the new wallpaper
-      apply_hyprpaper
-
       # Get wallpaper image name & send notification
       newwall=$(basename "$wallpaper_path")
-      notify-send "Colors and Wallpaper updated" "with image: $newwall"
+      notify-send "Colors updated" "with image: $newwall"
 
       echo "DONE!"
     '';
@@ -198,8 +181,6 @@ in {
       home.file.".config/matugen/config.toml".text = let
         gtkTemplate = builtins.path {path = ../matugen/templates/gtk.css;};
         agsTemplate = builtins.path {path = ../matugen/templates/ags.scss;};
-        hyprTemplate = builtins.path {path = ../matugen/templates/hyprland_colors.conf;};
-        hyprlockTemplate = builtins.path {path = ../matugen/templates/hyprlock_colors.conf;};
       in
         lib.mkIf cfgNew.matugenConfig ''
           [templates.gtk3]
@@ -213,14 +194,6 @@ in {
           [templates.ags]
           input_path = "${agsTemplate}"
           output_path = "~/.config/ags/style/abstracts/_variables.scss"
-
-          [templates.hypr]
-          input_path = "${hyprTemplate}"
-          output_path = "~/.config/hypr/hyprland_colors.conf"
-
-          [templates.hyprlock]
-          input_path = "${hyprlockTemplate}"
-          output_path = "~/.config/hypr/hyprlock_colors.conf"
 
           [config.custom_colors]
         '';
@@ -278,8 +251,6 @@ in {
       home.file.".config/matugen/config.toml".text = let
         gtkTemplate = builtins.path {path = ../matugen/templates/gtk.css;};
         agsTemplate = builtins.path {path = ../matugen/templates/ags.scss;};
-        hyprTemplate = builtins.path {path = ../matugen/templates/hyprland_colors.conf;};
-        hyprlockTemplate = builtins.path {path = ../matugen/templates/hyprlock_colors.conf;};
       in
         lib.mkIf cfgOld.matugenConfig ''
           [templates.gtk3]
@@ -293,14 +264,6 @@ in {
           [templates.ags]
           input_path = "${agsTemplate}"
           output_path = "~/.config/ags/style/abstracts/_variables.scss"
-
-          [templates.hypr]
-          input_path = "${hyprTemplate}"
-          output_path = "~/.config/hypr/hyprland_colors.conf"
-
-          [templates.hyprlock]
-          input_path = "${hyprlockTemplate}"
-          output_path = "~/.config/hypr/hyprlock_colors.conf"
 
           [config.custom_colors]
         '';

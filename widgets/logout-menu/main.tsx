@@ -37,11 +37,11 @@ export default function LogoutMenu() {
           <button onClicked={hide} />
           <box cssClasses={["logout-menu"]} vertical>
             <box>
-              {LogoutButton("lock", "hyprlock")}
+              {LogoutButton("lock", "loginctl lock-session || swaylock")}
               {LogoutButton("bedtime", "systemctl suspend || loginctl suspend")}
               {LogoutButton(
                 "logout",
-                "pkill Hyprland || loginctl terminate-user $USER",
+                "loginctl terminate-user $USER",
               )}
             </box>
             <box>

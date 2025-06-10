@@ -71,7 +71,7 @@ popover modelbutton {
 }
 popover modelbutton:hover {
   /* would prefer to handle this with transparency, 
-  but that currently glitches on Hyprland */
+  but that currently glitches on some compositors */
   background: rgba(131.8571428571, 98.4285714286, 89.1428571429, 0.6);
 }
 popover modelbutton:first-child {
@@ -103,7 +103,7 @@ popover modelbutton:only-child {
 }
 .button-disabled:hover {
   /* would prefer to handle this with transparency, 
-  but that currently glitches on Hyprland */
+  but that currently glitches on some compositors */
   background: rgba(131.8571428571, 98.4285714286, 89.1428571429, 0.6);
 }
 
@@ -117,7 +117,7 @@ popover modelbutton:only-child {
   font-size: 1.1rem;
   /* Common styles for both modes */
   /* OS Icon */
-  /* Hyperland */
+  /* Niri */
   /* music */
   /* tray */
   /* hw-monitor */
@@ -341,7 +341,7 @@ box.applauncher box.search entry menu menuitem {
 }
 box.applauncher box.search entry menu menuitem:hover {
   /* would prefer to handle this with transparency, 
-  but that currently glitches on Hyprland */
+  but that currently glitches on some compositors */
   background: rgba(131.8571428571, 98.4285714286, 89.1428571429, 0.6);
 }
 box.applauncher box.search entry menu menuitem:first-child {
@@ -383,7 +383,7 @@ box.applauncher box.apps button:hover {
 }
 box.applauncher box.apps button:hover:hover {
   /* would prefer to handle this with transparency, 
-  but that currently glitches on Hyprland */
+  but that currently glitches on some compositors */
   background: rgba(131.8571428571, 98.4285714286, 89.1428571429, 0.6);
 }
 box.applauncher box.apps button:focus {
@@ -395,7 +395,7 @@ box.applauncher box.apps button:focus {
 }
 box.applauncher box.apps button:focus:hover {
   /* would prefer to handle this with transparency, 
-  but that currently glitches on Hyprland */
+  but that currently glitches on some compositors */
   background: rgba(131.8571428571, 98.4285714286, 89.1428571429, 0.6);
 }
 box.applauncher box.not-found {
@@ -438,7 +438,7 @@ box.logout-background .logout-menu button {
 }
 box.logout-background .logout-menu button:hover {
   /* would prefer to handle this with transparency, 
-  but that currently glitches on Hyprland */
+  but that currently glitches on some compositors */
   background: rgba(131.8571428571, 98.4285714286, 89.1428571429, 0.6);
 }
 box.logout-background .logout-menu button:focus {
@@ -717,7 +717,7 @@ box.logout-background .logout-menu button label {
 }
 .network-item:hover {
   /* would prefer to handle this with transparency, 
-  but that currently glitches on Hyprland */
+  but that currently glitches on some compositors */
   background: rgba(131.8571428571, 98.4285714286, 89.1428571429, 0.6);
 }
 .network-item image:first-child {
@@ -772,7 +772,7 @@ box.logout-background .logout-menu button label {
 .disconnect-button:hover,
 .settings-button:hover {
   /* would prefer to handle this with transparency, 
-  but that currently glitches on Hyprland */
+  but that currently glitches on some compositors */
   background: rgba(131.8571428571, 98.4285714286, 89.1428571429, 0.6);
 }
 
@@ -820,7 +820,7 @@ image {
 }
 .password-search entry menu menuitem:hover {
   /* would prefer to handle this with transparency, 
-  but that currently glitches on Hyprland */
+  but that currently glitches on some compositors */
   background: rgba(131.8571428571, 98.4285714286, 89.1428571429, 0.6);
 }
 .password-search entry menu menuitem:first-child {
@@ -900,7 +900,7 @@ image {
 }
 .option-switch slider {
   min-width: 0.75rem;
-  min-height: 0.75rem;
+  min-height: 2rem;
   border-radius: 1.5rem;
   background-color: rgba(71, 53, 48, 0.6);
 }
@@ -956,7 +956,7 @@ image {
 }
 .category-content .category-button:hover {
   /* would prefer to handle this with transparency, 
-  but that currently glitches on Hyprland */
+  but that currently glitches on some compositors */
   background: rgba(131.8571428571, 98.4285714286, 89.1428571429, 0.6);
 }
 .category-content .category-button image:first-child {

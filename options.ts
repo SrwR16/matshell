@@ -7,9 +7,7 @@ import {
 } from "./utils/option";
 
 const options = await (async () => {
-  const currentWallpaper = await execAsync(
-    "hyprctl hyprpaper listloaded",
-  ).catch(() => "");
+  const currentWallpaper = "";
 
   const config = initializeConfig(
     `${GLib.get_user_config_dir()}/ags/config.json`,

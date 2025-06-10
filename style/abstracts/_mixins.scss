@@ -73,7 +73,7 @@
 
   &:hover {
     /* would prefer to handle this with transparency, 
-    but that currently glitches on Hyprland */
+    but that currently glitches on some compositors */
     @if $darkmode {
       background: color.adjust($buttonDisabled, $lightness: +20%);
     } @else {

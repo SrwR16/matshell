@@ -20,7 +20,7 @@ colorlist=()
 colorvalues=()
 
 # wallpath=$(swww query | head -1 | awk -F 'image: ' '{print $2}')
-# wallpath_png="$CACHE_DIR/user/generated/hypr/lockscreen.png"
+# wallpath_png="$CACHE_DIR/user/generated/lockscreen.png"
 # convert "$wallpath" "$wallpath_png"
 # wallpath_png=$(echo "$wallpath_png" | sed 's/\//\\\//g')
 # wallpath_png=$(sed 's/\//\\\\\//g' <<< "$wallpath_png")
@@ -103,68 +103,6 @@ apply_wlogout() {
     cp "$CACHE_DIR"/user/generated/wlogout/style.css "$XDG_CONFIG_HOME"/wlogout/style.css
 }
 
-apply_hyprland() {
-    # Check if scripts/templates/hypr/hyprland/colors.conf exists
-    if [ ! -f "scripts/templates/hypr/hyprland/colors.conf" ]; then
-        echo "Template file not found for Hyprland colors. Skipping that."
-        return
-    fi
-    # Copy template
-    mkdir -p "$CACHE_DIR"/user/generated/hypr/hyprland
-    cp "scripts/templates/hypr/hyprland/colors.conf" "$CACHE_DIR"/user/generated/hypr/hyprland/colors.conf
-    # Apply colors
-    for i in "${!colorlist[@]}"; do
-        sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$CACHE_DIR"/user/generated/hypr/hyprland/colors.conf
-    done
-
-    cp "$CACHE_DIR"/user/generated/hypr/hyprland/colors.conf "$XDG_CONFIG_HOME"/hypr/hyprland/colors.conf
-}
-
-apply_hyprlock() {
-    # Check if scripts/templates/hypr/hyprlock.conf exists
-    if [ ! -f "scripts/templates/hypr/hyprlock.conf" ]; then
-        echo "Template file not found for hyprlock. Skipping that."
-        return
-    fi
-    # Copy template
-    mkdir -p "$CACHE_DIR"/user/generated/hypr/
-    cp "scripts/templates/hypr/hyprlock.conf" "$CACHE_DIR"/user/generated/hypr/hyprlock.conf
-    # Apply colors
-    # sed -i "s/{{ SWWW_WALL }}/${wallpath_png}/g" "$CACHE_DIR"/user/generated/hypr/hyprlock.conf
-    for i in "${!colorlist[@]}"; do
-        sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]#\#}/g" "$CACHE_DIR"/user/generated/hypr/hyprlock.conf
-    done
-
-    cp "$CACHE_DIR"/user/generated/hypr/hyprlock.conf "$XDG_CONFIG_HOME"/hypr/hyprlock.conf
-}
-
-apply_gtk() { # Using gradience-cli
-    lightdark=$(get_light_dark)
-
-    # Copy template
-    mkdir -p "$CACHE_DIR"/user/generated/gradience
-    cp "scripts/templates/gradience/preset.json" "$CACHE_DIR"/user/generated/gradience/preset.json
-
-    # Apply colors
-    for i in "${!colorlist[@]}"; do
-        sed -i "s/{{ ${colorlist[$i]} }}/${colorvalues[$i]}/g" "$CACHE_DIR"/user/generated/gradience/preset.json
-    done
-
-    mkdir -p "$XDG_CONFIG_HOME/presets" # create gradience presets folder
-    gradience-cli apply -p "$CACHE_DIR"/user/generated/gradience/preset.json --gtk both
-
-    # Set light/dark preference
-    # And set GTK theme manually as Gradience defaults to light adw-gtk3
-    # (which is unreadable when broken when you use dark mode)
-    if [ "$lightdark" = "light" ]; then
-        gsettings set org.gnome.desktop.interface gtk-theme 'adw-gtk3'
-        gsettings set org.gnome.desktop.interface color-scheme 'prefer-light'
-    else
-        gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-dark
-        gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'
-    fi
-}
-
 apply_ags() {
     cp "$STATE_DIR"/scss/_material.scss "$CONFIG_DIR"/style/abstracts/_material-colors_end4.scss
 }
@@ -177,8 +115,6 @@ colorvalues=( "$colorstrings" ) # Array of color values
 
 apply_ags &
 apply_wlogout &
-apply_hyprland &
-apply_hyprlock &
 apply_gtk &
 apply_fuzzel &
 #apply_term &

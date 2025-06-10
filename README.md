@@ -13,7 +13,7 @@
 
 </div>
 
-Matshell is a Material Design inspired desktop shell built with [Astal](https://github.com/Aylur/astal) for [Hyprland](https://github.com/hyprwm/Hyprland). This project draws heavy inspiration from [fufexan's](https://github.com/fufexan/dotfiles) AGSv1 config, with design influences from [saimoomedits](https://github.com/saimoomedits/eww-widgets), tailored for both multi-monitor desktop setups and laptops.
+Matshell is a Material Design inspired desktop shell built with [Astal](https://github.com/Aylur/astal) for [Niri](https://github.com/YaLTeR/niri). This project draws heavy inspiration from [fufexan's](https://github.com/fufexan/dotfiles) AGSv1 config, with design influences from [saimoomedits](https://github.com/saimoomedits/eww-widgets), tailored for both multi-monitor desktop setups and laptops.
 
 This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice sprinkled on top.
 
@@ -24,7 +24,7 @@ This setup tries to achieve sleek, "MacOS-esque" looks with a little bit of rice
 - **Adaptive Layout**: Automatically adapts to desktop or laptop environments by conditionally rendering notebook-specific widgets
 - **Dynamic Material Design Theming**: Change themes on-the-fly using either scripts I botched from [end-4](https://github.com/end-4/dots-hyprland) or via [matugen](https://github.com/InioX/matugen) templates
 - **Multi-monitor Support**: Designed with multi-monitor setups in mind
-- **Hyprland Integration**: Built specifically for the Hyprland compositor
+- **Niri Integration**: Built specifically for the Niri compositor
 - **Nix Support**: Support for NixOS / Home-Manager with dedicated module
 
 <details>
@@ -106,7 +106,7 @@ ______________________________________________________________________
 
 - ags (& thereby astal)
 - libgtop
-- hyprland
+- niri
 - coreutils
 - dart-sass
 - imagemagick
@@ -168,7 +168,7 @@ mkdir -p $XDG_STATE_HOME/ags/{scss,user} $XDG_CACHE_HOME/ags/user/generated
 
 </details>
 
-After using hyprpaper or some other means to set your wallpaper, run the script from [end-4](https://github.com/end-4/dots-hyprland) like this:
+After setting your wallpaper with your preferred wallpaper setter (swww, swaybg, etc.), you can run the color generation script from [end-4](https://github.com/end-4/dots-hyprland) like this:
 
 ```console
 $HOME/.config/ags/scripts/colorgen.sh "$HOME/.cache/current_wallpaper.jpg" --apply --smart
@@ -178,7 +178,7 @@ The color generation works better with wallpapers that have a bit of chroma.
 
 #### ❄️ Nix
 
-You can generally test out matshell via the flake exposed package `nix run github:Neurarian/matshell`. For a NixOS implementation and example [script](https://github.com/Neurarian/matshell/blob/master/nix/hm-module.nix) for use with hyprpaper, matugen, and a [custom cli utility](https://github.com/Neurarian/image-hct) to get chroma/tone, you can enable dedicated options in the home-manager module:
+You can generally test out matshell via the flake exposed package `nix run github:Neurarian/matshell`. For a NixOS implementation and example [script](https://github.com/Neurarian/matshell/blob/master/nix/hm-module.nix) with matugen, and a [custom cli utility](https://github.com/Neurarian/image-hct) to get chroma/tone, you can enable dedicated options in the home-manager module:
 
 ```nix
 # ...
@@ -198,8 +198,6 @@ programs.matshell= {
   matugenThemeSetter = true;
   # This also sets up the entire matugen config & templates.
   # If you already have matugen set up you may want to omit this.
-  # To use the hyprland/hyprlock templates, you would still need to
-  # import the generated files and add the color aliases to your config as desired.
   matugenConfig = true;
 };
 #...
