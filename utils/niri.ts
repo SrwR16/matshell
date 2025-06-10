@@ -1,6 +1,6 @@
 import { execAsync, subprocess } from "astal/process";
-import { Variable } from "astal";
-import { App, Gdk, GLib } from "astal/gtk4";
+import { Variable, GLib } from "astal";
+import { App, Gdk } from "astal/gtk4";
 
 export interface NiriWorkspace {
   id: number;
